@@ -1,5 +1,7 @@
 ## Current working direction — user update, 2026-11-07
 
+Completed: v4 TRAIN holdout 79.05 vs static 73.34 (7,500 cases); LIVE edition 001 generated with no LLM judgment. Canonical copies: root `v4-submission.csv`, `submission/submission_v4_live_001.csv`, `submission/v4-strategy/submission_v4_live_001.csv`. All 203,083 bank lines, 642,703 rows; hard checks and official schema pass. 31 invalid non-duplicate over-total alternatives fall back to the validated static transaction; held-out guard changes zero cases. Website feedback pending. Push completed stages to q, never main.
+
 Latest authorization: train v4 on TRAIN and apply it to all LIVE transactions for a v4 submission, with **LLM judgment disabled**. Use temporal validation, document training sampling and artifacts, commit and push completed stages to q. This supersedes the earlier starter-only restrictions for this stage.
 
 Latest decision: v4 is a three-tier hybrid (static reconstruction, learned allocation/payment decisions, permitted LLM revision actor). Starter ML result is 80.95 vs static 78.65; user-provided v3 LIVE feedback is 77.46. TRAIN is the selected next learning source under version-4/STRATEGY.md; no TRAIN fit or LLM call is included in the starter result. Feedback files are v3_feedback.md and feedback-evaluation/v3-model_evaluation_feedback.md. Commit/push completed stages to q.

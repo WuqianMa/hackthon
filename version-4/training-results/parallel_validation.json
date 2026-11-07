@@ -1,0 +1,6 @@
+{
+  "ok": true,
+  "transactions": 1000,
+  "workers": 3,
+  "comparison": "Serial and independent worker predictions/methods exactly identical"
+}

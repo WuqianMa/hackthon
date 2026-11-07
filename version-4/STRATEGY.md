@@ -1,6 +1,8 @@
 # Selected v4 strategy — 7 November 2026
 
-The user selected three tiers and permits LLM revision. TRAIN is the next learning source. The completed current stage is the starter ML experiment: no TRAIN model has yet been fitted and no external LLM contribution is included in its score.
+Execution update: the user authorized TRAIN fitting and full LIVE application **without LLM judgment**. The frozen TRAIN model scores **79.05** versus static **73.34** on the same 7,500 temporal test cases. Fitting/calibration/test use 70,500 deterministic sampled cases before purging; the full invoice context is indexed. See [TRAIN_RESULTS.md](TRAIN_RESULTS.md) and [TRAIN_EXECUTION.md](TRAIN_EXECUTION.md). The optional tier-3 design below remains future work and is disabled for this submission edition.
+
+The original selection included three tiers and permitted LLM revision. The starter stage below preceded TRAIN fitting; no external LLM contribution is included in either measured ML result.
 
 ## Tier 1: static reconstruction
 

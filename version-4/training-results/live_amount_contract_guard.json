@@ -1,0 +1,781 @@
+{
+  "transactions": 31,
+  "repairs": [
+    {
+      "bank_txn_id": "BT-2025-0285102",
+      "reason": "Non-duplicate allocation exceeds document total",
+      "invalid_rows": [
+        {
+          "row": [
+            "BT-2025-0285102",
+            "ARI-2025-2370986",
+            "5530.76",
+            "",
+            ""
+          ],
+          "document_total_cents": 539560
+        }
+      ],
+      "replacement": [
+        [
+          "BT-2025-0285102",
+          "ARI-2025-2370986",
+          "5530.76",
+          "",
+          "DUPLICATE_PAYMENT"
+        ]
+      ]
+    },
+    {
+      "bank_txn_id": "BT-2025-0285195",
+      "reason": "Non-duplicate allocation exceeds document total",
+      "invalid_rows": [
+        {
+          "row": [
+            "BT-2025-0285195",
+            "ARI-2025-3564136",
+            "21069.61",
+            "",
+            ""
+          ],
+          "document_total_cents": 2043154
+        }
+      ],
+      "replacement": [
+        [
+          "BT-2025-0285195",
+          "ARI-2025-3564136",
+          "21069.61",
+          "",
+          "DUPLICATE_PAYMENT"
+        ]
+      ]
+    },
+    {
+      "bank_txn_id": "BT-2025-0288112",
+      "reason": "Non-duplicate allocation exceeds document total",
+      "invalid_rows": [
+        {
+          "row": [
+            "BT-2025-0288112",
+            "ARI-2025-1326873",
+            "4585.52",
+            "",
+            ""
+          ],
+          "document_total_cents": 447358
+        }
+      ],
+      "replacement": [
+        [
+          "BT-2025-0288112",
+          "ARI-2025-1326873",
+          "4585.52",
+          "",
+          "DUPLICATE_PAYMENT"
+        ]
+      ]
+    },
+    {
+      "bank_txn_id": "BT-2025-0292715",
+      "reason": "Non-duplicate allocation exceeds document total",
+      "invalid_rows": [
+        {
+          "row": [
+            "BT-2025-0292715",
+            "ARI-2025-6682638",
+            "10307.76",
+            "",
+            ""
+          ],
+          "document_total_cents": 1012329
+        }
+      ],
+      "replacement": [
+        [
+          "BT-2025-0292715",
+          "ARI-2025-6682638",
+          "10307.76",
+          "",
+          "DUPLICATE_PAYMENT"
+        ]
+      ]
+    },
+    {
+      "bank_txn_id": "BT-2025-0300475",
+      "reason": "Non-duplicate allocation exceeds document total",
+      "invalid_rows": [
+        {
+          "row": [
+            "BT-2025-0300475",
+            "ARI-2025-2115511",
+            "2072.76",
+            "",
+            ""
+          ],
+          "document_total_cents": 201989
+        }
+      ],
+      "replacement": [
+        [
+          "BT-2025-0300475",
+          "ARI-2025-2115511",
+          "2072.76",
+          "",
+          "DUPLICATE_PAYMENT"
+        ]
+      ]
+    },
+    {
+      "bank_txn_id": "BT-2025-0306696",
+      "reason": "Non-duplicate allocation exceeds document total",
+      "invalid_rows": [
+        {
+          "row": [
+            "BT-2025-0306696",
+            "ARI-2025-0591930",
+            "125.87",
+            "",
+            ""
+          ],
+          "document_total_cents": 12430
+        }
+      ],
+      "replacement": [
+        [
+          "BT-2025-0306696",
+          "ARI-2025-0591930",
+          "125.87",
+          "",
+          "DUPLICATE_PAYMENT"
+        ]
+      ]
+    },
+    {
+      "bank_txn_id": "BT-2025-0332618",
+      "reason": "Non-duplicate allocation exceeds document total",
+      "invalid_rows": [
+        {
+          "row": [
+            "BT-2025-0332618",
+            "ARI-2025-2939604",
+            "10857.97",
+            "",
+            ""
+          ],
+          "document_total_cents": 1046049
+        }
+      ],
+      "replacement": [
+        [
+          "BT-2025-0332618",
+          "ARI-2025-2939604",
+          "10857.97",
+          "",
+          "DUPLICATE_PAYMENT"
+        ]
+      ]
+    },
+    {
+      "bank_txn_id": "BT-2025-0333044",
+      "reason": "Non-duplicate allocation exceeds document total",
+      "invalid_rows": [
+        {
+          "row": [
+            "BT-2025-0333044",
+            "ARI-2025-4093528",
+            "2958.12",
+            "",
+            ""
+          ],
+          "document_total_cents": 285644
+        }
+      ],
+      "replacement": [
+        [
+          "BT-2025-0333044",
+          "ARI-2025-4093528",
+          "2958.12",
+          "",
+          "DUPLICATE_PAYMENT"
+        ]
+      ]
+    },
+    {
+      "bank_txn_id": "BT-2025-0333284",
+      "reason": "Non-duplicate allocation exceeds document total",
+      "invalid_rows": [
+        {
+          "row": [
+            "BT-2025-0333284",
+            "ARI-2025-2635431",
+            "1649.61",
+            "",
+            ""
+          ],
+          "document_total_cents": 159700
+        }
+      ],
+      "replacement": [
+        [
+          "BT-2025-0333284",
+          "ARI-2025-2635431",
+          "1649.61",
+          "",
+          "DUPLICATE_PAYMENT"
+        ]
+      ]
+    },
+    {
+      "bank_txn_id": "BT-2025-0333699",
+      "reason": "Non-duplicate allocation exceeds document total",
+      "invalid_rows": [
+        {
+          "row": [
+            "BT-2025-0333699",
+            "ARI-2025-5408180",
+            "1800.00",
+            "",
+            ""
+          ],
+          "document_total_cents": 171684
+        }
+      ],
+      "replacement": [
+        [
+          "BT-2025-0333699",
+          "ARI-2025-5408180",
+          "1800.00",
+          "",
+          "DUPLICATE_PAYMENT"
+        ]
+      ]
+    },
+    {
+      "bank_txn_id": "BT-2025-0335141",
+      "reason": "Non-duplicate allocation exceeds document total",
+      "invalid_rows": [
+        {
+          "row": [
+            "BT-2025-0335141",
+            "ARI-2025-6462251",
+            "9296.37",
+            "",
+            ""
+          ],
+          "document_total_cents": 893022
+        }
+      ],
+      "replacement": [
+        [
+          "BT-2025-0335141",
+          "ARI-2025-6462251",
+          "9296.37",
+          "",
+          "DUPLICATE_PAYMENT"
+        ]
+      ]
+    },
+    {
+      "bank_txn_id": "BT-2025-0339905",
+      "reason": "Non-duplicate allocation exceeds document total",
+      "invalid_rows": [
+        {
+          "row": [
+            "BT-2025-0339905",
+            "ARI-2025-4338973",
+            "6866.76",
+            "",
+            ""
+          ],
+          "document_total_cents": 675577
+        }
+      ],
+      "replacement": [
+        [
+          "BT-2025-0339905",
+          "ARI-2025-4338973",
+          "6866.76",
+          "",
+          "DUPLICATE_PAYMENT"
+        ]
+      ]
+    },
+    {
+      "bank_txn_id": "BT-2025-0353268",
+      "reason": "Non-duplicate allocation exceeds document total",
+      "invalid_rows": [
+        {
+          "row": [
+            "BT-2025-0353268",
+            "ARI-2025-2403296",
+            "7321.06",
+            "",
+            ""
+          ],
+          "document_total_cents": 722949
+        }
+      ],
+      "replacement": [
+        [
+          "BT-2025-0353268",
+          "ARI-2025-2403296",
+          "7321.06",
+          "",
+          "DUPLICATE_PAYMENT"
+        ]
+      ]
+    },
+    {
+      "bank_txn_id": "BT-2025-0354731",
+      "reason": "Non-duplicate allocation exceeds document total",
+      "invalid_rows": [
+        {
+          "row": [
+            "BT-2025-0354731",
+            "ARI-2025-5792352",
+            "4973.29",
+            "",
+            ""
+          ],
+          "document_total_cents": 478545
+        }
+      ],
+      "replacement": [
+        [
+          "BT-2025-0354731",
+          "ARI-2025-5792352",
+          "4973.29",
+          "",
+          "DUPLICATE_PAYMENT"
+        ]
+      ]
+    },
+    {
+      "bank_txn_id": "BT-2025-0359886",
+      "reason": "Non-duplicate allocation exceeds document total",
+      "invalid_rows": [
+        {
+          "row": [
+            "BT-2025-0359886",
+            "ARI-2025-1791060",
+            "1559.99",
+            "",
+            ""
+          ],
+          "document_total_cents": 151203
+        }
+      ],
+      "replacement": [
+        [
+          "BT-2025-0359886",
+          "ARI-2025-1791060",
+          "1559.99",
+          "",
+          "DUPLICATE_PAYMENT"
+        ]
+      ]
+    },
+    {
+      "bank_txn_id": "BT-2025-0360286",
+      "reason": "Non-duplicate allocation exceeds document total",
+      "invalid_rows": [
+        {
+          "row": [
+            "BT-2025-0360286",
+            "ARI-2025-4891053",
+            "259.26",
+            "",
+            ""
+          ],
+          "document_total_cents": 25722
+        }
+      ],
+      "replacement": [
+        [
+          "BT-2025-0360286",
+          "ARI-2025-4891053",
+          "259.26",
+          "",
+          "DUPLICATE_PAYMENT"
+        ]
+      ]
+    },
+    {
+      "bank_txn_id": "BT-2025-0366484",
+      "reason": "Non-duplicate allocation exceeds document total",
+      "invalid_rows": [
+        {
+          "row": [
+            "BT-2025-0366484",
+            "ARI-2025-0731604",
+            "1000.00",
+            "",
+            ""
+          ],
+          "document_total_cents": 97194
+        }
+      ],
+      "replacement": [
+        [
+          "BT-2025-0366484",
+          "ARI-2025-0731604",
+          "1000.00",
+          "",
+          "DUPLICATE_PAYMENT"
+        ]
+      ]
+    },
+    {
+      "bank_txn_id": "BT-2025-0367368",
+      "reason": "Non-duplicate allocation exceeds document total",
+      "invalid_rows": [
+        {
+          "row": [
+            "BT-2025-0367368",
+            "ARI-2025-8381462",
+            "14536.25",
+            "",
+            ""
+          ],
+          "document_total_cents": 1435098
+        }
+      ],
+      "replacement": [
+        [
+          "BT-2025-0367368",
+          "ARI-2025-8381462",
+          "14536.25",
+          "",
+          "DUPLICATE_PAYMENT"
+        ]
+      ]
+    },
+    {
+      "bank_txn_id": "BT-2025-0368615",
+      "reason": "Non-duplicate allocation exceeds document total",
+      "invalid_rows": [
+        {
+          "row": [
+            "BT-2025-0368615",
+            "ARI-2025-6462251",
+            "9301.01",
+            "",
+            ""
+          ],
+          "document_total_cents": 893022
+        }
+      ],
+      "replacement": [
+        [
+          "BT-2025-0368615",
+          "ARI-2025-6462251",
+          "9301.01",
+          "",
+          "DUPLICATE_PAYMENT"
+        ]
+      ]
+    },
+    {
+      "bank_txn_id": "BT-2025-0370352",
+      "reason": "Non-duplicate allocation exceeds document total",
+      "invalid_rows": [
+        {
+          "row": [
+            "BT-2025-0370352",
+            "ARI-2025-4809559",
+            "942.46",
+            "",
+            ""
+          ],
+          "document_total_cents": 90899
+        }
+      ],
+      "replacement": [
+        [
+          "BT-2025-0370352",
+          "ARI-2025-4809559",
+          "942.46",
+          "",
+          "DUPLICATE_PAYMENT"
+        ]
+      ]
+    },
+    {
+      "bank_txn_id": "BT-2025-0372002",
+      "reason": "Non-duplicate allocation exceeds document total",
+      "invalid_rows": [
+        {
+          "row": [
+            "BT-2025-0372002",
+            "ARI-2025-3382365",
+            "383.98",
+            "",
+            ""
+          ],
+          "document_total_cents": 37158
+        }
+      ],
+      "replacement": [
+        [
+          "BT-2025-0372002",
+          "ARI-2025-3382365",
+          "383.98",
+          "",
+          "DUPLICATE_PAYMENT"
+        ]
+      ]
+    },
+    {
+      "bank_txn_id": "BT-2025-0373670",
+      "reason": "Non-duplicate allocation exceeds document total",
+      "invalid_rows": [
+        {
+          "row": [
+            "BT-2025-0373670",
+            "ARI-2025-4143152",
+            "8441.68",
+            "",
+            ""
+          ],
+          "document_total_cents": 818824
+        }
+      ],
+      "replacement": [
+        [
+          "BT-2025-0373670",
+          "ARI-2025-4143152",
+          "8441.68",
+          "",
+          "DUPLICATE_PAYMENT"
+        ]
+      ]
+    },
+    {
+      "bank_txn_id": "BT-2025-0375433",
+      "reason": "Non-duplicate allocation exceeds document total",
+      "invalid_rows": [
+        {
+          "row": [
+            "BT-2025-0375433",
+            "API-2025-1248208",
+            "777.53",
+            "",
+            ""
+          ],
+          "document_total_cents": 56639
+        }
+      ],
+      "replacement": [
+        [
+          "BT-2025-0375433",
+          "API-2025-1248208",
+          "777.53",
+          "",
+          "DUPLICATE_PAYMENT"
+        ]
+      ]
+    },
+    {
+      "bank_txn_id": "BT-2025-0376003",
+      "reason": "Non-duplicate allocation exceeds document total",
+      "invalid_rows": [
+        {
+          "row": [
+            "BT-2025-0376003",
+            "API-2025-3945577",
+            "9259.32",
+            "",
+            ""
+          ],
+          "document_total_cents": 102848
+        }
+      ],
+      "replacement": [
+        [
+          "BT-2025-0376003",
+          "API-2025-3945577",
+          "9259.32",
+          "",
+          "DUPLICATE_PAYMENT"
+        ]
+      ]
+    },
+    {
+      "bank_txn_id": "BT-2025-0382610",
+      "reason": "Non-duplicate allocation exceeds document total",
+      "invalid_rows": [
+        {
+          "row": [
+            "BT-2025-0382610",
+            "API-2025-2225787",
+            "1402.29",
+            "",
+            ""
+          ],
+          "document_total_cents": 140174
+        }
+      ],
+      "replacement": [
+        [
+          "BT-2025-0382610",
+          "API-2025-2225787",
+          "1402.29",
+          "",
+          "DUPLICATE_PAYMENT"
+        ]
+      ]
+    },
+    {
+      "bank_txn_id": "BT-2025-0384982",
+      "reason": "Non-duplicate allocation exceeds document total",
+      "invalid_rows": [
+        {
+          "row": [
+            "BT-2025-0384982",
+            "ARI-2025-4662410",
+            "17495.25",
+            "",
+            ""
+          ],
+          "document_total_cents": 1734989
+        }
+      ],
+      "replacement": [
+        [
+          "BT-2025-0384982",
+          "ARI-2025-4662410",
+          "17495.25",
+          "",
+          "DUPLICATE_PAYMENT"
+        ]
+      ]
+    },
+    {
+      "bank_txn_id": "BT-2025-0386409",
+      "reason": "Non-duplicate allocation exceeds document total",
+      "invalid_rows": [
+        {
+          "row": [
+            "BT-2025-0386409",
+            "ARI-2025-8617389",
+            "1059.23",
+            "",
+            ""
+          ],
+          "document_total_cents": 105367
+        }
+      ],
+      "replacement": [
+        [
+          "BT-2025-0386409",
+          "ARI-2025-8617389",
+          "1059.23",
+          "",
+          "DUPLICATE_PAYMENT"
+        ]
+      ]
+    },
+    {
+      "bank_txn_id": "BT-2025-0386466",
+      "reason": "Non-duplicate allocation exceeds document total",
+      "invalid_rows": [
+        {
+          "row": [
+            "BT-2025-0386466",
+            "ARI-2025-6635311",
+            "6568.91",
+            "",
+            ""
+          ],
+          "document_total_cents": 653826
+        }
+      ],
+      "replacement": [
+        [
+          "BT-2025-0386466",
+          "ARI-2025-6635311",
+          "6568.91",
+          "",
+          "DUPLICATE_PAYMENT"
+        ]
+      ]
+    },
+    {
+      "bank_txn_id": "BT-2025-0389366",
+      "reason": "Non-duplicate allocation exceeds document total",
+      "invalid_rows": [
+        {
+          "row": [
+            "BT-2025-0389366",
+            "ARI-2025-8044767",
+            "25515.72",
+            "",
+            ""
+          ],
+          "document_total_cents": 2472743
+        }
+      ],
+      "replacement": [
+        [
+          "BT-2025-0389366",
+          "ARI-2025-8044767",
+          "25515.72",
+          "",
+          "DUPLICATE_PAYMENT"
+        ]
+      ]
+    },
+    {
+      "bank_txn_id": "BT-2025-0401481",
+      "reason": "Non-duplicate allocation exceeds document total",
+      "invalid_rows": [
+        {
+          "row": [
+            "BT-2025-0401481",
+            "ARI-2025-8937919",
+            "16249.29",
+            "",
+            ""
+          ],
+          "document_total_cents": 1597258
+        }
+      ],
+      "replacement": [
+        [
+          "BT-2025-0401481",
+          "ARI-2025-8937919",
+          "16249.29",
+          "",
+          "DUPLICATE_PAYMENT"
+        ]
+      ]
+    },
+    {
+      "bank_txn_id": "BT-2025-0402726",
+      "reason": "Non-duplicate allocation exceeds document total",
+      "invalid_rows": [
+        {
+          "row": [
+            "BT-2025-0402726",
+            "ARI-2025-6382412",
+            "62411.43",
+            "",
+            ""
+          ],
+          "document_total_cents": 6122995
+        }
+      ],
+      "replacement": [
+        [
+          "BT-2025-0402726",
+          "ARI-2025-6382412",
+          "62411.43",
+          "",
+          "DUPLICATE_PAYMENT"
+        ]
+      ]
+    }
+  ],
+  "scope": "Deterministic source-total constraint only; no labels, model fitting, or LLM judgment"
+}

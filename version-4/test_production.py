@@ -4,13 +4,22 @@ import tempfile
 from pathlib import Path
 import unittest
 from production_data import role,sample_banks,DiskCatalog,MonthSources
-from train_live import attach_targets
+from train_live import attach_targets,amount_contract_guard
 import json
 import sqlite3
 from types import SimpleNamespace
 
 
 class ProductionTests(unittest.TestCase):
+    def test_invalid_blank_duplicate_falls_back_without_clamping_cash(self):
+        static={'B':[['B','I','105.00','','DUPLICATE_PAYMENT']]}
+        pred={'B':[['B','I','105.00','','']]}
+        c=SimpleNamespace(item=lambda iid:dict(total=10000))
+        repairs=amount_contract_guard(pred,static,c)
+        self.assertEqual(len(repairs),1)
+        self.assertEqual(pred,static)
+        self.assertEqual(amount_contract_guard(pred,static,c),[])
+
     def test_temporal_roles(self):
         for dt,expected in [('2023-12-31','pair_fit'),('2024-01-01','hypothesis_fit'),
                             ('2024-07-01','calibration'),('2025-01-01','test'),

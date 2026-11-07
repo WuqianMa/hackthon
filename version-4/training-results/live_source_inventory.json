@@ -1,0 +1,13 @@
+{
+  "groups": {
+    "receipt": 93786,
+    "cheque": 6083,
+    "direct_debit_batches": 1590,
+    "card_settlements": 1265,
+    "cheque_deposits": 1968,
+    "payment_runs": 77248,
+    "remittance": 6889
+  },
+  "issues": [],
+  "scope": "LIVE structured sources and PDF/text advices; no labels or LLM calls"
+}
