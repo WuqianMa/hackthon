@@ -33,7 +33,17 @@ class DiskCatalog(V3Catalog.Catalog):
     """Same static interfaces without retaining millions of raw invoice dictionaries."""
     def __init__(self, dbpath, phase, masters, cache):
         print('Indexing complete TRAIN invoice history on disk...',flush=True)
-        BaseCatalog.__init__(self,dbpath,phase,masters,cache,False)
+        connect=sqlite3.connect
+        def bulk_connection(*args,**kwargs):
+            connection=connect(*args,**kwargs)
+            connection.execute('PRAGMA cache_size=-524288')
+            connection.execute('PRAGMA synchronous=NORMAL')
+            connection.execute('PRAGMA temp_store=MEMORY')
+            return connection
+        # Constructor is synchronous; restore the shared module entry immediately.
+        sqlite3.connect=bulk_connection
+        try:BaseCatalog.__init__(self,dbpath,phase,masters,cache,False)
+        finally:sqlite3.connect=connect
         self.as_of='9999-12-31'
         self.prefixes=defaultdict(set);self.children=defaultdict(set)
         self.group_members=defaultdict(set);self.related=defaultdict(set);self.mandates=defaultdict(set)
@@ -70,6 +80,7 @@ class DiskCatalog(V3Catalog.Catalog):
 
     def visible(self,r):
         r=dict(r);f=json.loads(r['facts'])
+        if getattr(self,'candidate_mode',False):r['balance']=r['initial']
         if f.get('cancelled_from') and f['cancelled_from']>self.as_of:
             f.pop('cancelled',None);r['facts']=json.dumps(f)
         return r
@@ -97,6 +108,7 @@ def catalog(work,phase,masters):
     if state.exists():
         c=object.__new__(DiskCatalog);c.__dict__.update(joblib.load(state))
         c.db=sqlite3.connect(db);c.db.row_factory=sqlite3.Row;c.metadata=Metadata(c)
+        c.db.execute('PRAGMA cache_size=-131072')
     else:
         for suffix in ('','-wal','-shm'):Path(str(db)+suffix).unlink(missing_ok=True)
         c=DiskCatalog(db,phase,masters,ROOT/'work/cache/pdf_text')
@@ -107,6 +119,15 @@ def catalog(work,phase,masters):
 class MonthSources(V3Sources.Sources):
     def __init__(self,phase,cache,catalog):
         self.catalog=catalog
+        # The ordinary printed-reference index deliberately omits <5-character
+        # keys. Due-date grouping must still support those short supplier numbers.
+        if not catalog.db.execute("SELECT 1 FROM sqlite_master WHERE name='short_ap_due'").fetchone():
+            catalog.db.execute('CREATE TABLE short_ap_due(doc TEXT,name TEXT,currency TEXT,due TEXT)')
+            for r in catalog.db.execute("SELECT doc,name,currency,due FROM items WHERE side='AP' AND iid LIKE 'API-%'"):
+                key=norm(r['doc'])
+                if len(key)<5:catalog.db.execute('INSERT INTO short_ap_due VALUES(?,?,?,?)',(key,norm(r['name']),r['currency'],r['due']))
+            catalog.db.execute('CREATE INDEX short_ap_lookup ON short_ap_due(doc,name,currency)')
+            catalog.db.commit()
         super().__init__(phase,cache)
 
     def load_batches(self,phase):
@@ -127,7 +148,10 @@ class MonthSources(V3Sources.Sources):
             for e in g.entries:
                 if e['credit']:continue
                 # Direct SQL preserves invoice due-date lookup without a full raw AP dict.
-                known={r['due'] for r in self.catalog.db.execute('SELECT i.due,i.name FROM items i JOIN refs r ON r.iid=i.iid WHERE r.ref=? AND i.currency=? AND i.side=?',(norm(e['doc']),g.currency,'AP')) if norm(r['name'])==norm(e['name'])}
+                if len(norm(e['doc']))<5:
+                    known={r['due'] for r in self.catalog.db.execute('SELECT due FROM short_ap_due WHERE doc=? AND name=? AND currency=?',(norm(e['doc']),norm(e['name']),g.currency))}
+                else:
+                    known={r['due'] for r in self.catalog.db.execute("SELECT i.due,i.name,i.doc FROM items i JOIN refs r ON r.iid=i.iid WHERE r.ref=? AND i.currency=? AND i.iid LIKE 'API-%'",(norm(e['doc']),g.currency)) if norm(r['name'])==norm(e['name']) and norm(r['doc'])==norm(e['doc'])}
                 if len(known)==1:dates.extend(known)
             if not dates:continue
             maturity=max(dates);run=sorted(r for r in g.refs if '-' not in r)[0]

@@ -64,6 +64,10 @@ def generate(c,sources,banks,static,phase,docs):
     import numpy as np
     _,_,em=load_strategy()
     engine=em.Engine(c,sources)
+    # Alternatives use phase-opening amounts, matching the starter/LIVE feature
+    # contract, rather than a ledger already advanced through this month.
+    previous_mode=getattr(c,'candidate_mode',False)
+    c.candidate_mode=True
     pair_rows=[];pair_x=[];per_tx={};baseline_pairs={};base_hyps={};item_parties={}
     for index,(tid,t) in enumerate(banks.items(),1):
         if hasattr(c,'as_of'):c.as_of=t['booking_date']
@@ -157,6 +161,7 @@ def generate(c,sources,banks,static,phase,docs):
                 base_hyps[tid].append({'kind':'source','pair_ids':ids,'rows':[pair_rows[j] for j in ids]})
         if index%1000==0:print(f'Candidates {index:,}/{len(banks):,}; pairs {len(pair_rows):,}',flush=True)
     feature_names=FEATURES+['exception_'+e for e in EXCEPTIONS]
+    c.candidate_mode=previous_mode
     return dict(banks=banks,static=dict(static),pair_rows=pair_rows,X=np.asarray(pair_x,dtype=np.float32),
                 per_tx=per_tx,base_hyps=base_hyps,phase=phase,docs=docs,feature_names=feature_names,
                 item_parties=item_parties)

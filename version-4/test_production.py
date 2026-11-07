@@ -3,9 +3,11 @@ import csv
 import tempfile
 from pathlib import Path
 import unittest
-from production_data import role,sample_banks,DiskCatalog
+from production_data import role,sample_banks,DiskCatalog,MonthSources
 from train_live import attach_targets
 import json
+import sqlite3
+from types import SimpleNamespace
 
 
 class ProductionTests(unittest.TestCase):
@@ -43,6 +45,30 @@ class ProductionTests(unittest.TestCase):
         self.assertFalse(json.loads(c.visible(original)['facts']).get('cancelled'))
         c.as_of='2024-02-01'
         self.assertTrue(json.loads(c.visible(original)['facts'])['cancelled'])
+
+    def test_candidate_policy_cannot_see_end_of_month_ledger(self):
+        c=object.__new__(DiskCatalog);c.as_of='2024-01-01';c.candidate_mode=True
+        item=dict(iid='I',initial=10000,balance=0,facts='{}')
+        self.assertEqual(c.visible(item)['balance'],10000)
+        c.candidate_mode=False
+        self.assertEqual(c.visible(item)['balance'],0)
+
+    def test_short_supplier_reference_retains_maturity_container(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            p=Path(tmp);(p/'payment_runs').mkdir()
+            db=sqlite3.connect(':memory:');db.row_factory=sqlite3.Row
+            db.execute('CREATE TABLE items(iid,side,doc,name,currency,due)')
+            db.execute("INSERT INTO items VALUES('API-2024-0000001','AP','1234','Supplier ABC','EUR','2024-02-01')")
+            r=dict(run_type='confirming',run_id='RUN0001',end_to_end_id='TRANSFER001',debtor_account_id='ES01-RIBA-EUR',
+                   execution_date='2024-01-01',currency='EUR',transfer_amount='10.00',document_number='1234',
+                   document_amount='10.00',beneficiary='Supplier ABC',beneficiary_iban='')
+            with (p/'payment_runs/run.csv').open('w',newline='') as f:
+                w=csv.DictWriter(f,fieldnames=list(r));w.writeheader();w.writerow(r)
+            source=MonthSources(p,p/'cache',SimpleNamespace(db=db))
+            key='maturity:ES01-RIBA-EUR:RUN0001:2024-02-01'
+            self.assertIn(key,source.groups)
+            self.assertEqual(source.groups[key].cash,-1000)
+            db.close()
 
 
 if __name__=='__main__':unittest.main()

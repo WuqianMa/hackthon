@@ -37,11 +37,15 @@ def dump_rows(path,predictions,banks):
 
 def prepare_train(phase,docs,per_month):
     manifest=WORK/'sample_manifest.json'
+    identity=dict(per_month=per_month,train_sha256=HASHES['train'],docs_sha256=HASHES['docs'],
+        generation_sha256={name:digest(Path(__file__).parent/name) for name in ('data.py','production_data.py')})
     if manifest.exists():
         old=json.loads(manifest.read_text())
         if old['per_month']!=per_month:raise ValueError('Use a new work directory for changed sampling')
+        if old.get('cache_identity')!=identity and any((WORK/'shards').glob('*.joblib')):
+            raise ValueError('TRAIN shards belong to different candidate code/settings; rebuild derived shards and ledger')
     selected,counts=sample_banks(phase,per_month)
-    write_json(manifest,dict(per_month=per_month,bank_counts=counts,selected={m:list(t) for m,t in selected.items()},
+    write_json(manifest,dict(cache_identity=identity,per_month=per_month,bank_counts=counts,selected={m:list(t) for m,t in selected.items()},
         roles={m:role(m+'-01') for m in selected},labels_used_for_sampling=False,
         input_archive_sha256=HASHES['train'],sampling='Lowest SHA256(v4-train-42:bank_txn_id) per month',
         history='Static bank ledger replays selected transactions only; all invoice history searchable; no golden balance inputs.'))
@@ -118,7 +122,7 @@ def train_models(phase,docs):
     with threadpool_limits(limits=4):head=fit_model(H,hy)
     hypothesis_count=len(hy);del H,hy,Hs,ys,d;gc.collect()
     # Official scorer receives only the sampled bank/golden rows (not 1.49M unpredicted cases).
-    calibration={};calstatic={};cbanks={};choices={k:{} for k in [(a,b) for a in (.25,.5,.75,1.) for b in (0,.1,.2)]}
+    calibration={};calstatic={};cbanks={};choices={k:{} for k in [(a,b) for a in (.25,.5,.75,1.) for b in (0,.1,.2,1.)]}
     for shard in sorted((WORK/'shards').glob('*.joblib')):
         if manifest['roles'][shard.stem]!='calibration':continue
         d=joblib.load(shard)
@@ -261,7 +265,7 @@ def live(docs,model,edition):
         bank_lines=len(banks),rows=validation['rows'],bytes=target.stat().st_size,
         submission_file=str(published.relative_to(ROOT)),tracking_file=str((tracked/filename).relative_to(ROOT)),
         sha256=digest(target),model_sha256=digest(WORK/'model.joblib'),train_archive_sha256=HASHES['train'],
-        live_archive_sha256=HASHES['live'],static_candidate_sha256=expected,changed_vs_static=changed,
+        docs_archive_sha256=HASHES['docs'],live_archive_sha256=HASHES['live'],static_candidate_sha256=expected,changed_vs_static=changed,
         methods=dict(methods),validation=validation,website_score=None,website_status='Awaiting user upload and feedback',
         source_sha256={str(p.relative_to(ROOT)):digest(p) for p in Path(__file__).parent.glob('*.py')})
     write_json(ROOT/f'version-4/editions/live_{edition}.json',record)
@@ -271,14 +275,35 @@ def live(docs,model,edition):
 def main():
     parser=argparse.ArgumentParser();parser.add_argument('--per-month',type=int,default=1500)
     parser.add_argument('--edition',default='001');parser.add_argument('--prepare-only',action='store_true')
+    parser.add_argument('--mode',choices=['all','train','live'],default='all')
     args=parser.parse_args()
     if not args.edition.isdigit() or len(args.edition)!=3:parser.error('edition must have three digits')
+    if args.per_month<1:parser.error('per-month must be positive')
     WORK.mkdir(exist_ok=True);RESULTS.mkdir(exist_ok=True)
     docs,_=extract(ROOT/'bankrec-docs-and-masters.zip',ROOT/'work/archives/docs',HASHES['docs'])
+    portable=ROOT/'version-4/models/train_001.joblib'
+    if args.mode=='live':
+        metadata=json.loads((portable.with_suffix('.json')).read_text())
+        if digest(portable)!=metadata['sha256']:raise ValueError('Published model checksum differs')
+        model=joblib.load(portable)
+        if not (WORK/'model.joblib').exists():shutil.copyfile(portable,WORK/'model.joblib')
+        if digest(WORK/'model.joblib')!=metadata['sha256']:raise ValueError('Local model differs from published model')
+        live(docs,model,args.edition);return
     root,_=extract(ROOT/'bankrec-train.tar.gz',ROOT/'work/archives/train',HASHES['train']);phase=find_folder(root,'train')
     prepare_train(phase,docs,args.per_month)
     if args.prepare_only:return
-    model=train_models(phase,docs);live(docs,model,args.edition)
+    model=train_models(phase,docs)
+    portable.parent.mkdir(exist_ok=True)
+    if portable.exists() and digest(portable)!=digest(WORK/'model.joblib'):raise ValueError('Immutable published model differs')
+    shutil.copyfile(WORK/'model.joblib',portable)
+    inventory=joblib.load(WORK/'catalog_state.joblib')
+    write_json(portable.with_suffix('.json'),dict(sha256=digest(portable),sklearn_version=__import__('sklearn').__version__,
+        numpy_version=np.__version__,train_archive_sha256=HASHES['train'],llm_enabled=False,llm_calls=0,
+        pair_training_rows=model['pair_training_rows'],hypothesis_training_rows=model['hypothesis_training_rows'],
+        alpha=model['alpha'],static_bonus=model['static_bonus'],features=model['features'],
+        hypothesis_features=model['hypothesis_features'],catalog=dict(inventory['counts']),
+        source_sha256={p.name:digest(p) for p in Path(__file__).parent.glob('*.py')}))
+    if args.mode=='all':live(docs,model,args.edition)
 
 
 from run import amount_ok
