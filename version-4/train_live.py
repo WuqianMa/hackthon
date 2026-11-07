@@ -3,14 +3,17 @@
 Run from the repository root: python3 version-4/train_live.py
 """
 from collections import Counter,defaultdict
+from concurrent.futures import ProcessPoolExecutor
 import argparse
 import csv
 import gc
 import json
+import os
 from pathlib import Path
 import shutil
 import sqlite3
 import time
+from types import SimpleNamespace
 
 import joblib
 import numpy as np
@@ -35,6 +38,15 @@ def dump_rows(path,predictions,banks):
             w.writerows(sorted(predictions[tid],key=lambda r:tuple(r[1:])))
 
 
+def prefetch_sources(phase,month):
+    connection=sqlite3.connect(f'file:{WORK / "catalog.sqlite"}?mode=ro',uri=True)
+    connection.row_factory=sqlite3.Row;connection.execute('PRAGMA cache_size=-131072')
+    connection.execute('PRAGMA mmap_size=1073741824')
+    source=MonthSources(month_view(phase,WORK,month),ROOT/'work/cache/pdf_text',SimpleNamespace(db=connection))
+    source.catalog=None;connection.close()
+    return source
+
+
 def prepare_train(phase,docs,per_month):
     manifest=WORK/'sample_manifest.json'
     identity=dict(per_month=per_month,train_sha256=HASHES['train'],docs_sha256=HASHES['docs'],
@@ -52,21 +64,28 @@ def prepare_train(phase,docs,per_month):
     pending=[m for m in selected if not (WORK/'shards'/f'{m}.joblib').exists()]
     if not pending:return
     c=catalog(WORK,phase,docs/'masters');_,_,em=load_strategy()
+    c.db.execute('PRAGMA cache_size=-524288');c.db.execute('PRAGMA mmap_size=1073741824')
     (WORK/'shards').mkdir(exist_ok=True)
-    for month in pending:
-        started=time.monotonic();banks=selected[month]
-        print(f'TRAIN {month}: {len(banks):,} selected bank lines; sources...',flush=True)
-        c.as_of='9999-12-31'
-        sources=MonthSources(month_view(phase,WORK,month),ROOT/'work/cache/pdf_text',c)
-        engine=em.Engine(c,sources);engine.speculative=True
-        static={};reversed_ids=reversal_pairs(banks)
-        for tid,t in banks.items():
-            c.as_of=t['booking_date'];static[tid]=engine.reconcile(t,reversed_ids)[0]
-        dataset=generate(c,sources,banks,static,phase,docs)
-        joblib.dump(dataset,WORK/'shards'/f'{month}.joblib',compress=3)
-        c.db.commit()
-        print(f'TRAIN {month}: {len(dataset["pair_rows"]):,} pairs, {time.monotonic()-started:.1f}s',flush=True)
-        del dataset,sources,static,engine;gc.collect()
+    first=None
+    if not c.db.execute("SELECT 1 FROM sqlite_master WHERE name='short_ap_due'").fetchone():
+        first=MonthSources(month_view(phase,WORK,pending[0]),ROOT/'work/cache/pdf_text',c)
+    with ProcessPoolExecutor(max_workers=1) as loader:
+        future=loader.submit(prefetch_sources,phase,pending[0]) if first is None else None
+        for number,month in enumerate(pending):
+            started=time.monotonic();banks=selected[month]
+            print(f'TRAIN {month}: {len(banks):,} selected bank lines; sources...',flush=True)
+            sources=first if number==0 and first is not None else future.result()
+            first=None
+            if number+1<len(pending):future=loader.submit(prefetch_sources,phase,pending[number+1])
+            engine=em.Engine(c,sources);engine.speculative=True
+            static={};reversed_ids=reversal_pairs(banks)
+            for tid,t in banks.items():
+                c.as_of=t['booking_date'];static[tid]=engine.reconcile(t,reversed_ids)[0]
+            dataset=generate(c,sources,banks,static,phase,docs)
+            joblib.dump(dataset,WORK/'shards'/f'{month}.joblib',compress=3)
+            c.db.commit()
+            print(f'TRAIN {month}: {len(dataset["pair_rows"]):,} pairs, {time.monotonic()-started:.1f}s',flush=True)
+            del dataset,sources,static,engine;gc.collect()
     c.db.close()
 
 
@@ -190,14 +209,34 @@ def scorer_subset(phase,docs,banks,folder):
     return official(dict(docs=docs,phase=folder))
 
 
-def infer(d,model):
+def infer(d,model,threads=4):
     if d['feature_names']!=model['features']:raise ValueError('Feature schema differs from fitted model')
-    with threadpool_limits(limits=4):
+    with threadpool_limits(limits=threads):
         pp=predict(model['pair'],d['X']);hyps,H,by_tx=hypotheses(d,pp);hp=predict(model['hypothesis'],H)
     return select(hyps,by_tx,hp,list(d['banks']),model['alpha'],model['static_bonus'])
 
 
-def live(docs,model,edition):
+LIVE_CONTEXT=None
+
+
+def initialize_live_worker(livework,phase,docs,model_path):
+    global LIVE_CONTEXT
+    cm,_,_=load_strategy();c=object.__new__(cm.Catalog)
+    c.__dict__.update(joblib.load(livework/'catalog_state.joblib'))
+    c.db=sqlite3.connect(f'file:{livework / "catalog.sqlite"}?mode=ro',uri=True);c.db.row_factory=sqlite3.Row
+    c.db.execute('PRAGMA cache_size=-65536');c.db.execute('PRAGMA mmap_size=1073741824')
+    LIVE_CONTEXT=(c,joblib.load(livework/'sources.joblib'),phase,docs,joblib.load(model_path),livework)
+
+
+def predict_live_batch(task):
+    start,banks,static=task;c,sources,phase,docs,model,livework=LIVE_CONTEXT
+    d=generate(c,sources,banks,static,phase,docs);out,methods=infer(d,model,threads=2)
+    path=livework/'predictions'/f'{start:06d}.joblib';temporary=path.with_suffix('.joblib.tmp')
+    joblib.dump((out,methods),temporary,compress=3);os.replace(temporary,path)
+    return out,methods
+
+
+def live(docs,model,edition,workers=3):
     # Verified LIVE-only input; use the already validated immutable static edition as a candidate.
     root,_=extract(ROOT/'bankrec-live.tar.gz',ROOT/'work/archives/live',HASHES['live']);phase=find_folder(root,'live')
     static_path=ROOT/'submission/static-strategy/submission_v3_live_001.csv'
@@ -205,20 +244,23 @@ def live(docs,model,edition):
     if digest(static_path)!=expected:raise ValueError('Frozen static LIVE candidate hash changed')
     cm,sm,_=load_strategy();livework=WORK/'live';livework.mkdir(exist_ok=True)
     identity=dict(model_sha256=digest(WORK/'model.joblib'),live_archive_sha256=HASHES['live'],
-                  candidate_code_sha256=digest(Path(__file__).parent/'data.py'))
+                  candidate_code_sha256=digest(Path(__file__).parent/'data.py'),
+                  inference_code_sha256={n:digest(Path(__file__).parent/n) for n in ('run.py','train_live.py')})
     identity_path=livework/'run_identity.json'
     if identity_path.exists() and json.loads(identity_path.read_text())!=identity:
         raise ValueError('LIVE cache belongs to a different model/input/code; use a new work directory')
     write_json(identity_path,identity)
     db=livework/'catalog.sqlite'
     # Reuse the same source-catalog schema but reset its ledger to the opening snapshot.
-    if not db.exists():
+    if not db.exists() or not (livework/'catalog_state.joblib').exists():
+        for suffix in ('','-wal','-shm'):Path(str(db)+suffix).unlink(missing_ok=True)
         print('Indexing LIVE catalog and PDF clauses...',flush=True)
         c=cm.Catalog(db,phase,docs/'masters',ROOT/'work/cache/pdf_text',True)
         state={k:v for k,v in c.__dict__.items() if k!='db'};joblib.dump(state,livework/'catalog_state.joblib',compress=3)
     else:
         c=object.__new__(cm.Catalog);c.__dict__.update(joblib.load(livework/'catalog_state.joblib'))
         c.db=sqlite3.connect(db);c.db.row_factory=sqlite3.Row
+    c.db.execute('PRAGMA cache_size=-262144');c.db.execute('PRAGMA mmap_size=1073741824')
     print('Parsing LIVE source groups...',flush=True)
     sources=sm.Sources(phase,ROOT/'work/cache/pdf_text')
     banks={r['bank_txn_id']:r for r in rows(table(phase,'bank_transactions'))};static=defaultdict(list)
@@ -226,16 +268,30 @@ def live(docs,model,edition):
     if set(banks)!=set(static):raise ValueError('Static LIVE candidate coverage differs from bank input')
     predictions={};methods=Counter();order=sorted(banks,key=lambda t:(banks[t]['booking_date'],t));changed=0
     sharddir=livework/'predictions';sharddir.mkdir(exist_ok=True)
-    for start in range(0,len(order),1000):
-        file=sharddir/f'{start:06d}.joblib';tids=order[start:start+1000]
-        if file.exists():out,method=joblib.load(file)
-        else:
-            batch={t:banks[t] for t in tids};d=generate(c,sources,batch,static,phase,docs)
-            out,method=infer(d,model);joblib.dump((out,method),file,compress=3)
-            del d;gc.collect()
-        predictions.update(out);methods.update(method.values())
-        changed+=sum(sorted(out[t])!=sorted(static[t]) for t in tids)
-        print(f'LIVE {min(start+1000,len(order)):,}/{len(order):,}; changed {changed:,}',flush=True)
+    # Verify independent worker state against one serial batch before publishing.
+    first=order[:1000];expected=None
+    if not (sharddir/'000000.joblib').exists():
+        d=generate(c,sources,{t:banks[t] for t in first},{t:static[t] for t in first},phase,docs)
+        expected=infer(d,model);del d
+    joblib.dump(sources,livework/'sources.joblib',compress=3)
+    # Validation needs only SQL item membership and categories, not the large name/master maps.
+    connection=c.db;categories=c.categories;c.__dict__.clear();c.db=connection;c.categories=categories
+    sources=None;state=None;gc.collect()
+    with ProcessPoolExecutor(max_workers=workers,initializer=initialize_live_worker,initargs=(livework,phase,docs,WORK/'model.joblib')) as pool:
+        for wave in range(0,len(order),1000*workers):
+            jobs=[]
+            for start in range(wave,min(wave+1000*workers,len(order)),1000):
+                file=sharddir/f'{start:06d}.joblib';tids=order[start:start+1000]
+                if file.exists():jobs.append((start,tids,None,joblib.load(file)))
+                else:jobs.append((start,tids,pool.submit(predict_live_batch,(start,{t:banks[t] for t in tids},{t:static[t] for t in tids})),None))
+            for start,tids,future,cached in jobs:
+                out,method=future.result() if future else cached
+                if start==0 and expected is not None:
+                    if (out,method)!=expected:raise ValueError('Parallel inference differs from serial inference')
+                    write_json(RESULTS/'parallel_validation.json',dict(ok=True,transactions=len(first),workers=workers,comparison='Serial and independent worker predictions/methods exactly identical'))
+                predictions.update(out);methods.update(method.values())
+                changed+=sum(sorted(out[t])!=sorted(static[t]) for t in tids)
+                print(f'LIVE {len(predictions):,}/{len(order):,}; changed {changed:,}',flush=True)
     target=livework/'submission.csv';dump_rows(target,predictions,banks)
     validation=validate(target,banks,c)
     aggregate=[e for e in validation['errors'] if e['message']=='aggregate allocation exceeds remaining balance']
@@ -269,6 +325,7 @@ def live(docs,model,edition):
         methods=dict(methods),validation=validation,website_score=None,website_status='Awaiting user upload and feedback',
         source_sha256={str(p.relative_to(ROOT)):digest(p) for p in Path(__file__).parent.glob('*.py')})
     write_json(ROOT/f'version-4/editions/live_{edition}.json',record)
+    write_json(tracked/f'live_{edition}.json',record)
     print(f'UPLOAD FILE: {published}',flush=True)
 
 
@@ -276,9 +333,11 @@ def main():
     parser=argparse.ArgumentParser();parser.add_argument('--per-month',type=int,default=1500)
     parser.add_argument('--edition',default='001');parser.add_argument('--prepare-only',action='store_true')
     parser.add_argument('--mode',choices=['all','train','live'],default='all')
+    parser.add_argument('--workers',type=int,default=3)
     args=parser.parse_args()
     if not args.edition.isdigit() or len(args.edition)!=3:parser.error('edition must have three digits')
     if args.per_month<1:parser.error('per-month must be positive')
+    if not 1<=args.workers<=4:parser.error('workers must be between 1 and 4')
     WORK.mkdir(exist_ok=True);RESULTS.mkdir(exist_ok=True)
     docs,_=extract(ROOT/'bankrec-docs-and-masters.zip',ROOT/'work/archives/docs',HASHES['docs'])
     portable=ROOT/'version-4/models/train_001.joblib'
@@ -288,7 +347,7 @@ def main():
         model=joblib.load(portable)
         if not (WORK/'model.joblib').exists():shutil.copyfile(portable,WORK/'model.joblib')
         if digest(WORK/'model.joblib')!=metadata['sha256']:raise ValueError('Local model differs from published model')
-        live(docs,model,args.edition);return
+        live(docs,model,args.edition,args.workers);return
     root,_=extract(ROOT/'bankrec-train.tar.gz',ROOT/'work/archives/train',HASHES['train']);phase=find_folder(root,'train')
     prepare_train(phase,docs,args.per_month)
     if args.prepare_only:return
@@ -303,7 +362,7 @@ def main():
         alpha=model['alpha'],static_bonus=model['static_bonus'],features=model['features'],
         hypothesis_features=model['hypothesis_features'],catalog=dict(inventory['counts']),
         source_sha256={p.name:digest(p) for p in Path(__file__).parent.glob('*.py')}))
-    if args.mode=='all':live(docs,model,args.edition)
+    if args.mode=='all':live(docs,model,args.edition,args.workers)
 
 
 from run import amount_ok

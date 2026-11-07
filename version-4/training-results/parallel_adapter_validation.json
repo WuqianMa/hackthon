@@ -1,0 +1,6 @@
+{
+  "ok": true,
+  "transactions": 1000,
+  "workers": 2,
+  "comparison": "Exact allocation-row and method equality against serial inference on starter"
+}
