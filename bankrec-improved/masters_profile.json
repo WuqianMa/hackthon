@@ -1,0 +1,822 @@
+{
+  "bank_accounts.csv": {
+    "rows": 47,
+    "columns": {
+      "account_id": {
+        "filled": 47,
+        "missing": 0,
+        "unique_nonempty": 47
+      },
+      "entity": {
+        "filled": 47,
+        "missing": 0,
+        "unique_nonempty": 17,
+        "distribution": {
+          "ES00": 7,
+          "ES01": 6,
+          "ES02": 4,
+          "PT01": 2,
+          "FR01": 3,
+          "IT01": 2,
+          "DE01": 1,
+          "NL01": 1,
+          "UK01": 2,
+          "PL01": 2,
+          "CH01": 2,
+          "US01": 4,
+          "MX01": 2,
+          "BR01": 2,
+          "MA01": 2,
+          "CN01": 2,
+          "AU01": 3
+        }
+      },
+      "bank": {
+        "filled": 47,
+        "missing": 0,
+        "unique_nonempty": 12,
+        "distribution": {
+          "PENA": 8,
+          "MONC": 4,
+          "RHEI": 9,
+          "RIBA": 4,
+          "NORT": 4,
+          "LORV": 4,
+          "VALD": 1,
+          "HPNB": 4,
+          "MEZQ": 2,
+          "CAZU": 2,
+          "LING": 2,
+          "WATT": 3
+        }
+      },
+      "bank_name": {
+        "filled": 47,
+        "missing": 0,
+        "unique_nonempty": 12,
+        "distribution": {
+          "Banco Peñalara": 8,
+          "Banco del Moncayo": 4,
+          "Rheinfeld Kreditbank": 9,
+          "Banca Ribagorza": 4,
+          "Northmoor Bank": 4,
+          "Banque Lorvalle": 4,
+          "Banca Valdorsa": 1,
+          "Harbor Pine National Bank": 4,
+          "Banco Mezquital": 2,
+          "Banco Cerrado Azul": 2,
+          "Lingnan Harbour Bank": 2,
+          "Southern Wattle Bank": 3
+        }
+      },
+      "bic": {
+        "filled": 47,
+        "missing": 0,
+        "unique_nonempty": 12,
+        "distribution": {
+          "PENAESM1XXX": 8,
+          "MONCESMMXXX": 4,
+          "RHEIDEFFXXX": 9,
+          "RIBAESB1XXX": 4,
+          "NORTGB2LXXX": 4,
+          "LORVFRPPXXX": 4,
+          "VALDITMMXXX": 1,
+          "HPNBUS33XXX": 4,
+          "MEZQMXMMXXX": 2,
+          "CAZUBRSPXXX": 2,
+          "LINGCNSHXXX": 2,
+          "WATTAU2SXXX": 3
+        }
+      },
+      "currency": {
+        "filled": 47,
+        "missing": 0,
+        "unique_nonempty": 11,
+        "distribution": {
+          "EUR": 25,
+          "USD": 10,
+          "GBP": 2,
+          "PLN": 1,
+          "CHF": 1,
+          "CAD": 1,
+          "MXN": 1,
+          "BRL": 2,
+          "MAD": 1,
+          "CNY": 1,
+          "AUD": 2
+        }
+      },
+      "iban": {
+        "filled": 34,
+        "missing": 13,
+        "unique_nonempty": 34
+      },
+      "account_number": {
+        "filled": 13,
+        "missing": 34,
+        "unique_nonempty": 13,
+        "distribution": {
+          "": 34,
+          "6816306726": 1,
+          "8463651447": 1,
+          "4749026573": 1,
+          "4375558930": 1,
+          "2440346559": 1,
+          "4779925908": 1,
+          "8713108934": 1,
+          "8587652926": 1,
+          "6837431110": 1,
+          "3848327169": 1,
+          "4481846404": 1,
+          "9794151824": 1,
+          "7220249842": 1
+        }
+      },
+      "purpose": {
+        "filled": 47,
+        "missing": 0,
+        "unique_nonempty": 26,
+        "distribution": {
+          "Cabecera cash pooling / Pagos / Financiación / Divisas": 1,
+          "Divisas": 3,
+          "Financiación / Pagos": 1,
+          "Cabecera cash pool EUR (zona euro)": 1,
+          "Financiación": 1,
+          "Operativa / participante cash pool / Cobros / Remesas SEPA (adeudos directos) / Pagos": 1,
+          "Cobros / Nóminas": 1,
+          "Cobros / Pagos / Confirming": 1,
+          "Liquidación TPV / comercio electrónico / Cobros": 1,
+          "Cobros / Pagos": 9,
+          "Remesas SEPA (adeudos directos) / Cobros": 1,
+          "Operativa / participante cash pool / Pagos / Cobros": 1,
+          "Pagos / Confirming": 1,
+          "Nóminas": 1,
+          "Pagos / Cobros": 1,
+          "Operativa / participante cash pool / Cobros / Pagos / Remesas SEPA (adeudos directos) / Nóminas": 3,
+          "Cobros": 4,
+          "Cobros / Pagos / Remesas SEPA (adeudos directos) / Liquidación TPV / comercio electrónico / Nóminas": 1,
+          "Operativa / participante cash pool / Cobros": 1,
+          "Cobros / Pagos / Remesas SEPA (adeudos directos) / Nóminas": 1,
+          "Operativa / participante cash pool": 1,
+          "Cobros / Pagos / Liquidación TPV / comercio electrónico / Remesas SEPA (adeudos directos) / Nóminas": 2,
+          "Cobros / Pagos / Nóminas": 6,
+          "Cobros / Lockbox (cheques) / Remesas SEPA (adeudos directos)": 1,
+          "Pagos / Nóminas / Liquidación TPV / comercio electrónico": 1,
+          "Pagos": 1
+        }
+      },
+      "statement_format": {
+        "filled": 47,
+        "missing": 0,
+        "unique_nonempty": 3,
+        "distribution": {
+          "n43": 16,
+          "camt053": 14,
+          "mt940": 17
+        }
+      },
+      "statement_format_from_2025_10_01": {
+        "filled": 4,
+        "missing": 43,
+        "unique_nonempty": 1,
+        "distribution": {
+          "": 43,
+          "camt053": 4
+        }
+      },
+      "opened": {
+        "filled": 0,
+        "missing": 47,
+        "unique_nonempty": 0,
+        "distribution": {
+          "": 47
+        }
+      }
+    }
+  },
+  "categories.csv": {
+    "rows": 21,
+    "columns": {
+      "category": {
+        "filled": 21,
+        "missing": 0,
+        "unique_nonempty": 21,
+        "distribution": {
+          "BANK_FEES": 1,
+          "INTEREST_INCOME": 1,
+          "INTEREST_EXPENSE": 1,
+          "PAYROLL": 1,
+          "SOCIAL_SECURITY": 1,
+          "TAX_PAYMENT": 1,
+          "TAX_REFUND": 1,
+          "LOAN_DRAWDOWN": 1,
+          "LOAN_REPAYMENT": 1,
+          "LEASING": 1,
+          "FX_DEAL": 1,
+          "CASH_POOL": 1,
+          "INTERCOMPANY": 1,
+          "INTERNAL_TRANSFER": 1,
+          "CUSTOMER_ADVANCE": 1,
+          "CUSTOMER_REFUND": 1,
+          "SUPPLIER_REFUND": 1,
+          "CARD_EXPENSES": 1,
+          "INSURANCE": 1,
+          "BANK_REVERSAL": 1,
+          "UNIDENTIFIED": 1
+        }
+      },
+      "description": {
+        "filled": 21,
+        "missing": 0,
+        "unique_nonempty": 21,
+        "distribution": {
+          "Comisiones y gastos bancarios": 1,
+          "Intereses a favor": 1,
+          "Intereses de deudas / descubiertos": 1,
+          "Nóminas (remesa de transferencias)": 1,
+          "Seguridad social / cargas sociales": 1,
+          "Impuestos (IVA, retenciones, sociedades)": 1,
+          "Devolución de impuestos": 1,
+          "Disposición de préstamo / póliza": 1,
+          "Cuota de préstamo (capital + intereses)": 1,
+          "Cuota de leasing / renting financiero": 1,
+          "Compraventa de divisa / liquidación de forward": 1,
+          "Barrido de cash pooling (cabecera ↔ filial)": 1,
+          "Transferencia intragrupo (no comercial)": 1,
+          "Traspaso entre cuentas propias de la misma sociedad": 1,
+          "Anticipo de cliente sin factura (p. ej. pago de proforma)": 1,
+          "Devolución de dinero a cliente (saldo a favor)": 1,
+          "Reembolso de proveedor sin abono asociado (p. ej. pago duplicado nuestro)": 1,
+          "Liquidación de tarjetas de empresa": 1,
+          "Primas de seguros": 1,
+          "Apunte erróneo del banco y su anulación": 1,
+          "Cobro no identificado (no existe partida)": 1
+        }
+      },
+      "gl_account": {
+        "filled": 21,
+        "missing": 0,
+        "unique_nonempty": 18,
+        "distribution": {
+          "626000": 1,
+          "769000": 1,
+          "662000": 1,
+          "465000": 1,
+          "476000": 1,
+          "475000": 1,
+          "470000": 1,
+          "520000": 2,
+          "524000": 1,
+          "572900": 3,
+          "552000": 1,
+          "551000": 1,
+          "438000": 1,
+          "430000": 1,
+          "400000": 1,
+          "410900": 1,
+          "625000": 1,
+          "554000": 1
+        }
+      }
+    }
+  },
+  "customers.csv": {
+    "rows": 55672,
+    "columns": {
+      "customer_id": {
+        "filled": 55672,
+        "missing": 0,
+        "unique_nonempty": 55672
+      },
+      "entity": {
+        "filled": 55672,
+        "missing": 0,
+        "unique_nonempty": 17,
+        "distribution": {
+          "ES00": 6,
+          "ES01": 8565,
+          "ES02": 377,
+          "PT01": 1560,
+          "FR01": 3967,
+          "IT01": 2190,
+          "DE01": 2409,
+          "NL01": 1565,
+          "UK01": 1335,
+          "PL01": 1025,
+          "CH01": 682,
+          "US01": 22704,
+          "MX01": 1365,
+          "BR01": 1353,
+          "MA01": 677,
+          "CN01": 1354,
+          "AU01": 4538
+        }
+      },
+      "name": {
+        "filled": 55672,
+        "missing": 0,
+        "unique_nonempty": 36981
+      },
+      "trade_name": {
+        "filled": 3275,
+        "missing": 52397,
+        "unique_nonempty": 2825
+      },
+      "customer_type": {
+        "filled": 55672,
+        "missing": 0,
+        "unique_nonempty": 6,
+        "distribution": {
+          "KEY_ACCOUNT": 192,
+          "DISTRIBUTOR": 4885,
+          "INSTALLER": 23274,
+          "PROJECT": 1234,
+          "INSTALLER_DD": 26081,
+          "WEB_CARD": 6
+        }
+      },
+      "country": {
+        "filled": 55672,
+        "missing": 0,
+        "unique_nonempty": 24,
+        "distribution": {
+          "ES": 8881,
+          "GB": 1334,
+          "DZ": 12,
+          "FR": 3954,
+          "US": 22563,
+          "PT": 1570,
+          "CH": 705,
+          "AE": 5,
+          "MA": 691,
+          "BE": 7,
+          "LU": 8,
+          "IT": 2177,
+          "MT": 7,
+          "DE": 2391,
+          "PL": 1033,
+          "AT": 5,
+          "NL": 1560,
+          "IE": 12,
+          "CA": 152,
+          "MX": 1360,
+          "BR": 1353,
+          "CN": 1352,
+          "AU": 4510,
+          "NZ": 30
+        }
+      },
+      "tax_id": {
+        "filled": 55666,
+        "missing": 6,
+        "unique_nonempty": 55376
+      },
+      "iban": {
+        "filled": 24324,
+        "missing": 31348,
+        "unique_nonempty": 24324
+      },
+      "sepa_mandate_id": {
+        "filled": 26081,
+        "missing": 29591,
+        "unique_nonempty": 26081
+      },
+      "payment_terms": {
+        "filled": 55672,
+        "missing": 0,
+        "unique_nonempty": 11,
+        "distribution": {
+          "T60": 9178,
+          "T90": 425,
+          "T30": 6630,
+          "T60D25": 11,
+          "D1N60": 15,
+          "D2N30": 3981,
+          "CASH": 2249,
+          "DD15": 7546,
+          "DD30": 3804,
+          "N30US": 16344,
+          "D2N30US": 5489
+        }
+      },
+      "invoice_currency": {
+        "filled": 55672,
+        "missing": 0,
+        "unique_nonempty": 11,
+        "distribution": {
+          "EUR": 20656,
+          "USD": 22666,
+          "GBP": 1335,
+          "PLN": 1010,
+          "CHF": 682,
+          "CAD": 113,
+          "MXN": 1330,
+          "BRL": 1353,
+          "MAD": 661,
+          "CNY": 1328,
+          "AUD": 4538
+        }
+      },
+      "group_id": {
+        "filled": 506,
+        "missing": 55166,
+        "unique_nonempty": 178
+      },
+      "parent_customer_id": {
+        "filled": 331,
+        "missing": 55341,
+        "unique_nonempty": 178
+      },
+      "created": {
+        "filled": 55666,
+        "missing": 6,
+        "unique_nonempty": 1766
+      },
+      "blocked_since": {
+        "filled": 10627,
+        "missing": 45045,
+        "unique_nonempty": 1479
+      }
+    }
+  },
+  "entities.csv": {
+    "rows": 17,
+    "columns": {
+      "entity": {
+        "filled": 17,
+        "missing": 0,
+        "unique_nonempty": 17,
+        "distribution": {
+          "ES00": 1,
+          "ES01": 1,
+          "ES02": 1,
+          "PT01": 1,
+          "FR01": 1,
+          "IT01": 1,
+          "DE01": 1,
+          "NL01": 1,
+          "UK01": 1,
+          "PL01": 1,
+          "CH01": 1,
+          "US01": 1,
+          "MX01": 1,
+          "BR01": 1,
+          "MA01": 1,
+          "CN01": 1,
+          "AU01": 1
+        }
+      },
+      "legal_name": {
+        "filled": 17,
+        "missing": 0,
+        "unique_nonempty": 17,
+        "distribution": {
+          "Valtermia Industrial, S.A.": 1,
+          "Valtermia Ibérica, S.A.U.": 1,
+          "Valtermia Manufacturing, S.L.U.": 1,
+          "Valtermia Portugal, Lda.": 1,
+          "Valtermia France SAS": 1,
+          "Valtermia Italia S.r.l.": 1,
+          "Valtermia Deutschland GmbH": 1,
+          "Valtermia Benelux B.V.": 1,
+          "Valtermia UK Ltd": 1,
+          "Valtermia Polska Sp. z o.o.": 1,
+          "Valtermia Schweiz AG": 1,
+          "Valtermia North America Inc.": 1,
+          "Valtermia México, S.A. de C.V.": 1,
+          "Valtermia do Brasil Ltda.": 1,
+          "Valtermia Maroc SARL": 1,
+          "Valtermia (Ningbo) Trading Co., Ltd.": 1,
+          "Valtermia Australia Pty Ltd": 1
+        }
+      },
+      "country": {
+        "filled": 17,
+        "missing": 0,
+        "unique_nonempty": 15,
+        "distribution": {
+          "ES": 3,
+          "PT": 1,
+          "FR": 1,
+          "IT": 1,
+          "DE": 1,
+          "NL": 1,
+          "GB": 1,
+          "PL": 1,
+          "CH": 1,
+          "US": 1,
+          "MX": 1,
+          "BR": 1,
+          "MA": 1,
+          "CN": 1,
+          "AU": 1
+        }
+      },
+      "functional_currency": {
+        "filled": 17,
+        "missing": 0,
+        "unique_nonempty": 10,
+        "distribution": {
+          "EUR": 8,
+          "GBP": 1,
+          "PLN": 1,
+          "CHF": 1,
+          "USD": 1,
+          "MXN": 1,
+          "BRL": 1,
+          "MAD": 1,
+          "CNY": 1,
+          "AUD": 1
+        }
+      },
+      "role": {
+        "filled": 17,
+        "missing": 0,
+        "unique_nonempty": 9,
+        "distribution": {
+          "holding / in-house bank / cash-pool header": 1,
+          "commercial Spain (branches)": 1,
+          "manufacturing": 1,
+          "commercial": 9,
+          "commercial + plant": 1,
+          "commercial + logistics hub": 1,
+          "commercial + manufacturing": 1,
+          "sourcing + manufacturing": 1,
+          "commercial + manufacturing APAC": 1
+        }
+      },
+      "in_group_since": {
+        "filled": 17,
+        "missing": 0,
+        "unique_nonempty": 1,
+        "distribution": {
+          "2010-01-01": 17
+        }
+      }
+    }
+  },
+  "fx_rates.csv": {
+    "rows": 13706,
+    "columns": {
+      "date": {
+        "filled": 13706,
+        "missing": 0,
+        "unique_nonempty": 1246
+      },
+      "currency": {
+        "filled": 13706,
+        "missing": 0,
+        "unique_nonempty": 11,
+        "distribution": {
+          "AUD": 1246,
+          "BRL": 1246,
+          "CAD": 1246,
+          "CHF": 1246,
+          "CNY": 1246,
+          "GBP": 1246,
+          "MAD": 1246,
+          "MXN": 1246,
+          "PLN": 1246,
+          "USD": 1246,
+          "ZAR": 1246
+        }
+      },
+      "units_per_eur": {
+        "filled": 13706,
+        "missing": 0,
+        "unique_nonempty": 11015
+      },
+      "source": {
+        "filled": 13706,
+        "missing": 0,
+        "unique_nonempty": 2,
+        "distribution": {
+          "ECB": 12460,
+          "BAM-basket (derived)": 1246
+        }
+      }
+    }
+  },
+  "payment_terms.csv": {
+    "rows": 13,
+    "columns": {
+      "code": {
+        "filled": 13,
+        "missing": 0,
+        "unique_nonempty": 13,
+        "distribution": {
+          "T30": 1,
+          "T60": 1,
+          "T90": 1,
+          "T30FM": 1,
+          "T60D25": 1,
+          "D2N30": 1,
+          "D1N60": 1,
+          "D3N45": 1,
+          "CASH": 1,
+          "DD15": 1,
+          "DD30": 1,
+          "N30US": 1,
+          "D2N30US": 1
+        }
+      },
+      "days": {
+        "filled": 13,
+        "missing": 0,
+        "unique_nonempty": 6,
+        "distribution": {
+          "30": 6,
+          "60": 3,
+          "90": 1,
+          "45": 1,
+          "0": 1,
+          "15": 1
+        }
+      },
+      "early_payment_discount_pct": {
+        "filled": 4,
+        "missing": 9,
+        "unique_nonempty": 3,
+        "distribution": {
+          "": 9,
+          "2.00": 2,
+          "1.00": 1,
+          "3.00": 1
+        }
+      },
+      "discount_days": {
+        "filled": 4,
+        "missing": 9,
+        "unique_nonempty": 3,
+        "distribution": {
+          "": 9,
+          "10": 2,
+          "15": 1,
+          "8": 1
+        }
+      },
+      "description": {
+        "filled": 13,
+        "missing": 0,
+        "unique_nonempty": 13,
+        "distribution": {
+          "30 días fecha factura": 1,
+          "60 días fecha factura": 1,
+          "90 días fecha factura": 1,
+          "30 días fin de mes": 1,
+          "60 días, día de pago 25": 1,
+          "2 % 10 días, neto 30": 1,
+          "1 % 15 días, neto 60": 1,
+          "3 % 8 días, neto 45": 1,
+          "Contado / pago con pedido": 1,
+          "Recibo domiciliado SEPA a 15 días": 1,
+          "Recibo domiciliado SEPA a 30 días": 1,
+          "Net 30": 1,
+          "2/10 Net 30": 1
+        }
+      }
+    }
+  },
+  "suppliers.csv": {
+    "rows": 12831,
+    "columns": {
+      "supplier_id": {
+        "filled": 12831,
+        "missing": 0,
+        "unique_nonempty": 12831
+      },
+      "entity": {
+        "filled": 12831,
+        "missing": 0,
+        "unique_nonempty": 17,
+        "distribution": {
+          "ES00": 238,
+          "ES01": 1646,
+          "ES02": 1080,
+          "PT01": 307,
+          "FR01": 952,
+          "IT01": 444,
+          "DE01": 478,
+          "NL01": 281,
+          "UK01": 306,
+          "PL01": 210,
+          "CH01": 186,
+          "US01": 4177,
+          "MX01": 273,
+          "BR01": 265,
+          "MA01": 166,
+          "CN01": 923,
+          "AU01": 899
+        }
+      },
+      "name": {
+        "filled": 12831,
+        "missing": 0,
+        "unique_nonempty": 10859
+      },
+      "country": {
+        "filled": 12831,
+        "missing": 0,
+        "unique_nonempty": 18,
+        "distribution": {
+          "ES": 2639,
+          "DE": 714,
+          "US": 3743,
+          "GB": 429,
+          "FR": 997,
+          "IT": 634,
+          "IN": 86,
+          "TR": 81,
+          "PT": 434,
+          "NL": 412,
+          "CN": 894,
+          "PL": 186,
+          "CH": 167,
+          "MX": 234,
+          "BR": 223,
+          "MA": 151,
+          "JP": 10,
+          "AU": 797
+        }
+      },
+      "tax_id": {
+        "filled": 12831,
+        "missing": 0,
+        "unique_nonempty": 12808
+      },
+      "supplier_type": {
+        "filled": 12831,
+        "missing": 0,
+        "unique_nonempty": 8,
+        "distribution": {
+          "GOODS": 5741,
+          "LOGISTICS": 1272,
+          "SERVICES": 3188,
+          "FOREIGN_GOODS": 586,
+          "TELECOM": 388,
+          "INSURANCE": 249,
+          "UTILITY": 766,
+          "PROFESSIONAL": 641
+        }
+      },
+      "iban": {
+        "filled": 6844,
+        "missing": 5987,
+        "unique_nonempty": 6844
+      },
+      "account_number": {
+        "filled": 5987,
+        "missing": 6844,
+        "unique_nonempty": 5987
+      },
+      "payment_method": {
+        "filled": 12831,
+        "missing": 0,
+        "unique_nonempty": 2,
+        "distribution": {
+          "transfer": 11428,
+          "dd": 1403
+        }
+      },
+      "payment_terms": {
+        "filled": 12831,
+        "missing": 0,
+        "unique_nonempty": 5,
+        "distribution": {
+          "T60": 5166,
+          "T30": 4183,
+          "T90": 652,
+          "T60D25": 633,
+          "N30US": 2197
+        }
+      },
+      "invoice_currency": {
+        "filled": 12831,
+        "missing": 0,
+        "unique_nonempty": 10,
+        "distribution": {
+          "EUR": 5407,
+          "USD": 4335,
+          "GBP": 295,
+          "PLN": 201,
+          "CHF": 177,
+          "MXN": 255,
+          "BRL": 250,
+          "MAD": 161,
+          "CNY": 885,
+          "AUD": 865
+        }
+      },
+      "created": {
+        "filled": 12831,
+        "missing": 0,
+        "unique_nonempty": 1439
+      },
+      "blocked_since": {
+        "filled": 1754,
+        "missing": 11077,
+        "unique_nonempty": 976
+      }
+    }
+  }
+}

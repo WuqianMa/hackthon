@@ -1,0 +1,22 @@
+__pycache__/
+*.py[cod]
+.venv/
+.DS_Store
+.env
+.env.*
+!.env.example
+
+# Original challenge data stays local.
+/train/
+/train 2/
+/live/
+/bankrec-docs-and-masters/
+*.zip
+
+# Reproducible intermediate data and large predictions.
+/bankrec-improved/train_work/
+/bankrec-improved/train_results/*.csv.gz
+/bankrec-improved/train_results/*.partial
+/bankrec-improved/train_results/*.log
+/bankrec-improved/sample_*.csv.gz
+/bankrec-improved/*_trace.jsonl
