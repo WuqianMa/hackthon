@@ -1,0 +1,20 @@
+{
+  "bank_lines_scanned": 1489931,
+  "selected": 70500,
+  "per_month": 1500,
+  "months": 47,
+  "sampling": "Lowest SHA256(v4-train-42:bank_txn_id) per month",
+  "labels_used_for_sampling": false,
+  "sample_manifest_sha256": "82a24a7cd9ae7a2a88198eb5a5fc55414bbff6911fa3ce2f4aceac3e413e529c",
+  "cache_identity": {
+    "per_month": 1500,
+    "train_sha256": "163f51a818193f6310b6fba96e3830e4347c883b0b84bc070153f5018e3f06b8",
+    "docs_sha256": "210b2404efd011af248a251db2bc0ee85a2ddaa1d56a7a0ca0b95ede18cc1071",
+    "generation_sha256": {
+      "data.py": "509512923eead789f601d82665f5949122a6f06de40eb1d6d96c93bc461c98aa",
+      "production_data.py": "15bec149b117d3f48de9bfe993ab6a242d44162b8256e5384509170f87511c2d"
+    }
+  },
+  "test_gold_pairs": 26528,
+  "test_candidate_correct_pairs": 22383
+}

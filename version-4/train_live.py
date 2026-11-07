@@ -125,7 +125,7 @@ def train_models(phase,docs):
         d=joblib.load(shard);_,_,_,y=load_labels_subset(d,gold)
         keep=np.array([r[0] not in purged for r in d['pair_rows']]);X.append(d['X'][keep]);Y.append(y[keep]);features=d['feature_names']
     X=np.concatenate(X);Y=np.concatenate(Y)
-    print(f'Fitting allocation model: {len(Y):,} rows, {sum(Y):,} positives',flush=True)
+    print(f'Fitting allocation model: {len(Y):,} rows, {int(Y.sum(dtype=np.int64)):,} positives',flush=True)
     with threadpool_limits(limits=4):pair=fit_model(X,Y)
     pair_count=len(Y);del X,Y;gc.collect()
     Hs=[];ys=[]
@@ -137,7 +137,7 @@ def train_models(phase,docs):
         keep=np.array([h['tid'] not in purged for h in hyps]);Hs.append(H[keep])
         ys.append(np.array([complete(h['rows'],gold,noitem) for h in hyps],dtype=np.int8)[keep])
     H=np.concatenate(Hs);hy=np.concatenate(ys)
-    print(f'Fitting payment model: {len(hy):,} hypotheses, {sum(hy):,} positives',flush=True)
+    print(f'Fitting payment model: {len(hy):,} hypotheses, {int(hy.sum(dtype=np.int64)):,} positives',flush=True)
     with threadpool_limits(limits=4):head=fit_model(H,hy)
     hypothesis_count=len(hy);del H,hy,Hs,ys,d;gc.collect()
     # Official scorer receives only the sampled bank/golden rows (not 1.49M unpredicted cases).
@@ -263,6 +263,8 @@ def live(docs,model,edition,workers=3):
     c.db.execute('PRAGMA cache_size=-262144');c.db.execute('PRAGMA mmap_size=1073741824')
     print('Parsing LIVE source groups...',flush=True)
     sources=sm.Sources(phase,ROOT/'work/cache/pdf_text')
+    write_json(RESULTS/'live_source_inventory.json',dict(groups=dict(sources.counts),issues=sources.issues,
+        scope='LIVE structured sources and PDF/text advices; no labels or LLM calls'))
     banks={r['bank_txn_id']:r for r in rows(table(phase,'bank_transactions'))};static=defaultdict(list)
     for r in rows(static_path):static[r['bank_txn_id']].append([r[k] for k in FIELDS])
     if set(banks)!=set(static):raise ValueError('Static LIVE candidate coverage differs from bank input')
