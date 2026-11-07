@@ -1,6 +1,6 @@
 # Version 4 — TRAIN-fitted static + ML decisions
 
-**LIVE edition 001 is ready:** repository-root `v4-submission.csv`, with identical copies in `submission/` and `submission/v4-strategy/`. See [LIVE_EDITION_001.md](LIVE_EDITION_001.md). All 203,083 bank lines are covered; 642,703 rows. Website feedback is pending.
+**LIVE edition 001:** repository-root `v4-submission.csv`, with identical copies in `submission/` and `submission/v4-strategy/`. See [LIVE_EDITION_001.md](LIVE_EDITION_001.md). All 203,083 bank lines are covered; 642,703 rows. New user-provided [website feedback](../v4-feedback.md) reports **79.05**, versus v3 LIVE **77.46**. The [v5 proposal](../version-5/README.md) reviews the gains and regressions without running another experiment.
 
 Current edition uses **no LLM judgment**. Two gradient-boosted models fitted on TRAIN score **79.05** on 7,500 temporal holdout cases, versus **73.34** for static reconstruction on the same cases (**+5.71**). See [TRAIN_RESULTS.md](TRAIN_RESULTS.md) for metrics, sampling, regressions and limitations, and [TRAIN_EXECUTION.md](TRAIN_EXECUTION.md) for the production protocol.
 

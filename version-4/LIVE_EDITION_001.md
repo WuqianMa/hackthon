@@ -1,5 +1,7 @@
 # V4 LIVE edition 001 — ready for upload
 
+Website update, 7 November 2026: the user supplied [v4-feedback.md](../v4-feedback.md), reporting **LIVE 79.05**, versus v3 LIVE **77.46**. Metrics and review are tracked in [feedback.md](../submission/v4-strategy/feedback.md) and [version-5](../version-5/README.md). The original release details below and CSV/model hashes are preserved.
+
 The actual upload CSV is **`v4-submission.csv` at the repository root**. Identical edition copies are `submission/submission_v4_live_001.csv` and `submission/v4-strategy/submission_v4_live_001.csv`.
 
 - Phase: LIVE only; all **203,083** bank lines covered.
