@@ -1,0 +1,3 @@
+# PDF text extraction; CSV, gzip, ZIP, TAR, XLSX and SQLite use the standard library.
+pypdf==6.11.0
+

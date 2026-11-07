@@ -1,0 +1,211 @@
+{
+  "ok": true,
+  "errors": [],
+  "warnings": [
+    {
+      "row": 172,
+      "message": "return predates observable clearing history; balance capped at total"
+    },
+    {
+      "row": 1715,
+      "message": "return predates observable clearing history; balance capped at total"
+    },
+    {
+      "row": 4232,
+      "message": "return predates observable clearing history; balance capped at total"
+    },
+    {
+      "row": 4245,
+      "message": "return predates observable clearing history; balance capped at total"
+    },
+    {
+      "row": 4757,
+      "message": "return predates observable clearing history; balance capped at total"
+    },
+    {
+      "row": 9680,
+      "message": "return predates observable clearing history; balance capped at total"
+    },
+    {
+      "row": 17961,
+      "message": "return predates observable clearing history; balance capped at total"
+    },
+    {
+      "row": 18584,
+      "message": "return predates observable clearing history; balance capped at total"
+    },
+    {
+      "row": 21825,
+      "message": "return predates observable clearing history; balance capped at total"
+    },
+    {
+      "row": 22424,
+      "message": "return predates observable clearing history; balance capped at total"
+    },
+    {
+      "row": 38305,
+      "message": "return predates observable clearing history; balance capped at total"
+    },
+    {
+      "row": 38313,
+      "message": "return predates observable clearing history; balance capped at total"
+    },
+    {
+      "row": 40680,
+      "message": "return predates observable clearing history; balance capped at total"
+    },
+    {
+      "row": 40998,
+      "message": "return predates observable clearing history; balance capped at total"
+    },
+    {
+      "row": 41160,
+      "message": "return predates observable clearing history; balance capped at total"
+    },
+    {
+      "row": 41704,
+      "message": "return predates observable clearing history; balance capped at total"
+    },
+    {
+      "row": 41743,
+      "message": "return predates observable clearing history; balance capped at total"
+    },
+    {
+      "row": 41748,
+      "message": "return predates observable clearing history; balance capped at total"
+    },
+    {
+      "row": 43254,
+      "message": "return predates observable clearing history; balance capped at total"
+    },
+    {
+      "row": 43717,
+      "message": "return predates observable clearing history; balance capped at total"
+    },
+    {
+      "row": 43735,
+      "message": "return predates observable clearing history; balance capped at total"
+    },
+    {
+      "row": 44145,
+      "message": "return predates observable clearing history; balance capped at total"
+    },
+    {
+      "row": 44849,
+      "message": "return predates observable clearing history; balance capped at total"
+    },
+    {
+      "row": 44876,
+      "message": "return predates observable clearing history; balance capped at total"
+    },
+    {
+      "row": 44886,
+      "message": "return predates observable clearing history; balance capped at total"
+    },
+    {
+      "row": 44893,
+      "message": "return predates observable clearing history; balance capped at total"
+    },
+    {
+      "row": 45176,
+      "message": "return predates observable clearing history; balance capped at total"
+    },
+    {
+      "row": 47380,
+      "message": "return predates observable clearing history; balance capped at total"
+    },
+    {
+      "row": 47742,
+      "message": "return predates observable clearing history; balance capped at total"
+    },
+    {
+      "row": 49381,
+      "message": "return predates observable clearing history; balance capped at total"
+    },
+    {
+      "row": 49448,
+      "message": "return predates observable clearing history; balance capped at total"
+    },
+    {
+      "row": 49466,
+      "message": "return predates observable clearing history; balance capped at total"
+    },
+    {
+      "row": 49473,
+      "message": "return predates observable clearing history; balance capped at total"
+    },
+    {
+      "row": 49475,
+      "message": "return predates observable clearing history; balance capped at total"
+    },
+    {
+      "row": 49486,
+      "message": "return predates observable clearing history; balance capped at total"
+    },
+    {
+      "row": 49504,
+      "message": "return predates observable clearing history; balance capped at total"
+    },
+    {
+      "row": 49534,
+      "message": "return predates observable clearing history; balance capped at total"
+    },
+    {
+      "row": 52507,
+      "message": "return predates observable clearing history; balance capped at total"
+    },
+    {
+      "row": 52570,
+      "message": "return predates observable clearing history; balance capped at total"
+    },
+    {
+      "row": 59826,
+      "message": "return predates observable clearing history; balance capped at total"
+    },
+    {
+      "row": 59883,
+      "message": "return predates observable clearing history; balance capped at total"
+    },
+    {
+      "row": 60399,
+      "message": "return predates observable clearing history; balance capped at total"
+    },
+    {
+      "row": 61028,
+      "message": "return predates observable clearing history; balance capped at total"
+    },
+    {
+      "row": 62202,
+      "message": "return predates observable clearing history; balance capped at total"
+    },
+    {
+      "row": 62703,
+      "message": "return predates observable clearing history; balance capped at total"
+    },
+    {
+      "row": 62706,
+      "message": "return predates observable clearing history; balance capped at total"
+    },
+    {
+      "row": 63046,
+      "message": "return predates observable clearing history; balance capped at total"
+    },
+    {
+      "row": 63358,
+      "message": "return predates observable clearing history; balance capped at total"
+    },
+    {
+      "row": 63491,
+      "message": "return predates observable clearing history; balance capped at total"
+    },
+    {
+      "row": 64449,
+      "message": "return predates observable clearing history; balance capped at total"
+    }
+  ],
+  "rows": 561520,
+  "bank_lines": 203083,
+  "covered": 203083,
+  "uncompressed_bytes": 24300308,
+  "max_bytes": 62914560
+}

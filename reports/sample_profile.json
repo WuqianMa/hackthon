@@ -1,0 +1,372 @@
+{
+  "masters": {
+    "bank_accounts": {
+      "rows": 47,
+      "columns": [
+        "account_id",
+        "entity",
+        "bank",
+        "bank_name",
+        "bic",
+        "currency",
+        "iban",
+        "account_number",
+        "purpose",
+        "statement_format",
+        "statement_format_from_2025_10_01",
+        "opened"
+      ]
+    },
+    "categories": {
+      "rows": 21,
+      "columns": [
+        "category",
+        "description",
+        "gl_account"
+      ]
+    },
+    "customers": {
+      "rows": 55672,
+      "columns": [
+        "customer_id",
+        "entity",
+        "name",
+        "trade_name",
+        "customer_type",
+        "country",
+        "tax_id",
+        "iban",
+        "sepa_mandate_id",
+        "payment_terms",
+        "invoice_currency",
+        "group_id",
+        "parent_customer_id",
+        "created",
+        "blocked_since"
+      ]
+    },
+    "entities": {
+      "rows": 17,
+      "columns": [
+        "entity",
+        "legal_name",
+        "country",
+        "functional_currency",
+        "role",
+        "in_group_since"
+      ]
+    },
+    "fx_rates": {
+      "rows": 13706,
+      "columns": [
+        "date",
+        "currency",
+        "units_per_eur",
+        "source"
+      ]
+    },
+    "payment_terms": {
+      "rows": 13,
+      "columns": [
+        "code",
+        "days",
+        "early_payment_discount_pct",
+        "discount_days",
+        "description"
+      ]
+    },
+    "suppliers": {
+      "rows": 12831,
+      "columns": [
+        "supplier_id",
+        "entity",
+        "name",
+        "country",
+        "tax_id",
+        "supplier_type",
+        "iban",
+        "account_number",
+        "payment_method",
+        "payment_terms",
+        "invoice_currency",
+        "created",
+        "blocked_since"
+      ]
+    }
+  },
+  "sample": {
+    "bank_transactions": {
+      "rows": 8499,
+      "columns": [
+        "bank_txn_id",
+        "account_id",
+        "entity",
+        "bank",
+        "statement_format",
+        "statement_file",
+        "booking_date",
+        "value_date",
+        "amount",
+        "currency",
+        "bank_code",
+        "bank_subcode",
+        "ref1",
+        "ref2",
+        "text",
+        "counterparty_name",
+        "counterparty_account",
+        "end_to_end_id",
+        "remittance_info",
+        "orig_amount",
+        "orig_currency"
+      ],
+      "entity": {
+        "DE01": 1649,
+        "ES01": 3868,
+        "FR01": 2982
+      },
+      "currency": {
+        "EUR": 8486,
+        "USD": 13
+      },
+      "statement_format": {
+        "camt053": 2094,
+        "n43": 3868,
+        "mt940": 2537
+      }
+    },
+    "ar_invoices": {
+      "rows": 50775,
+      "columns": [
+        "item_id",
+        "entity",
+        "document_number",
+        "issue_date",
+        "due_date",
+        "customer_id",
+        "customer_name",
+        "currency",
+        "net_amount",
+        "tax_amount",
+        "total_amount",
+        "payment_terms",
+        "customer_po",
+        "payment_method"
+      ],
+      "entity": {
+        "FR01": 15378,
+        "ES01": 26550,
+        "DE01": 8847
+      },
+      "currency": {
+        "EUR": 49650,
+        "USD": 1125
+      }
+    },
+    "ap_invoices": {
+      "rows": 13709,
+      "columns": [
+        "item_id",
+        "entity",
+        "supplier_id",
+        "supplier_name",
+        "supplier_invoice_number",
+        "issue_date",
+        "due_date",
+        "currency",
+        "net_amount",
+        "tax_amount",
+        "total_amount",
+        "payment_terms",
+        "our_po",
+        "payment_method"
+      ],
+      "entity": {
+        "ES01": 5334,
+        "FR01": 5560,
+        "DE01": 2815
+      },
+      "currency": {
+        "EUR": 13540,
+        "USD": 169
+      }
+    },
+    "credit_notes": {
+      "rows": 1362,
+      "columns": [
+        "item_id",
+        "side",
+        "entity",
+        "document_number",
+        "issue_date",
+        "party_id",
+        "party_name",
+        "currency",
+        "net_amount",
+        "tax_amount",
+        "total_amount",
+        "related_document",
+        "reason"
+      ],
+      "entity": {
+        "ES01": 668,
+        "FR01": 463,
+        "DE01": 231
+      },
+      "currency": {
+        "EUR": 1332,
+        "USD": 30
+      }
+    },
+    "golden_allocations": {
+      "rows": 36574,
+      "columns": [
+        "bank_txn_id",
+        "item_id",
+        "amount",
+        "category",
+        "exception",
+        "segment",
+        "difficulty"
+      ],
+      "category": {
+        "": 35659,
+        "CASH_POOL": 63,
+        "BANK_FEES": 536,
+        "UNIDENTIFIED": 218,
+        "BANK_REVERSAL": 18,
+        "LEASING": 13,
+        "CUSTOMER_ADVANCE": 8,
+        "CARD_EXPENSES": 3,
+        "CUSTOMER_REFUND": 20,
+        "LOAN_REPAYMENT": 3,
+        "INTERCOMPANY": 7,
+        "SUPPLIER_REFUND": 4,
+        "INTERNAL_TRANSFER": 6,
+        "SOCIAL_SECURITY": 3,
+        "TAX_PAYMENT": 4,
+        "PAYROLL": 3,
+        "INTEREST_INCOME": 5,
+        "INTEREST_EXPENSE": 1
+      },
+      "exception": {
+        "SHORT_DISCOUNT": 247,
+        "OVERPAYMENT": 24,
+        "": 34527,
+        "DUPLICATE_PAYMENT": 35,
+        "PARTIAL": 466,
+        "SHORT_DISPUTE": 225,
+        "UNIDENTIFIED": 218,
+        "SHORT_WITHHOLDING": 8,
+        "FX_DIFFERENCE": 605,
+        "RETURNED": 210,
+        "SHORT_BANK_CHARGES": 9
+      },
+      "segment": {
+        "ar_short_discount": 235,
+        "ar_overpayment": 24,
+        "nonitem_cash_pool": 63,
+        "ar_same_amount_fifo": 256,
+        "ar_same_amount_month": 185,
+        "ar_ref_noise": 5525,
+        "ar_duplicate_payment": 32,
+        "ar_retention_release": 44,
+        "ar_1to1": 927,
+        "ar_1toN_remittance": 1086,
+        "ar_discount_late": 100,
+        "ar_1toN_credit_note": 2459,
+        "ar_1toN_text": 2229,
+        "ar_retention": 55,
+        "ar_short_dispute": 8318,
+        "nonitem_bank_fees_intl": 99,
+        "ap_supplier_refund": 87,
+        "ar_partial": 174,
+        "ar_instalment": 186,
+        "ar_dispute_settlement": 53,
+        "unidentified": 152,
+        "ar_third_party_agency": 43,
+        "ar_dd_represented_transfer": 60,
+        "nonitem_bank_fees": 437,
+        "ar_new_iban": 76,
+        "ar_third_party_parent": 73,
+        "ar_n_to_m": 417,
+        "ar_short_withholding": 8,
+        "nonitem_bank_reversal": 18,
+        "ar_fx": 566,
+        "unidentified_lookalike": 66,
+        "ar_third_party_confirming": 132,
+        "nonitem_leasing": 13,
+        "ar_dd_returned": 202,
+        "ap_returned_transfer": 2,
+        "ar_card_settlement": 1150,
+        "ap_confirming": 840,
+        "customer_advance": 8,
+        "ar_cheque_deposit": 164,
+        "ar_dd_batch": 5184,
+        "nonitem_card_expenses": 3,
+        "ar_advance_deduction": 12,
+        "ar_replaced_invoice": 29,
+        "ap_direct_debit": 131,
+        "ar_cheque_returned": 3,
+        "customer_refund": 20,
+        "nonitem_loan_repayment": 3,
+        "nonitem_intercompany": 7,
+        "ar_short_bank_charges": 8,
+        "ar_1to1_remittance": 1,
+        "ap_payment_multi": 3015,
+        "ap_factored": 82,
+        "ap_payment_single": 458,
+        "ap_credit_note_netted": 526,
+        "ap_partial": 437,
+        "ap_fx": 59,
+        "ap_duplicate_payment": 3,
+        "ar_card_chargeback": 3,
+        "ap_duplicate_refund": 4,
+        "nonitem_internal_transfer": 6,
+        "nonitem_social_security": 3,
+        "nonitem_tax_payment": 4,
+        "nonitem_payroll": 3,
+        "nonitem_interest_income": 5,
+        "nonitem_interest_expense": 1
+      }
+    },
+    "pdfs": {
+      "files": 2298,
+      "median_bytes": 2685.0
+    },
+    "remittance_advices": {
+      "files": 332,
+      "formats": {
+        ".csv": 124,
+        ".txt": 73,
+        ".xlsx": 12,
+        ".pdf": 123
+      }
+    },
+    "payment_runs": {
+      "files": 4,
+      "formats": {
+        ".csv": 4
+      }
+    },
+    "direct_debit_batches": {
+      "files": 9,
+      "formats": {
+        ".csv": 9
+      }
+    },
+    "card_settlements": {
+      "files": 2,
+      "formats": {
+        ".csv": 2
+      }
+    },
+    "cheque_deposits": {
+      "files": 2,
+      "formats": {
+        ".csv": 2
+      }
+    }
+  },
+  "archives": {}
+}

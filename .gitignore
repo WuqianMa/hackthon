@@ -1,0 +1,13 @@
+data/
+work/
+final_submission/
+.venv/
+__pycache__/
+*.pyc
+.DS_Store
+._*
+*.zip
+*.tar
+*.tar.gz
+*.tgz
+

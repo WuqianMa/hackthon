@@ -1,0 +1,707 @@
+{
+  "version": "0.1.0",
+  "code_sha256": {
+    "__init__.py": "5e03366c3841004a6acb78ce1f8c820a3884449b771b372e19c966c987878088",
+    "__main__.py": "6d8b7d7846a845059d7a3107143f11131f63c5511d669b44085b15ec5e3d2279",
+    "catalog.py": "84b957e955c3769f05b0ae299f5fd1bc7498e76d32e4f51ed1cb3d89ef3b691a",
+    "cli.py": "6d9b7d6c367f8c70fdec3ebf6666a3895201468937ee9a9f4b8e3f7ca779d50d",
+    "engine.py": "89f83eb4c038c3d2f64822637d2a7a238bb91f96ab5d0dcdf7ccdb34ae1c43bb",
+    "extensions.py": "29ec011f2d6530ee6fbeb9486619b6a6cd76c9b83fbc972b1b463caab1cb90f4",
+    "io.py": "58a6a3226d351cfc6f55b947717215ed06f929f7176e6a1f9999cd602148cabc",
+    "sources.py": "208d534d720c1291df11819a435d4e9a874cc270d3de994e12ba90a952f48d5d",
+    "validate.py": "8127ae605c6e729823f0e631ac57e819fe7152f0947be12c66f58e6b3aecf044"
+  },
+  "python": "3.9.6 (default, Jan  9 2026, 11:03:41) \n[Clang 17.0.0 (clang-1700.6.4.2)]",
+  "pypdf": "6.11.0",
+  "command": [
+    "/Users/q/Desktop/hackthon/bankrec/__main__.py",
+    "--phase",
+    "sample"
+  ],
+  "phase": "sample",
+  "archive_hashes": {
+    "docs": "210b2404efd011af248a251db2bc0ee85a2ddaa1d56a7a0ca0b95ede18cc1071"
+  },
+  "input_tables": {
+    "phase/ap_invoices.csv.gz": {
+      "sha256": "fafd2d82ae4ae66ff7ca9f39227295a1ae4493906b5dbf4744afdd3212cee3a3",
+      "bytes": 480995
+    },
+    "phase/ar_invoices.csv.gz": {
+      "sha256": "69bd71db43a4361c30a8ad8724f4af9ddefa500a04db2024c595020a1501c467",
+      "bytes": 1724688
+    },
+    "phase/bank_transactions.csv.gz": {
+      "sha256": "801124b744c2a13e1cc9e4b1bec339c88e95f96508a1818c82409b4d9c9be938",
+      "bytes": 360917
+    },
+    "phase/card_settlements/ES01_202506.csv": {
+      "sha256": "205d19554f7ff6004e59c364390c2174b01cbd59f1cdd3953bb36f6185c78690",
+      "bytes": 96418
+    },
+    "phase/card_settlements/FR01_202506.csv": {
+      "sha256": "b3f2ac0f05e4f4f3e6e19ecbbbb73cecd3d675b4aacfa99a84f0a55bbc6c35f0",
+      "bytes": 45440
+    },
+    "phase/cheque_deposits/FR01_LYO_202506.csv": {
+      "sha256": "16d95364f6ebfe0d4acdaaa1b845ffb8a7e65dc99ebca318d663d0ac15a5ebf7",
+      "bytes": 8843
+    },
+    "phase/cheque_deposits/FR01_PAR_202506.csv": {
+      "sha256": "84ccbf74cde0df1c6038f7de118174484bb7bc01ada2213ecc8da5d2e3e6a950",
+      "bytes": 9693
+    },
+    "phase/credit_notes.csv.gz": {
+      "sha256": "0272b6033e53e457f49f1ef14adfd1f528010938ca73fd86d54fd62fdaac4c17",
+      "bytes": 50216
+    },
+    "phase/direct_debit_batches/DE01_HAM_202506.csv": {
+      "sha256": "9ed7afd1e3ca6957646b73d791e4ba65d2e5280c194644382bb5aad56f1185aa",
+      "bytes": 72155
+    },
+    "phase/direct_debit_batches/DE01_MUC_202506.csv": {
+      "sha256": "331dc6e71e4e0c130fa8f204ead4533e3a24969f7285e7ffca4e432f2b7603e0",
+      "bytes": 69718
+    },
+    "phase/direct_debit_batches/ES01_BCN_202506.csv": {
+      "sha256": "ec858d46b7f2c32dc9fbee8b176394451b63763657810962deca4c1826e32536",
+      "bytes": 101818
+    },
+    "phase/direct_debit_batches/ES01_BIO_202506.csv": {
+      "sha256": "3faa1e6acbf6f9a24bd13c5046aa1a4a2dee1e23bb97cae17b8fa4a1f04ca2d1",
+      "bytes": 100025
+    },
+    "phase/direct_debit_batches/ES01_MAD_202506.csv": {
+      "sha256": "e5fa3b484fb934a320527e72f0532606e6f8a6506457d6289500d224a9e256e5",
+      "bytes": 100776
+    },
+    "phase/direct_debit_batches/ES01_SEV_202506.csv": {
+      "sha256": "3cc56c8f725f65884106d5f8e321ab3c6cbc1e5220cc74a3e8ec5281542d864d",
+      "bytes": 90108
+    },
+    "phase/direct_debit_batches/ES01_VLC_202506.csv": {
+      "sha256": "b31f42bffc85487fad0171c763d860ac55e6ccf35104b578d019ed5cdeeb4e88",
+      "bytes": 87890
+    },
+    "phase/direct_debit_batches/FR01_LYO_202506.csv": {
+      "sha256": "0b8b1a7f5f15f525424b3a2c5bd431a84db269e76ced9d07630de445d0fc5199",
+      "bytes": 117566
+    },
+    "phase/direct_debit_batches/FR01_PAR_202506.csv": {
+      "sha256": "a57ad2d97b3f1bde8509d85214d6ff608f5edac88f6630db2d4c9b9980a291a2",
+      "bytes": 117240
+    },
+    "phase/payment_runs/DE01_202506_0.csv": {
+      "sha256": "3eb25712cec78a176edf485aa3194b85824261d236d2ec53463af0a9fb91f752",
+      "bytes": 330380
+    },
+    "phase/payment_runs/ES01_202506_0.csv": {
+      "sha256": "ce6ab5b115a3bf71379e909bcf958c844adfa4123328a953a70d89bde2cc66fe",
+      "bytes": 511286
+    },
+    "phase/payment_runs/ES01_202506_1.csv": {
+      "sha256": "82a31eb3bb75ccfa6431bfb199485a3fa65df10918f9fb16f03d86a04278ca77",
+      "bytes": 455406
+    },
+    "phase/payment_runs/FR01_202506_0.csv": {
+      "sha256": "4e5d81e85772e083b5b5b2b345cb463cfd60f21f9e0f7ee1599935c419bd704a",
+      "bytes": 649088
+    },
+    "phase/pdfs/index.csv": {
+      "sha256": "7b82e33dfbd285b4b4d8c8b3a34f6df1e9d4cc4d2900fe51a168ea34367332aa",
+      "bytes": 186454
+    },
+    "phase/remittance_advices/DE01/RA_20250601_POOLTECHNIKG_007364.csv": {
+      "sha256": "6e28b9e2a1007b406683d651a879b01f3f9385051ce6d0685c747de3d6ab73ff",
+      "bytes": 1472
+    },
+    "phase/remittance_advices/DE01/RA_20250603_ALONSOWELLNE_865961.csv": {
+      "sha256": "8588f239d9419d902b5c6d177fd913f6f7626450eb92c4a36f74d17c338275dd",
+      "bytes": 352
+    },
+    "phase/remittance_advices/DE01/RA_20250603_SCHWIMMBADBA_537808.csv": {
+      "sha256": "5d8eb705b0afd64719a288a7b378142d209e9f9e7456bda54691ac6aa46a2495",
+      "bytes": 1082
+    },
+    "phase/remittance_advices/DE01/RA_20250605_KALTENTALWAS_827423.csv": {
+      "sha256": "664fc0dcbffd4e69d13305a905d2dc1688dfe61bff5cbe04c415530014ed1cf9",
+      "bytes": 254
+    },
+    "phase/remittance_advices/DE01/RA_20250605_WASSERTECHNI_823479.csv": {
+      "sha256": "361f2f9af6d0f008de88dcb7802299613f0c9bf243a406d639766a4d847b7119",
+      "bytes": 245
+    },
+    "phase/remittance_advices/DE01/RA_20250607_KALTENTALWEL_330348.csv": {
+      "sha256": "c5e358efe23bfb31152d157c50de13c9143f85da24adda349651be2032655bb8",
+      "bytes": 30717
+    },
+    "phase/remittance_advices/DE01/RA_20250607_SCHWIMMBADBA_479280.csv": {
+      "sha256": "93f3fbf84eeb3b20b551c2921899a3378c70e30465a1fac1bdd554c6b1c52f48",
+      "bytes": 243
+    },
+    "phase/remittance_advices/DE01/RA_20250608_WASSERTECHNI_544891.csv": {
+      "sha256": "c56a499eb50deb5144803716deaf1e0be38cd31bb51b591facf9af1ede4d6218",
+      "bytes": 1224
+    },
+    "phase/remittance_advices/DE01/RA_20250610_POOLTECHNIKG_844143.csv": {
+      "sha256": "82cce9aa4a17b72f6b7a9fa8a083967a48fb824ec557916e676840fe4902d62c",
+      "bytes": 1345
+    },
+    "phase/remittance_advices/DE01/RA_20250611_SCHWIMMBADBA_107712.csv": {
+      "sha256": "3b707e3654dd12aaaa2896d288dbff16487ad72d5908c993a0a756bd61d682ac",
+      "bytes": 770
+    },
+    "phase/remittance_advices/DE01/RA_20250613_OBERHAVENWEL_192680.csv": {
+      "sha256": "f9b16bbbac187961307ba81bb68734b8b84b6ff88bd02cd4a9027391bebc64e5",
+      "bytes": 3158
+    },
+    "phase/remittance_advices/DE01/RA_20250614_WASSERTECHNI_853551.csv": {
+      "sha256": "9f72ab2b0ea2238e7adf02ccb726074a32c17282bc50e8f044e2a44a0b289c0b",
+      "bytes": 1505
+    },
+    "phase/remittance_advices/DE01/RA_20250615_POOLTECHNIKG_024547.csv": {
+      "sha256": "d81d38360f197b68286390ab15e93fcf1fd11783e0035976733e0c38d71417b1",
+      "bytes": 1928
+    },
+    "phase/remittance_advices/DE01/RA_20250615_SCHWIMMBADBA_188541.csv": {
+      "sha256": "b630e1a4cda4c65cb1df006d87250893b422c6b2879578f8ecc889edf317e041",
+      "bytes": 286
+    },
+    "phase/remittance_advices/DE01/RA_20250617_WASSERTECHNI_197955.csv": {
+      "sha256": "83c51e13bfab2b19cc9e2d4d823b592bdb1ab342aaf0435061746f3cd8eeadcf",
+      "bytes": 540
+    },
+    "phase/remittance_advices/DE01/RA_20250618_PRPPOOLTECHN_619916.csv": {
+      "sha256": "6c7e745344dc913d152c96377f817f94db6cc8d50a29d60440d69cfc5f8ce2c9",
+      "bytes": 247
+    },
+    "phase/remittance_advices/DE01/RA_20250620_WASSERTECHNI_247233.csv": {
+      "sha256": "1d65aca02f685f5e5e6a3d1582aa45d08399b4760743da888503e67219e498f8",
+      "bytes": 306
+    },
+    "phase/remittance_advices/DE01/RA_20250621_SCHWIMMBADBA_944073.csv": {
+      "sha256": "caf4c5c23f077508dd267b33cc83d39c522b0e65c0835744a4092941333632a9",
+      "bytes": 1189
+    },
+    "phase/remittance_advices/DE01/RA_20250622_SCHWIMMBADBA_278260.csv": {
+      "sha256": "3e75a9cdcce47ba0e04f76d690a531886e076145c36b253121af6c6f4940bdcf",
+      "bytes": 398
+    },
+    "phase/remittance_advices/DE01/RA_20250624_ARRIETASOLER_317976.csv": {
+      "sha256": "cc0dacf829a20782c37a07e50ab7a8e1dc4472cee0a0721a6a39eff5a57a300f",
+      "bytes": 864
+    },
+    "phase/remittance_advices/DE01/RA_20250624_POOLTECHNIKG_573779.csv": {
+      "sha256": "d69d2e3d4ed687e42bf4a4d391422ef0c3ba87c9eb0b433f15f843d2e204f61a",
+      "bytes": 1382
+    },
+    "phase/remittance_advices/DE01/RA_20250625_ESPINOSAWELL_032920.csv": {
+      "sha256": "70edece45e0976b169e38cbfd3d1d1cd8e1907e3c9008e5c81cfbd2b726cca46",
+      "bytes": 300
+    },
+    "phase/remittance_advices/DE01/RA_20250625_WASSERTECHNI_124112.csv": {
+      "sha256": "a9bb64af5d5d9137d8214f9f7e00449d5ba40219163a9e6448b696b0ab38d441",
+      "bytes": 2167
+    },
+    "phase/remittance_advices/DE01/RA_20250628_POOLTECHNIKG_346043.csv": {
+      "sha256": "458b057a6b5149d8263334f74ab88150561eeafc39962fc191661bb7f5de0abe",
+      "bytes": 1722
+    },
+    "phase/remittance_advices/DE01/RA_20250628_SCHWIMMBADBA_610628.csv": {
+      "sha256": "e09f574c49a4776443cf45dbe2ea13ff262bca2b2a3c91edbb7866b4bb126c1d",
+      "bytes": 555
+    },
+    "phase/remittance_advices/DE01/RA_20250630_BENNETTPOOLS_766912.csv": {
+      "sha256": "5838dc98113781a4534fb206f84ee76b3d6b038178481962df9afeaf5fb3bb7b",
+      "bytes": 1107
+    },
+    "phase/remittance_advices/ES01/RA_20250601_SPAVEGALTASC_976891.csv": {
+      "sha256": "95af447bd08c6456a108deb6274b2cbe3f51da4925cb38f9f5fd2faa943509d0",
+      "bytes": 515
+    },
+    "phase/remittance_advices/ES01/RA_20250602_CONSTRUCCION_111480.csv": {
+      "sha256": "bcc213c0fa123587fd393513a2fa94be5ed19679a4d6a8eeacb46f16e0ad05fd",
+      "bytes": 6549
+    },
+    "phase/remittance_advices/ES01/RA_20250602_HOTELESBLUES_437850.csv": {
+      "sha256": "466563f46ab4a784f576afc353a34ae82aa5bd2c6dadc1d57ab70179c1691c06",
+      "bytes": 387
+    },
+    "phase/remittance_advices/ES01/RA_20250602_INSTALACIONE_229175.csv": {
+      "sha256": "ad625b3ed0c75244fd06ded91f8d6037cabd19d33d25b5c45f866889d78c97ab",
+      "bytes": 253
+    },
+    "phase/remittance_advices/ES01/RA_20250602_VÁZQUEZINSTA_427095.csv": {
+      "sha256": "7c8b175d458677fb8586a3c305bd97c3363be234907acdd5480f4cf609760c46",
+      "bytes": 959
+    },
+    "phase/remittance_advices/ES01/RA_20250603_CARMONAYHERR_919979.csv": {
+      "sha256": "cef847b0aeefea3113df6a4c2bb6eb8b5bbbdaa2bbed8d176554d8fc3e0c562d",
+      "bytes": 259
+    },
+    "phase/remittance_advices/ES01/RA_20250603_DCPPISCINASS_419926.csv": {
+      "sha256": "ae72ad0de641265204934eebc077d6dfaabe1b849c80b3dcf18f3b7c70c27d03",
+      "bytes": 298
+    },
+    "phase/remittance_advices/ES01/RA_20250603_WASSERTECHNI_816674.csv": {
+      "sha256": "6abd9c34673b17a70e0581346d8820152c9ec75491682b5a0a0d8bf4d6465ab7",
+      "bytes": 857
+    },
+    "phase/remittance_advices/ES01/RA_20250603_WATERCAREKIN_859908.csv": {
+      "sha256": "7ae43b5cfbcd7cbfe7f93202708bf3052e89c60d7b8ba773398e81b600098aa2",
+      "bytes": 8726
+    },
+    "phase/remittance_advices/ES01/RA_20250604_CALABLANCAHO_457080.csv": {
+      "sha256": "c5f843cff2f0dbf14b1ad37d9e8f3cc961e65504b4187bcebf706f1abf9b5395",
+      "bytes": 551
+    },
+    "phase/remittance_advices/ES01/RA_20250604_CGFFERRETERÍ_754197.csv": {
+      "sha256": "20300fb49f17b8a364ced3face78d97eb39c1a06934f7383f024d1264c16ad87",
+      "bytes": 1969
+    },
+    "phase/remittance_advices/ES01/RA_20250604_RIEGOSRUIZPR_462451.csv": {
+      "sha256": "e2d8af64c39cd1912899fceca6e7e2b04ce01b8b2d04a25f1f1cddedae26bd2e",
+      "bytes": 409
+    },
+    "phase/remittance_advices/ES01/RA_20250605_MBIINSTALACI_384445.csv": {
+      "sha256": "c8169b215f3e33f7e57041707315ee02c1bd3c5316e0848a193cd4d41778bd71",
+      "bytes": 2963
+    },
+    "phase/remittance_advices/ES01/RA_20250606_CALABLANCAHO_371945.csv": {
+      "sha256": "a5c3799daa40dae9f3efc1dcacc52ef22f49bdd1176726ddd96dff6666b129c3",
+      "bytes": 449
+    },
+    "phase/remittance_advices/ES01/RA_20250607_CARMONAYHERR_969792.csv": {
+      "sha256": "da5dc8bfa8d8d1be8f6ed22504a81c5ab41e25c2e9b90bd6d0e8b5ad768ce5cc",
+      "bytes": 349
+    },
+    "phase/remittance_advices/ES01/RA_20250607_RIEGOSCAMPOL_567804.csv": {
+      "sha256": "c6ab5c64171ab5cb86f753e2fb827b7ce668ecb963491157d44331acef292425",
+      "bytes": 302
+    },
+    "phase/remittance_advices/ES01/RA_20250608_RIEGOSMONTAL_379962.csv": {
+      "sha256": "20ed7d6193b5ad853abfc753cc32bdc1dd071b9438a50ec19af96ceaa32b5b47",
+      "bytes": 11582
+    },
+    "phase/remittance_advices/ES01/RA_20250610_ALONSOSANEAM_666683.csv": {
+      "sha256": "9a99526bffbf18f8d29f62b900dac738c436c10ad49837e165a5fcb9d3e1f555",
+      "bytes": 355
+    },
+    "phase/remittance_advices/ES01/RA_20250610_BENNETTWHITE_169095.csv": {
+      "sha256": "4e35dd45e268f5a73d381100470c882c94d38a2134976464a9f1d4d316493845",
+      "bytes": 13884
+    },
+    "phase/remittance_advices/ES01/RA_20250610_RVCCAMPINGSC_358551.csv": {
+      "sha256": "aa3003c7c29517440b99679e11e8cd83707a009223a56914d9dcc35c6157446a",
+      "bytes": 687
+    },
+    "phase/remittance_advices/ES01/RA_20250611_CLIMATIZACIÓ_314390.csv": {
+      "sha256": "94c6b875456eecbcc1a4d3e0e38f6063acc649b9ba2a85a7e7ba4876cfe13c99",
+      "bytes": 5287
+    },
+    "phase/remittance_advices/ES01/RA_20250611_MARÍNWELLNES_183325.csv": {
+      "sha256": "ab535797255467811a4dea7ec20d9936a5fad1cdcaaf637f211ebe7c8a5878b3",
+      "bytes": 555
+    },
+    "phase/remittance_advices/ES01/RA_20250611_RHHHOTELESSL_355085.csv": {
+      "sha256": "d30355098955e6c0f31bc693396450f1c2744b0320f0d12fe46ac3114cab2d64",
+      "bytes": 308
+    },
+    "phase/remittance_advices/ES01/RA_20250612_FERRETERÍASÁ_327704.csv": {
+      "sha256": "6f9ca67ed739abb37e5a1b7c4049d23a36be879cc4aae40c032472a8b93cfc6b",
+      "bytes": 2092
+    },
+    "phase/remittance_advices/ES01/RA_20250612_FRANCOYROBLE_449787.csv": {
+      "sha256": "1ff6d1f51880f8882cf89798f178174c8ef893a7c499ca26d7d78a3bf6a4f4d0",
+      "bytes": 258
+    },
+    "phase/remittance_advices/ES01/RA_20250613_ARENALDELSUR_512191.csv": {
+      "sha256": "40d9aaf4cb31bc09997e9c5b55ad929747dd77966a1b7ab8e9046b6118a00243",
+      "bytes": 254
+    },
+    "phase/remittance_advices/ES01/RA_20250613_CGFFERRETERÍ_238218.csv": {
+      "sha256": "57b9416a355cd5ad6d776b001057995d0b3a3c8c7b44dba7859f1dd778d4d6c9",
+      "bytes": 2377
+    },
+    "phase/remittance_advices/ES01/RA_20250614_RIVASCLIMATI_574217.csv": {
+      "sha256": "d46d018e9fbcca35e50ff39c7b675066d83d30876efdedce9ca9a161d29292bb",
+      "bytes": 237
+    },
+    "phase/remittance_advices/ES01/RA_20250614_SANEAMIENTOS_354230.csv": {
+      "sha256": "701de5965e47bd847219842f4e035cc85d2bac7a38e9d3c9699ee5f8f4982f74",
+      "bytes": 301
+    },
+    "phase/remittance_advices/ES01/RA_20250614_SUMINISTROSC_027831.csv": {
+      "sha256": "e04b41dbcfe5b794bbf204bb3133de239aeec1f2f36608facbebb8b92f84716c",
+      "bytes": 661
+    },
+    "phase/remittance_advices/ES01/RA_20250614_VÁZQUEZINSTA_792380.csv": {
+      "sha256": "2f09571a10135fd63a64cc6a759f4ebffb4cd45523e23016e146ab6912e0af24",
+      "bytes": 1283
+    },
+    "phase/remittance_advices/ES01/RA_20250615_DCPPISCINASS_884532.csv": {
+      "sha256": "40574549348c26b9337df39b80f2255552b128486720e2975b9b034d062c4eee",
+      "bytes": 341
+    },
+    "phase/remittance_advices/ES01/RA_20250616_CARRILLOSPAS_621790.csv": {
+      "sha256": "d06e6c301a4786d9bc2926bdc175815433218e17c99a8f23a7120d77489da230",
+      "bytes": 302
+    },
+    "phase/remittance_advices/ES01/RA_20250616_PISCINASCANO_261204.csv": {
+      "sha256": "9c09248bb34c84977ebf4a6b2fcccf2a383b66cc398bcd8711ef26e711925a6e",
+      "bytes": 302
+    },
+    "phase/remittance_advices/ES01/RA_20250617_FERRETERÍAOA_694382.csv": {
+      "sha256": "d544440616d43e822f71706ed49c1a8de91df4f5cfed5c2734de8faf4b4dc128",
+      "bytes": 495
+    },
+    "phase/remittance_advices/ES01/RA_20250617_RVCCAMPINGSC_722618.csv": {
+      "sha256": "4fd35ca4282fd9eb07df66a7fe7ee280466ae9222badfd749e6cef02cfdf73da",
+      "bytes": 240
+    },
+    "phase/remittance_advices/ES01/RA_20250619_CGFFERRETERÍ_714838.csv": {
+      "sha256": "80ebc6922aeebceef1a494862e2ace27b845cc9cc1cfb7bcda46081e7e9989a0",
+      "bytes": 2027
+    },
+    "phase/remittance_advices/ES01/RA_20250619_MANTENIMIENT_078249.csv": {
+      "sha256": "dbb99bfa57ce073a010a9e359916c44093550c0fd40053e720a75aeb83a1ef60",
+      "bytes": 301
+    },
+    "phase/remittance_advices/ES01/RA_20250620_FRANCOYROBLE_331563.csv": {
+      "sha256": "fb468485657908a4a798865379f0ffda90a49e91d0a748018acddc64182d1b50",
+      "bytes": 327
+    },
+    "phase/remittance_advices/ES01/RA_20250620_ROCAVERDEWEL_309192.csv": {
+      "sha256": "7b8d4384f42e38009fca955669a38612e74a0bddb19901c3b85d432cd0708a09",
+      "bytes": 359
+    },
+    "phase/remittance_advices/ES01/RA_20250621_CARMONAYHERR_658219.csv": {
+      "sha256": "6c902b82b1fde393fd7080c4e5d7174d22587588e734225c532f571c677bd59b",
+      "bytes": 366
+    },
+    "phase/remittance_advices/ES01/RA_20250621_VÁZQUEZINSTA_032069.csv": {
+      "sha256": "29252929b48308f075504848d2eb792c412bec7fdccadeb3fcfe319e7f9999e0",
+      "bytes": 919
+    },
+    "phase/remittance_advices/ES01/RA_20250623_CAMPINGORTIZ_344501.csv": {
+      "sha256": "6edac456aec657bf4d1ea4107539dbd54c2c1571c4e7c4d4172e1636341cab87",
+      "bytes": 361
+    },
+    "phase/remittance_advices/ES01/RA_20250623_VALDEMORAPIS_924460.csv": {
+      "sha256": "ac1be27af838f959c64d0892aba1384880f3ebb9d63e5b4a4773b79788484a10",
+      "bytes": 742
+    },
+    "phase/remittance_advices/ES01/RA_20250624_BENNETTWHITE_848459.csv": {
+      "sha256": "47222678219a8664208c9817a7e3517a28e6c36d75613475e42006c4104a174d",
+      "bytes": 13610
+    },
+    "phase/remittance_advices/ES01/RA_20250624_FERRETERÍASÁ_304922.csv": {
+      "sha256": "dac79e9b01847fcbe0572c7212e1112ce6280948461385a950450062e1911980",
+      "bytes": 1733
+    },
+    "phase/remittance_advices/ES01/RA_20250624_VÁZQUEZINSTA_043490.csv": {
+      "sha256": "e0c5366cae5ea8881640b848c750d9c395d1045b8fd6a8159bdb118a3891a4f0",
+      "bytes": 1180
+    },
+    "phase/remittance_advices/ES01/RA_20250624_WATERCAREKIN_599283.csv": {
+      "sha256": "7e37e4dc8325763fb200893a6bb4e2483b21c084d19b6d0ef0324bced1a32704",
+      "bytes": 7872
+    },
+    "phase/remittance_advices/ES01/RA_20250625_CAMACHOYREDO_890200.csv": {
+      "sha256": "09ebf960d0ac73b4c87b889b3f502c99ad88b716855c6edcf832a77f7ab7b415",
+      "bytes": 570
+    },
+    "phase/remittance_advices/ES01/RA_20250625_MANTENIMIENT_529846.csv": {
+      "sha256": "994749d07cdabe40ee1ccba30678ea7049eb088bb0212fee6b6884ff70a5e0f8",
+      "bytes": 311
+    },
+    "phase/remittance_advices/ES01/RA_20250625_RIVASCLIMATI_807948.csv": {
+      "sha256": "4af7cc46663ca70ace284442f0d3ac10103f40cbd23f5ae620cd44fad39775d3",
+      "bytes": 354
+    },
+    "phase/remittance_advices/ES01/RA_20250625_VALDEMORAPIS_695230.csv": {
+      "sha256": "a264a379f4788a255f84963674362d844cb5aa6b0d76db278a77a184545bfbdf",
+      "bytes": 290
+    },
+    "phase/remittance_advices/ES01/RA_20250625_WASSERTECHNI_091762.csv": {
+      "sha256": "77999ce0017f325e1108e4273ab3271208078394de8359c82ca1f14bd898b62b",
+      "bytes": 814
+    },
+    "phase/remittance_advices/ES01/RA_20250626_FRANCOYROBLE_252524.csv": {
+      "sha256": "fb1b48c7ec0e8bbc561ec0cc2541d38b9f6fdb35e409783994553a23a66acea2",
+      "bytes": 361
+    },
+    "phase/remittance_advices/ES01/RA_20250627_CGFFERRETERÍ_318989.csv": {
+      "sha256": "401deb8fffc75c6dea35b39a1baea32ee0f03a8b03a0cdcae4e4ed022b4adcbd",
+      "bytes": 2358
+    },
+    "phase/remittance_advices/ES01/RA_20250628_AGUIRREYVÁZQ_005748.csv": {
+      "sha256": "6b9a6e2a7721e90de98032f2bea7d3793555eab14518b6866c25527192fd8fc1",
+      "bytes": 555
+    },
+    "phase/remittance_advices/ES01/RA_20250628_CALABLANCARI_873169.csv": {
+      "sha256": "1f82305dadc19ea702588e98aa8fde9ae7f8af845e837b2a22438fe8af0e64a2",
+      "bytes": 12927
+    },
+    "phase/remittance_advices/ES01/RA_20250628_MERINOHOTELE_028457.csv": {
+      "sha256": "c5c127080919167ced0fd9404ffe85106d476da7d8a2ee0cf777ff68bc7c2f29",
+      "bytes": 404
+    },
+    "phase/remittance_advices/ES01/RA_20250628_PASTORYREDON_313420.csv": {
+      "sha256": "e7f9310f322d9682f582b0907f2be778b741b0f0ed3aedfc8416988ca0d8986d",
+      "bytes": 1150
+    },
+    "phase/remittance_advices/ES01/RA_20250629_DCPPISCINASS_769401.csv": {
+      "sha256": "0dfa7435df4eeca3ba112a5993ea80253c7fd86e95ac1d326c6b4e82947bdf2f",
+      "bytes": 301
+    },
+    "phase/remittance_advices/ES01/RA_20250630_CALABLANCAHO_890990.csv": {
+      "sha256": "947c7b01b56719af1e2dccbc60a82086c687f9f4cb975a8b2e59a720a3cc8f8d",
+      "bytes": 681
+    },
+    "phase/remittance_advices/ES01/RA_20250630_CAMPINGPEÑAS_853160.csv": {
+      "sha256": "248586831490d83ad4b0213d0cc952fea1f24f0efd260ce4caa563580d072c97",
+      "bytes": 654
+    },
+    "phase/remittance_advices/ES01/RA_20250630_CAMPINGVALDE_427687.csv": {
+      "sha256": "44fdfd548bdea058fbd4697842c9f805b543413dfb33ff927f10524b0823e481",
+      "bytes": 437
+    },
+    "phase/remittance_advices/ES01/RA_20250630_CARMONAYHERR_802300.csv": {
+      "sha256": "1bc0de013d120995c9fae119083f85880d9bf71f6501dd7174401a74c2ae0279",
+      "bytes": 366
+    },
+    "phase/remittance_advices/ES01/RA_20250630_CASTROLARGOS_414862.csv": {
+      "sha256": "7a12a8039ba8068ea09747e9d44bb171738e49d89ac7a77f30f1673114f0fc41",
+      "bytes": 693
+    },
+    "phase/remittance_advices/ES01/RA_20250630_CLIMATIZACIÓ_644200.csv": {
+      "sha256": "bf827bc0718abe1ad8e972c7cf71a49a40aa68bc429d9dffbd0b451158d60603",
+      "bytes": 5998
+    },
+    "phase/remittance_advices/ES01/RA_20250630_CONSTRUCCION_180302.csv": {
+      "sha256": "3b2f9aa58726d6cc9c5587e2a9fc9499b52081a61ecb76d389ce065dc1f5c3ba",
+      "bytes": 5411
+    },
+    "phase/remittance_advices/ES01/RA_20250630_PISCINASTORR_636290.csv": {
+      "sha256": "9b4226608f34bcc1bc3bc8ae9a8c20c3026a571fa098a182ea03aaa564a68cbf",
+      "bytes": 360
+    },
+    "phase/remittance_advices/ES01/RA_20250630_ROCAVERDEWEL_134617.csv": {
+      "sha256": "f916369f4d5ccdd7d13b462c61bf0ca74c0007d095a44f139f1465706b45d609",
+      "bytes": 260
+    },
+    "phase/remittance_advices/ES01/RA_20250630_VÁZQUEZINSTA_780091.csv": {
+      "sha256": "a1a43bb9a52483cb891a7e21152939f4a71b73259e822d60878cf00cff5114cc",
+      "bytes": 743
+    },
+    "phase/remittance_advices/FR01/RA_20250601_JARDINSCOSTA_366275.csv": {
+      "sha256": "6f00bc13dcc7abe3e6978d891bcf75b778c722769486b9c76bd749a0861c797a",
+      "bytes": 605
+    },
+    "phase/remittance_advices/FR01/RA_20250601_PORTAURÈLEJA_116423.csv": {
+      "sha256": "59c3663ed6f4b9b01ded898b3767c21a12f6952881bc0b01411348c09014b8be",
+      "bytes": 750
+    },
+    "phase/remittance_advices/FR01/RA_20250601_SAINTAUBRACP_065536.csv": {
+      "sha256": "e76565ccc0a471e5787f1badb26018528876a4ed0085e106de5d8061acbd0cfa",
+      "bytes": 7846
+    },
+    "phase/remittance_advices/FR01/RA_20250602_OLIVASPAEURL_664862.csv": {
+      "sha256": "0dbaf4bc4f2052c5637b0170907c24808fdece8016dcccb87877ef4f3f5baeda",
+      "bytes": 1436
+    },
+    "phase/remittance_advices/FR01/RA_20250605_SAINTAUBRACS_296572.csv": {
+      "sha256": "6afa211b349b42bd39f3d21749e30a99fda27df5db67445ca8e443b516d8d638",
+      "bytes": 735
+    },
+    "phase/remittance_advices/FR01/RA_20250607_NÚÑEZNAVARRO_654550.csv": {
+      "sha256": "1140929fb40d07bfe5ffff8ccb6bc97dde37d029e249ee47ac1820b445885620",
+      "bytes": 415
+    },
+    "phase/remittance_advices/FR01/RA_20250608_SAINTAUBRACP_874756.csv": {
+      "sha256": "67b6c64e7e1a879e3f13a74f7a853d1ddd380976776ccc8d2354b268f0c03908",
+      "bytes": 10604
+    },
+    "phase/remittance_advices/FR01/RA_20250614_MÉNDEZAQUATI_937279.csv": {
+      "sha256": "09454c6098509295491b92298ce0237ab038574b1288d1ab97936a8d8c96427f",
+      "bytes": 9348
+    },
+    "phase/remittance_advices/FR01/RA_20250615_AQUATIQUEMAR_932422.csv": {
+      "sha256": "2bfbb5c222222b2cab034c989d4c7ec74b1bdaeea88d8a9f6031e7a195a7e555",
+      "bytes": 246
+    },
+    "phase/remittance_advices/FR01/RA_20250616_FONTOTEROSPA_739700.csv": {
+      "sha256": "ba98abba8d81ecf1b348db23940ed8484de9e419b4de9866defed5fc4dce8c2c",
+      "bytes": 596
+    },
+    "phase/remittance_advices/FR01/RA_20250616_SAINTAUBRACP_108280.csv": {
+      "sha256": "ed833f9e4d8b73dab62393dfd6f14f565f5990004f3d5450d046c307b6fe5da5",
+      "bytes": 10172
+    },
+    "phase/remittance_advices/FR01/RA_20250617_NÚÑEZNAVARRO_178847.csv": {
+      "sha256": "47ea1d90ce418d4a933feb5efd8ad9080094e437b7faa016d7e56c25b887f2f9",
+      "bytes": 409
+    },
+    "phase/remittance_advices/FR01/RA_20250618_CABALLEROBLA_386340.csv": {
+      "sha256": "d3f752966349c4543856bf1d9aef3513e64d3b992339d7184d6d3af327813492",
+      "bytes": 244
+    },
+    "phase/remittance_advices/FR01/RA_20250621_AQUATIQUEBEL_100760.csv": {
+      "sha256": "c52222496090402e369ec6ac55fc2bb7addef1c508080383d1dd488fe6698bc7",
+      "bytes": 743
+    },
+    "phase/remittance_advices/FR01/RA_20250621_MÉNDEZAQUATI_319763.csv": {
+      "sha256": "e36df3b277c715b952cbf6537a89d5900cd6975dc9b9b9cba39ac63d5e9fcb22",
+      "bytes": 10886
+    },
+    "phase/remittance_advices/FR01/RA_20250621_MÉNDEZAQUATI_655298.csv": {
+      "sha256": "d04cd15341597c2e58a5dc1d11450ed99295ff81a181c0cea50ca6cad13fa665",
+      "bytes": 10151
+    },
+    "phase/remittance_advices/FR01/RA_20250621_SAINTAUBRACP_698131.csv": {
+      "sha256": "d377fe87ca807706286739e7e0645a487076d9b87bb87cc8673c9bf5ebeaafcf",
+      "bytes": 9383
+    },
+    "phase/remittance_advices/FR01/RA_20250622_FONTOTEROSPA_922467.csv": {
+      "sha256": "c16188a76d20cf41bc0e83b39982ec16e6cf405fe5e372ce09c9f1234e012467",
+      "bytes": 457
+    },
+    "phase/remittance_advices/FR01/RA_20250625_GALÁNRUIZAQU_994038.csv": {
+      "sha256": "41210f3b44ab4e456107629906c389ed98bfc850bd735e1dcd180b1e24f9f626",
+      "bytes": 750
+    },
+    "phase/remittance_advices/FR01/RA_20250626_JARDINSSERRA_973803.csv": {
+      "sha256": "6f1826db5986a4d29571cd59e7396c973d1f569cab37ae1968b8d1a7786ee98e",
+      "bytes": 344
+    },
+    "phase/remittance_advices/FR01/RA_20250626_PISCINESLEVA_081837.csv": {
+      "sha256": "abd363c97a74e034997bb294fc870e04ecb163f2e5372977563b349f08a70041",
+      "bytes": 254
+    },
+    "phase/remittance_advices/FR01/RA_20250627_AQUATIQUEMAR_888415.csv": {
+      "sha256": "a3f7831dd335decddc6156b3265d0d01b8a9a7f5c1aca42ec6804813e4084c0a",
+      "bytes": 721
+    },
+    "phase/remittance_advices/FR01/RA_20250627_MÉNDEZAQUATI_253183.csv": {
+      "sha256": "21619a8404a9f8f746ed2ea76f8118f2e3c02a3728b02108d49215e28401f809",
+      "bytes": 11821
+    },
+    "phase/remittance_advices/FR01/RA_20250627_RONCEVALEAUX_237285.csv": {
+      "sha256": "a771e61b57b6170e7c4b4633e02ddd4de2d5d1c1e7b208ee4e84d496bb2ca716",
+      "bytes": 733
+    },
+    "phase/remittance_advices/FR01/RA_20250628_NAVARROJARDI_939379.csv": {
+      "sha256": "6b98c7e17efc584176f67a08c1f6c5d8b11f797988ddd7011824fe9dc837df24",
+      "bytes": 517
+    },
+    "phase/remittance_advices/FR01/RA_20250629_NÚÑEZNAVARRO_099296.csv": {
+      "sha256": "46de361e0d1265b1085d635508f201a141d7e23329346af4f3f1f3292485ca6f",
+      "bytes": 256
+    },
+    "phase/remittance_advices/FR01/RA_20250630_SAINTAUBRACS_463260.csv": {
+      "sha256": "865894144dfbd0e54a07ebee9256395d0cb918ad0edc47010485a499de015f83",
+      "bytes": 523
+    },
+    "phase/remittance_advices/index.csv": {
+      "sha256": "be4696330d1b6c9c457d2160b8160089d802525097d9a4876ac38798ed0440a4",
+      "bytes": 28833
+    },
+    "masters/bank_accounts.csv": {
+      "sha256": "d20c61937ff60e680444113243c6cb6dc3134b7fc5f0e70e078bf6627c69a562",
+      "bytes": 5987
+    },
+    "masters/categories.csv": {
+      "sha256": "11d8a5fe5abd1c29c9becdff0cacbd0e4749388b8f47f9a0fa16e638e935e2c6",
+      "bytes": 1296
+    },
+    "masters/customers.csv": {
+      "sha256": "1fc8cc47c85616ee36117379de37398f1a2dfff9f195b574840840ca3d0d7bfb",
+      "bytes": 6332170
+    },
+    "masters/entities.csv": {
+      "sha256": "31e483456a362daba40b93692e5ffabf7c25ab9983c21b44982b707e9cea9cfa",
+      "bytes": 1228
+    },
+    "masters/fx_rates.csv": {
+      "sha256": "a13a9d679d787aafb0c5bca4c17fca256412e79eba43bf5019815ce86582925c",
+      "bytes": 380524
+    },
+    "masters/payment_terms.csv": {
+      "sha256": "2a06486d081d2ca9e14ccf86af844d8a14a2d1eddb8401ed5814e18059644463",
+      "bytes": 525
+    },
+    "masters/suppliers.csv": {
+      "sha256": "31509df5748a8fc70e051bcb8a1a44b2420ac8a75e19fc12c80dc5d3678671be",
+      "bytes": 1461392
+    }
+  },
+  "pdf_extraction": true,
+  "inference_uses_golden": false,
+  "bank_lines": 8499,
+  "methods": {
+    "party:policy": 102,
+    "references:single": 1774,
+    "narrative:CASH_POOL": 53,
+    "party:amount_fifo": 1908,
+    "structured:remittance": 292,
+    "party:bounded_subset": 176,
+    "unresolved": 1721,
+    "references:netted": 130,
+    "narrative:BANK_FEES": 535,
+    "narrative:reversal_pair": 18,
+    "narrative:LEASING": 13,
+    "structured:receipt": 56,
+    "structured:card_settlements": 84,
+    "narrative:CUSTOMER_ADVANCE": 8,
+    "structured:cheque_deposits": 41,
+    "structured:direct_debit_batches": 70,
+    "narrative:CARD_EXPENSES": 3,
+    "narrative:SUPPLIER_REFUND": 8,
+    "narrative:CUSTOMER_REFUND": 8,
+    "narrative:LOAN_REPAYMENT": 3,
+    "narrative:INTERCOMPANY": 7,
+    "structured:payment_runs": 1464,
+    "narrative:INTERNAL_TRANSFER": 6,
+    "narrative:SOCIAL_SECURITY": 3,
+    "structured:cheque": 2,
+    "narrative:TAX_PAYMENT": 4,
+    "narrative:PAYROLL": 3,
+    "narrative:interest": 7
+  },
+  "exceptions": {
+    "SHORT_DISCOUNT": 201,
+    "OVERPAYMENT": 239,
+    "": 22632,
+    "PARTIAL": 468,
+    "UNIDENTIFIED": 1721,
+    "SHORT_DISPUTE": 112,
+    "RETURNED": 69,
+    "DUPLICATE_PAYMENT": 45,
+    "FX_DIFFERENCE": 541,
+    "SHORT_BANK_CHARGES": 2
+  },
+  "catalog": {
+    "ar_invoices": 50775,
+    "ap_invoices": 13709,
+    "credit_notes": 1362,
+    "pdfs_read": 1492
+  },
+  "source_groups": {
+    "receipt": 5184,
+    "cheque": 164,
+    "direct_debit_batches": 72,
+    "card_settlements": 84,
+    "cheque_deposits": 41,
+    "payment_runs": 2750,
+    "remittance": 331
+  },
+  "source_issues": [],
+  "submission_sha256": "6af440b170cf306c7828cbe51e241b41f1a2909f10e0d1126eaa58b762b4d3b2",
+  "elapsed_seconds": 10.252,
+  "limitations": [
+    "Conservative baseline; unresolved is a review fallback, not proof no item exists.",
+    "Historical closed items absent from the phase/opening snapshot cannot be matched.",
+    "Sample lacks opening balances; prior instalments and returns are incompletely observable."
+  ]
+}
