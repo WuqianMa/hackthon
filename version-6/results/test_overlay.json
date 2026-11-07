@@ -1,0 +1,47 @@
+{
+  "phase": "test",
+  "bank_lines": 7500,
+  "changed_vs_v5": 145,
+  "methods": {
+    "v5_incumbent": 7355,
+    "v6:service_month_following_invoice": 90,
+    "v6:retrieved_document_advance_net": 5,
+    "v6:source_return_ap": 6,
+    "v6:referenced_newest_partial_group": 10,
+    "v6:related_credit_cash_identity": 22,
+    "v6:source_return_card": 1,
+    "v6:source_return_cheque": 2,
+    "v6:duplicate_supplier_refund": 2,
+    "v6:english_or_spanish_replacement": 5,
+    "v6:retrieved_crossborder_fee_invoice": 2
+  },
+  "pdf_facts": {
+    "service_clause": 3953,
+    "replaces": 12428,
+    "retention": 7116,
+    "advance": 2161,
+    "advance_net": 2149,
+    "cached_invoice_facts": 25629
+  },
+  "return_index": {
+    "ap_transfers": 8,
+    "cheque_numbers": 2,
+    "card_orders": 3
+  },
+  "seconds": 61.33,
+  "training_performed": false,
+  "new_llm_calls": 0,
+  "model_sha256": "a883a203fc5bc694812895a14cbd8b125870f435a67bc5e7627ab42e4526eccb",
+  "enabled": [
+    "advance",
+    "fee",
+    "netting",
+    "partial_group",
+    "policy",
+    "refund",
+    "related_net",
+    "replacement",
+    "returns",
+    "service"
+  ]
+}

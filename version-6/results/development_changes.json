@@ -1,0 +1,66 @@
+{
+  "methods": {
+    "v6:service_month_following_invoice": {
+      "changed": 90,
+      "fixed": 89,
+      "regressed": 0,
+      "still_wrong": 1
+    },
+    "v6:retrieved_document_advance_net": {
+      "changed": 5,
+      "fixed": 5,
+      "regressed": 0,
+      "still_wrong": 0
+    },
+    "v6:source_return_ap": {
+      "changed": 6,
+      "fixed": 6,
+      "regressed": 0,
+      "still_wrong": 0
+    },
+    "v6:referenced_newest_partial_group": {
+      "changed": 10,
+      "fixed": 5,
+      "regressed": 0,
+      "still_wrong": 5
+    },
+    "v6:related_credit_cash_identity": {
+      "changed": 22,
+      "fixed": 22,
+      "regressed": 0,
+      "still_wrong": 0
+    },
+    "v6:source_return_card": {
+      "changed": 1,
+      "fixed": 1,
+      "regressed": 0,
+      "still_wrong": 0
+    },
+    "v6:source_return_cheque": {
+      "changed": 2,
+      "fixed": 2,
+      "regressed": 0,
+      "still_wrong": 0
+    },
+    "v6:duplicate_supplier_refund": {
+      "changed": 2,
+      "fixed": 2,
+      "regressed": 0,
+      "still_wrong": 0
+    },
+    "v6:english_or_spanish_replacement": {
+      "changed": 5,
+      "fixed": 5,
+      "regressed": 0,
+      "still_wrong": 0
+    },
+    "v6:retrieved_crossborder_fee_invoice": {
+      "changed": 2,
+      "fixed": 2,
+      "regressed": 0,
+      "still_wrong": 0
+    }
+  },
+  "regressions": [],
+  "scope": "Official transaction-correctness checks on already inspected development changes; no LIVE labels."
+}

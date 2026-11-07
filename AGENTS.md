@@ -1,5 +1,7 @@
 ## Current working direction — user update, 2026-11-07
 
+Latest authorization: build and generate submission 6 with a documented strategy, using targeted TRAIN examples to infer synthetic source/relationship rules. Reuse existing weights and caches; no expensive retraining. Validate and publish root `v6-submission.csv` and versioned submission copies, commit/push stages to q, preserve older editions. This supersedes the preceding analysis-only restriction.
+
 Latest task: save user-pasted V5 LIVE website feedback (79.34, dated 07/11 16:12) and analyze the segments below 50%, including how TRAIN helps without retraining. Source is `feedback-evaluation/v5_website_feedback_2026-11-07.md`; analysis is `version-5/WEBSITE_REVIEW.md`. This is a feedback/analysis stage: no new solver changes, experiments, model training, inference, evaluation or LLM judgments. Commit/push completed documentation to q. Existing v5 CSV/model remain immutable. The cached development 79.29 is separate from website 79.34.
 
 Latest authorization: implement and generate the actual v5 LIVE submission, copy `v5-submission.csv` to the repository root and commit/push to q. Reuse frozen trained model and PDF/catalog caches; no model retraining or bulk PDF extraction. This supersedes the previous proposal-only restriction. Include bounded LLM review where useful, validate before publishing, preserve v3/v4 files and unrelated authors' work.
