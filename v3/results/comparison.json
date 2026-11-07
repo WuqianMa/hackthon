@@ -1,0 +1,384 @@
+{
+  "baseline_score": 71.32,
+  "v3_score": 78.65,
+  "score_gain": 7.33,
+  "baseline_metrics": {
+    "allocation_f1": 0.793908,
+    "precision": 0.99598,
+    "recall": 0.660002,
+    "txn_accuracy": 0.759383,
+    "exception_macro_f1": 0.442233,
+    "amount_weighted_accuracy": 0.606087,
+    "rows": 26030,
+    "txns_covered": 8499,
+    "txns_total": 8499
+  },
+  "v3_metrics": {
+    "allocation_f1": 0.846947,
+    "precision": 0.956708,
+    "recall": 0.75978,
+    "txn_accuracy": 0.853983,
+    "exception_macro_f1": 0.534209,
+    "amount_weighted_accuracy": 0.680119,
+    "rows": 29702,
+    "txns_covered": 8499,
+    "txns_total": 8499
+  },
+  "identical_winning_csv_runs": 2,
+  "tests_passed": 41,
+  "experiments": [
+    {
+      "profile": "initial broad prefix emission",
+      "score": 76.54,
+      "local_validation": false,
+      "selected": false
+    },
+    {
+      "profile": "balanced before maturity grouping",
+      "score": 77.85,
+      "local_validation": true,
+      "selected": false
+    },
+    {
+      "profile": "speculative deferred ledger before maturity grouping",
+      "score": 78.37,
+      "local_validation": true,
+      "selected": false
+    },
+    {
+      "profile": "speculative plus maturity grouping",
+      "score": 78.65,
+      "local_validation": true,
+      "selected": true
+    }
+  ],
+  "segment_changes": {
+    "ap_confirming": {
+      "n": 67,
+      "baseline_accuracy": 0.0,
+      "v3_accuracy": 0.462687
+    },
+    "ap_credit_note_netted": {
+      "n": 97,
+      "baseline_accuracy": 0.917526,
+      "v3_accuracy": 0.917526
+    },
+    "ap_direct_debit": {
+      "n": 131,
+      "baseline_accuracy": 0.885496,
+      "v3_accuracy": 0.992366
+    },
+    "ap_duplicate_payment": {
+      "n": 3,
+      "baseline_accuracy": 0.0,
+      "v3_accuracy": 0.0
+    },
+    "ap_duplicate_refund": {
+      "n": 4,
+      "baseline_accuracy": 0.5,
+      "v3_accuracy": 0.5
+    },
+    "ap_factored": {
+      "n": 33,
+      "baseline_accuracy": 0.757576,
+      "v3_accuracy": 0.757576
+    },
+    "ap_fx": {
+      "n": 35,
+      "baseline_accuracy": 0.885714,
+      "v3_accuracy": 0.885714
+    },
+    "ap_partial": {
+      "n": 72,
+      "baseline_accuracy": 0.861111,
+      "v3_accuracy": 0.861111
+    },
+    "ap_payment_multi": {
+      "n": 787,
+      "baseline_accuracy": 0.94028,
+      "v3_accuracy": 0.94028
+    },
+    "ap_payment_single": {
+      "n": 458,
+      "baseline_accuracy": 0.982533,
+      "v3_accuracy": 0.982533
+    },
+    "ap_returned_transfer": {
+      "n": 1,
+      "baseline_accuracy": 0.0,
+      "v3_accuracy": 1.0
+    },
+    "ap_supplier_refund": {
+      "n": 87,
+      "baseline_accuracy": 0.333333,
+      "v3_accuracy": 1.0
+    },
+    "ar_1to1": {
+      "n": 927,
+      "baseline_accuracy": 0.988134,
+      "v3_accuracy": 0.989213
+    },
+    "ar_1to1_remittance": {
+      "n": 1,
+      "baseline_accuracy": 1.0,
+      "v3_accuracy": 1.0
+    },
+    "ar_1toN_credit_note": {
+      "n": 199,
+      "baseline_accuracy": 0.20603,
+      "v3_accuracy": 0.39196
+    },
+    "ar_1toN_remittance": {
+      "n": 43,
+      "baseline_accuracy": 0.790698,
+      "v3_accuracy": 0.860465
+    },
+    "ar_1toN_text": {
+      "n": 349,
+      "baseline_accuracy": 0.467049,
+      "v3_accuracy": 0.744986
+    },
+    "ar_advance_deduction": {
+      "n": 12,
+      "baseline_accuracy": 0.25,
+      "v3_accuracy": 0.916667
+    },
+    "ar_card_chargeback": {
+      "n": 3,
+      "baseline_accuracy": 0.0,
+      "v3_accuracy": 0.0
+    },
+    "ar_card_settlement": {
+      "n": 84,
+      "baseline_accuracy": 1.0,
+      "v3_accuracy": 1.0
+    },
+    "ar_cheque_deposit": {
+      "n": 41,
+      "baseline_accuracy": 1.0,
+      "v3_accuracy": 1.0
+    },
+    "ar_cheque_returned": {
+      "n": 3,
+      "baseline_accuracy": 0.666667,
+      "v3_accuracy": 0.666667
+    },
+    "ar_dd_batch": {
+      "n": 72,
+      "baseline_accuracy": 0.805556,
+      "v3_accuracy": 0.819444
+    },
+    "ar_dd_represented_transfer": {
+      "n": 60,
+      "baseline_accuracy": 0.683333,
+      "v3_accuracy": 0.8
+    },
+    "ar_dd_returned": {
+      "n": 202,
+      "baseline_accuracy": 0.282178,
+      "v3_accuracy": 0.40099
+    },
+    "ar_discount_late": {
+      "n": 39,
+      "baseline_accuracy": 0.461538,
+      "v3_accuracy": 0.794872
+    },
+    "ar_dispute_settlement": {
+      "n": 53,
+      "baseline_accuracy": 0.037736,
+      "v3_accuracy": 0.584906
+    },
+    "ar_duplicate_payment": {
+      "n": 32,
+      "baseline_accuracy": 0.375,
+      "v3_accuracy": 0.59375
+    },
+    "ar_fx": {
+      "n": 8,
+      "baseline_accuracy": 0.5,
+      "v3_accuracy": 0.5
+    },
+    "ar_instalment": {
+      "n": 186,
+      "baseline_accuracy": 0.473118,
+      "v3_accuracy": 0.865591
+    },
+    "ar_n_to_m": {
+      "n": 102,
+      "baseline_accuracy": 0.088235,
+      "v3_accuracy": 0.098039
+    },
+    "ar_new_iban": {
+      "n": 27,
+      "baseline_accuracy": 0.814815,
+      "v3_accuracy": 0.925926
+    },
+    "ar_overpayment": {
+      "n": 24,
+      "baseline_accuracy": 0.333333,
+      "v3_accuracy": 0.708333
+    },
+    "ar_partial": {
+      "n": 174,
+      "baseline_accuracy": 0.258621,
+      "v3_accuracy": 0.408046
+    },
+    "ar_ref_noise": {
+      "n": 2155,
+      "baseline_accuracy": 0.752668,
+      "v3_accuracy": 0.890023
+    },
+    "ar_replaced_invoice": {
+      "n": 12,
+      "baseline_accuracy": 0.916667,
+      "v3_accuracy": 1.0
+    },
+    "ar_retention": {
+      "n": 55,
+      "baseline_accuracy": 0.454545,
+      "v3_accuracy": 0.890909
+    },
+    "ar_retention_release": {
+      "n": 44,
+      "baseline_accuracy": 0.0,
+      "v3_accuracy": 0.386364
+    },
+    "ar_same_amount_fifo": {
+      "n": 256,
+      "baseline_accuracy": 0.855469,
+      "v3_accuracy": 0.898438
+    },
+    "ar_same_amount_month": {
+      "n": 185,
+      "baseline_accuracy": 0.72973,
+      "v3_accuracy": 0.810811
+    },
+    "ar_short_bank_charges": {
+      "n": 8,
+      "baseline_accuracy": 0.25,
+      "v3_accuracy": 0.25
+    },
+    "ar_short_discount": {
+      "n": 218,
+      "baseline_accuracy": 0.917431,
+      "v3_accuracy": 0.944954
+    },
+    "ar_short_dispute": {
+      "n": 75,
+      "baseline_accuracy": 0.586667,
+      "v3_accuracy": 0.653333
+    },
+    "ar_short_withholding": {
+      "n": 5,
+      "baseline_accuracy": 0.0,
+      "v3_accuracy": 0.0
+    },
+    "ar_third_party_agency": {
+      "n": 18,
+      "baseline_accuracy": 0.333333,
+      "v3_accuracy": 0.388889
+    },
+    "ar_third_party_confirming": {
+      "n": 132,
+      "baseline_accuracy": 0.818182,
+      "v3_accuracy": 0.818182
+    },
+    "ar_third_party_parent": {
+      "n": 9,
+      "baseline_accuracy": 0.111111,
+      "v3_accuracy": 0.888889
+    },
+    "customer_advance": {
+      "n": 8,
+      "baseline_accuracy": 1.0,
+      "v3_accuracy": 1.0
+    },
+    "customer_refund": {
+      "n": 20,
+      "baseline_accuracy": 0.4,
+      "v3_accuracy": 0.4
+    },
+    "nonitem_bank_fees": {
+      "n": 437,
+      "baseline_accuracy": 0.997712,
+      "v3_accuracy": 0.997712
+    },
+    "nonitem_bank_fees_intl": {
+      "n": 99,
+      "baseline_accuracy": 1.0,
+      "v3_accuracy": 1.0
+    },
+    "nonitem_bank_reversal": {
+      "n": 18,
+      "baseline_accuracy": 1.0,
+      "v3_accuracy": 1.0
+    },
+    "nonitem_card_expenses": {
+      "n": 3,
+      "baseline_accuracy": 1.0,
+      "v3_accuracy": 1.0
+    },
+    "nonitem_cash_pool": {
+      "n": 63,
+      "baseline_accuracy": 0.84127,
+      "v3_accuracy": 0.84127
+    },
+    "nonitem_intercompany": {
+      "n": 7,
+      "baseline_accuracy": 1.0,
+      "v3_accuracy": 1.0
+    },
+    "nonitem_interest_expense": {
+      "n": 1,
+      "baseline_accuracy": 1.0,
+      "v3_accuracy": 1.0
+    },
+    "nonitem_interest_income": {
+      "n": 5,
+      "baseline_accuracy": 1.0,
+      "v3_accuracy": 1.0
+    },
+    "nonitem_internal_transfer": {
+      "n": 6,
+      "baseline_accuracy": 1.0,
+      "v3_accuracy": 1.0
+    },
+    "nonitem_leasing": {
+      "n": 13,
+      "baseline_accuracy": 1.0,
+      "v3_accuracy": 1.0
+    },
+    "nonitem_loan_repayment": {
+      "n": 3,
+      "baseline_accuracy": 1.0,
+      "v3_accuracy": 1.0
+    },
+    "nonitem_payroll": {
+      "n": 3,
+      "baseline_accuracy": 1.0,
+      "v3_accuracy": 1.0
+    },
+    "nonitem_social_security": {
+      "n": 3,
+      "baseline_accuracy": 1.0,
+      "v3_accuracy": 1.0
+    },
+    "nonitem_tax_payment": {
+      "n": 4,
+      "baseline_accuracy": 1.0,
+      "v3_accuracy": 1.0
+    },
+    "unidentified": {
+      "n": 152,
+      "baseline_accuracy": 1.0,
+      "v3_accuracy": 0.888158
+    },
+    "unidentified_lookalike": {
+      "n": 66,
+      "baseline_accuracy": 1.0,
+      "v3_accuracy": 0.924242
+    }
+  },
+  "decision": "Keep v3 as the starter development candidate. Continue starter work; 90+ gate remains unmet. Do not run TRAIN/LIVE yet.",
+  "scope": "10 MB docs/master/sample only; development scores; golden labels used only after inference"
+}

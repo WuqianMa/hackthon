@@ -29,6 +29,10 @@ The document's own attribution states it was authored by Claude Opus 5.5 in Anti
 
 Implementation lives here and reuses baseline archive/CSV/Decimal infrastructure. The baseline engine remains reproducible. Run with `python3 -m v3`; output is `final_submission/v3/sample/`. Runs, scores, regressions and adoption recommendation are recorded in `v3/results/`. TRAIN/LIVE/FINAL are not run in this stage.
 
+Completed experiment: **78.65 versus 71.32 baseline (+7.33)** with `python3 -m v3 --speculative`. See [RESULTS.md](RESULTS.md), [POLICY.md](POLICY.md) and [TASKS.md](TASKS.md). The balanced profile without the flag is retained as a control; the selected competition profile uses the flag. The 90+ target remains unmet; continue on starter rather than moving to the large datasets. `python3 -m unittest v3.test_strategy -v` runs the new mechanism checks.
+
+Run experiments sequentially with the default work directory. Parallel jobs require different `--work-dir` values because each run rebuilds its SQLite catalog. Output overrides alone do not isolate working state.
+
 ## Stages
 
 1. Design and assessment: this document, committed and pushed to `q`.

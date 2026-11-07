@@ -1,5 +1,7 @@
 ## Current working direction — user update, 2026-11-07
 
+Latest authorized stage: the user requested implementation and execution of `v3/` on the starter sample, with aggressive competition matching, meaningful commits, and a push to remote `q` after each completed stage. This supersedes the proposal-only restriction below for that scope. The measured selected v3 score is 78.65; continue starter development toward 90+ before expanding to TRAIN/LIVE. See `v3/README.md`, `v3/POLICY.md`, `v3/TASKS.md`, `v3/RESULTS.md` and `human_comments/2026-11-07_v3_execution.md`. Do not push remote `main`.
+
 The user is comparing system strategies before selecting the next implementation. Read `human_comments/2026-11-07_workflow.md`, `docs/strategy.md`, and `self_review/2026-11-07_baseline_review.md` first. This update takes precedence over the older recommended execution sequence below.
 
 - Keep `v0.1.0-baseline` as the initial implementation reference. The existing sample and LIVE measurements are historical evidence, not a request to rerun them.

@@ -1,10 +1,12 @@
 # Static bank reconciliation
 
+Current executable experiment: [strategy v3](v3/README.md), including [competition policy](v3/POLICY.md), [task chain](v3/TASKS.md) and [measured results](v3/RESULTS.md). `python3 -m v3 --speculative` scores **78.65** on the starter, versus **71.32** for the preserved baseline. All 8,499 starter transactions are covered; 710 remain unresolved. This is an improvement, with lower pair precision, and the 90+ target remains unmet. No new TRAIN/LIVE run was made. Completed stages are pushed to remote `q`.
+
 An offline, deterministic Python program turns verified challenge archives into `final_submission/<phase>/submission.csv`. It uses CSVs, structured payment evidence, native PDF text and a chronological open-item ledger. No model, agent, service credential or network access is used during reconciliation.
 
 See [the detailed proposal](reports/static_system_proposal.md), [verified run results](reports/run_results.md), and [the rule register](docs/rules_register.md). The organizer's documents inside the docs archive remain authoritative.
 
-Current stage: **strategy comparison, before further solver changes**. The active [Codex strategy](docs/strategy.md) and [baseline self-review](self_review/2026-11-07_baseline_review.md) supersede the earlier report's next-step recommendations. Use the smallest starter/sample dataset when a design experiment is requested. Full TRAIN is primarily reserved for a justified model-training step. Existing LIVE results are historical measurements; they do not require repeating the full run now.
+Earlier stage: **strategy comparison**. The [Codex proposal](docs/strategy.md) and [baseline self-review](self_review/2026-11-07_baseline_review.md) document the reasoning before the user authorized v3 implementation. Full TRAIN remains reserved for a justified model-training step. Existing LIVE results are historical measurements; they do not require repeating the full run now.
 
 The initial implementation is preserved at Git tag `v0.1.0-baseline` (commit `17ce829`). [Human comments](human_comments/README.md), [Codex reviews](self_review/README.md), and [independent strategy proposals](strategy_proposals/README.md) have separate locations. The final strategy decision remains open for the user's comparison with Claude and Gemini.
 
