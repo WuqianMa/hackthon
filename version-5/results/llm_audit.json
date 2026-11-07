@@ -1,0 +1,1985 @@
+{
+  "reviewed": 48,
+  "changed": 23,
+  "runtime": "Codex collaboration LLM review; cached explicit decisions",
+  "decisions": [
+    {
+      "bank_txn_id": "BT-2025-0370427",
+      "packet_sha256": "113c67213c2e2f917c7b9f781b84d2232af5d0d7d1a6f2358021ec25934f79b1",
+      "action": "KEEP",
+      "reason": "REF 33759 does not identify document 1022100093, and the 113.62 receipt has no explained relationship to the old 402.90 invoice. Preserve UNIDENTIFIED rather than create an unsupported partial allocation.",
+      "changed": false,
+      "regenerated": false,
+      "before": [
+        [
+          "BT-2025-0370427",
+          "",
+          "",
+          "UNIDENTIFIED",
+          "UNIDENTIFIED"
+        ]
+      ],
+      "after": [
+        [
+          "BT-2025-0370427",
+          "",
+          "",
+          "UNIDENTIFIED",
+          "UNIDENTIFIED"
+        ]
+      ]
+    },
+    {
+      "bank_txn_id": "BT-2025-0268839",
+      "packet_sha256": "85f6d33f616d7929d929aba9b56adafb5b7960db479f10f1bbe9b4468211720c",
+      "action": "KEEP",
+      "reason": "INSTALMENT 1/4 exactly explains 5998.24 as one quarter of the 23992.96 open invoice ARI-2025-9029133. This is the first nonfinal instalment, so the incumbent item and PARTIAL treatment are supported.",
+      "changed": false,
+      "regenerated": false,
+      "before": [
+        [
+          "BT-2025-0268839",
+          "ARI-2025-9029133",
+          "5998.24",
+          "",
+          "PARTIAL"
+        ]
+      ],
+      "after": [
+        [
+          "BT-2025-0268839",
+          "ARI-2025-9029133",
+          "5998.24",
+          "",
+          "PARTIAL"
+        ]
+      ]
+    },
+    {
+      "bank_txn_id": "BT-2025-0321822",
+      "packet_sha256": "0d96de2cf3502c95417ffd30057be3fc95976c768c2de0e167ee0025408ac66d",
+      "action": "CHOOSE",
+      "reason": "The incumbent clears only 2081.51 against 6602.53 cash with no explanation for the remaining 4521.02. C1 is the same-party 6551.38 invoice and explicitly represents the 51.15 cash excess as OVERPAYMENT; it is the materially closer supported payment hypothesis, although SUPPLIES supplies no exact invoice reference.",
+      "candidate_id": "C1",
+      "changed": true,
+      "regenerated": false,
+      "before": [
+        [
+          "BT-2025-0321822",
+          "ARI-2025-4694746",
+          "1255.12",
+          "",
+          ""
+        ],
+        [
+          "BT-2025-0321822",
+          "ARI-2025-6905255",
+          "826.39",
+          "",
+          ""
+        ]
+      ],
+      "after": [
+        [
+          "BT-2025-0321822",
+          "ARI-2025-1542765",
+          "6551.38",
+          "",
+          "OVERPAYMENT"
+        ]
+      ]
+    },
+    {
+      "bank_txn_id": "BT-2025-0348698",
+      "packet_sha256": "9ef2f9a180410078b50ee62cdbf1896188d41e0aba32761eb5608a2e51b6340e",
+      "action": "KEEP",
+      "reason": "RUECKLASTSCHRIFT and MS02 explicitly identify a returned direct debit. The September invoice is the most recent already-cleared 734.70 item; its zero before-balance is compatible with reversal of a prior clearance. October and November candidates remain open, while the other cleared alternative is much older.",
+      "changed": false,
+      "regenerated": false,
+      "before": [
+        [
+          "BT-2025-0348698",
+          "ARI-2025-1761057",
+          "734.70",
+          "",
+          "RETURNED"
+        ]
+      ],
+      "after": [
+        [
+          "BT-2025-0348698",
+          "ARI-2025-1761057",
+          "734.70",
+          "",
+          "RETURNED"
+        ]
+      ]
+    },
+    {
+      "bank_txn_id": "BT-2025-0322129",
+      "packet_sha256": "a1f8f0d1c37ce684d00758e7812e21fba49b257cf13c7bdcf970117733fbc5ab",
+      "action": "KEEP",
+      "reason": "The truncated FV25-05090 reference supports FV25-0509048. Cash 645.89 is 98% of 659.07, but payment in October is far beyond the June due date and no eligible early discount is documented; retain the cash amount as PARTIAL.",
+      "changed": false,
+      "regenerated": false,
+      "before": [
+        [
+          "BT-2025-0322129",
+          "ARI-2025-9051428",
+          "645.89",
+          "",
+          "PARTIAL"
+        ]
+      ],
+      "after": [
+        [
+          "BT-2025-0322129",
+          "ARI-2025-9051428",
+          "645.89",
+          "",
+          "PARTIAL"
+        ]
+      ]
+    },
+    {
+      "bank_txn_id": "BT-2025-0357167",
+      "packet_sha256": "bf69a92dcbc19778a738c85e0b95c9d769cd2e2d70bb69fdcb566a23db1b087e",
+      "action": "CHOOSE",
+      "reason": "PORT supplies no invoice reference. The incumbent two-item allocation totals 7272.90 rather than 8088.87 and has no exception explaining the 815.97 excess; the alternative is an arbitrary partial payment on a different party ID with no supporting document reference. No listed item allocation is sufficiently grounded, so choose UNIDENTIFIED.",
+      "candidate_id": "C2",
+      "changed": true,
+      "regenerated": false,
+      "before": [
+        [
+          "BT-2025-0357167",
+          "ARI-2025-5593474",
+          "3704.69",
+          "",
+          ""
+        ],
+        [
+          "BT-2025-0357167",
+          "ARI-2025-6650566",
+          "3568.21",
+          "",
+          ""
+        ]
+      ],
+      "after": [
+        [
+          "BT-2025-0357167",
+          "",
+          "",
+          "UNIDENTIFIED",
+          "UNIDENTIFIED"
+        ]
+      ]
+    },
+    {
+      "bank_txn_id": "BT-2025-0205367",
+      "packet_sha256": "cfdf243176ee150e324cc67f70612ed713206554cd0abba8bf59358e830e07af",
+      "action": "CHOOSE",
+      "reason": "The known open balance is 8465.34, while cash is only 3563.65. There is no final-tranche, release, remainder or explained full-clearance evidence in the bank text, so the existing item allocation should carry PARTIAL rather than a blank exception.",
+      "candidate_id": "C1",
+      "changed": true,
+      "regenerated": false,
+      "before": [
+        [
+          "BT-2025-0205367",
+          "ARI-2024-7754773",
+          "3563.65",
+          "",
+          ""
+        ]
+      ],
+      "after": [
+        [
+          "BT-2025-0205367",
+          "ARI-2024-7754773",
+          "3563.65",
+          "",
+          "PARTIAL"
+        ]
+      ]
+    },
+    {
+      "bank_txn_id": "BT-2025-0344124",
+      "packet_sha256": "bbe5f0ae87a63937f3aef02ecd9f4b15da1c304aba20516dba3a392054e99a31",
+      "action": "CHOOSE",
+      "reason": "The bank explicitly pays CUOTA MANTENIMIENTO OCTUBRE on November 12. Among equal recurring invoices, the November 3 invoice is the plausible following-month billing for October service and is fully open for exactly 56914.70. This is a timing judgment because no cached service-period text is supplied.",
+      "candidate_id": "C3",
+      "changed": true,
+      "regenerated": false,
+      "before": [
+        [
+          "BT-2025-0344124",
+          "ARI-2025-7476832",
+          "56914.70",
+          "",
+          ""
+        ]
+      ],
+      "after": [
+        [
+          "BT-2025-0344124",
+          "ARI-2025-9914303",
+          "56914.70",
+          "",
+          ""
+        ]
+      ]
+    },
+    {
+      "bank_txn_id": "BT-2025-0376616",
+      "packet_sha256": "0146bad7c9c4bbb97338123ca0a33380174c958eb5bd6527420626190119ae97",
+      "action": "CHOOSE",
+      "reason": "SERVICE NOVEMBER 2025 identifies the service period. The December 1 recurring invoice is the plausible following-month bill and is fully open for the exact 575.91 received December 10; the incumbent October invoice and v3 July invoice do not align with that service timing. No PDF service-period text is available to confirm it.",
+      "candidate_id": "C3",
+      "changed": true,
+      "regenerated": false,
+      "before": [
+        [
+          "BT-2025-0376616",
+          "ARI-2025-9671098",
+          "575.91",
+          "",
+          ""
+        ]
+      ],
+      "after": [
+        [
+          "BT-2025-0376616",
+          "ARI-2025-4815032",
+          "575.91",
+          "",
+          ""
+        ]
+      ]
+    },
+    {
+      "bank_txn_id": "BT-2025-0367854",
+      "packet_sha256": "e158e72e646928c792b0db363c00d96ae0b70db9f4ca0a2b7c803bd34db124f4",
+      "action": "KEEP",
+      "reason": "SERVICE SEPTEMBER 2025 is consistent with the October 1 recurring invoice as the following-month bill, for the exact 12272.47 receipt. Other candidates represent different monthly cycles; no cached service-period quote supports displacing this incumbent.",
+      "changed": false,
+      "regenerated": false,
+      "before": [
+        [
+          "BT-2025-0367854",
+          "ARI-2025-6274893",
+          "12272.47",
+          "",
+          ""
+        ]
+      ],
+      "after": [
+        [
+          "BT-2025-0367854",
+          "ARI-2025-6274893",
+          "12272.47",
+          "",
+          ""
+        ]
+      ]
+    },
+    {
+      "bank_txn_id": "BT-2025-0367425",
+      "packet_sha256": "d09b4ac901c4ff81473a046fe7c2363194064491534b4c39c1863a75a8ea3729",
+      "action": "KEEP",
+      "reason": "The bank names FV25-0417151 exactly, and its PDF states a 618.41 guarantee retention and 11749.88 payable now, with release in July 2026. This first 95% payment leaves the retention open, so PARTIAL is correct.",
+      "changed": false,
+      "regenerated": false,
+      "before": [
+        [
+          "BT-2025-0367425",
+          "ARI-2025-5945067",
+          "11749.88",
+          "",
+          "PARTIAL"
+        ]
+      ],
+      "after": [
+        [
+          "BT-2025-0367425",
+          "ARI-2025-5945067",
+          "11749.88",
+          "",
+          "PARTIAL"
+        ]
+      ]
+    },
+    {
+      "bank_txn_id": "BT-2025-0262220",
+      "packet_sha256": "770db8aafb212a673e238fea2be0cfaeba1993ab2872d7cfa4774b81fc8c2086",
+      "action": "CHOOSE",
+      "reason": "The bank explicitly cites 0313599, matching INV25-0313599, but 1213.33 is below its confident 1661.14 open balance. A second bank reference is not represented by any offered item, and no closing or full-clearance explanation is given; retain the supported item with PARTIAL.",
+      "candidate_id": "C1",
+      "changed": true,
+      "regenerated": false,
+      "before": [
+        [
+          "BT-2025-0262220",
+          "ARI-2025-7216603",
+          "1213.33",
+          "",
+          ""
+        ]
+      ],
+      "after": [
+        [
+          "BT-2025-0262220",
+          "ARI-2025-7216603",
+          "1213.33",
+          "",
+          "PARTIAL"
+        ]
+      ]
+    },
+    {
+      "bank_txn_id": "BT-2025-0340248",
+      "packet_sha256": "020f193e072894582ed253c6fd0143d79c83b83b09d2c80d76252f967c2ab341",
+      "action": "CHOOSE",
+      "reason": "SERVICIOS ABRIL 2025 identifies April service. The May 2 invoice is the plausible following-month bill, is confidently open for exactly 673.97, and fits the service period better than the incumbent September invoice. This remains a timing judgment without cached PDF confirmation.",
+      "candidate_id": "C1",
+      "changed": true,
+      "regenerated": false,
+      "before": [
+        [
+          "BT-2025-0340248",
+          "ARI-2025-1331549",
+          "673.97",
+          "",
+          ""
+        ]
+      ],
+      "after": [
+        [
+          "BT-2025-0340248",
+          "ARI-2025-1584148",
+          "673.97",
+          "",
+          ""
+        ]
+      ]
+    },
+    {
+      "bank_txn_id": "BT-2025-0230357",
+      "packet_sha256": "aef92234767250ca90644959b0ab44f34badd0bf0b35da3dc3dd03c488e3ac1f",
+      "action": "ABSTAIN",
+      "reason": "The plural FRAS narrative explicitly supports documents 0105153 and 0111947 inside C0, but C0 also allocates fourteen invoices totaling 65819.63 against only 27345.38 cash. The single-item alternative does not match either named reference, and UNIDENTIFIED discards real document evidence. No listed alternative repairs this multi-item allocation, so preserve the incumbent pending a supported subset.",
+      "changed": false,
+      "regenerated": false,
+      "before": [
+        [
+          "BT-2025-0230357",
+          "ARI-2025-0592121",
+          "6531.43",
+          "",
+          ""
+        ],
+        [
+          "BT-2025-0230357",
+          "ARI-2025-0906314",
+          "6354.93",
+          "",
+          ""
+        ],
+        [
+          "BT-2025-0230357",
+          "ARI-2025-1040810",
+          "4283.79",
+          "",
+          ""
+        ],
+        [
+          "BT-2025-0230357",
+          "ARI-2025-1443610",
+          "4887.59",
+          "",
+          ""
+        ],
+        [
+          "BT-2025-0230357",
+          "ARI-2025-1623995",
+          "4927.07",
+          "",
+          ""
+        ],
+        [
+          "BT-2025-0230357",
+          "ARI-2025-2701758",
+          "5983.68",
+          "",
+          ""
+        ],
+        [
+          "BT-2025-0230357",
+          "ARI-2025-3440110",
+          "5190.33",
+          "",
+          ""
+        ],
+        [
+          "BT-2025-0230357",
+          "ARI-2025-3762709",
+          "3764.12",
+          "",
+          ""
+        ],
+        [
+          "BT-2025-0230357",
+          "ARI-2025-4157103",
+          "5022.54",
+          "",
+          ""
+        ],
+        [
+          "BT-2025-0230357",
+          "ARI-2025-4593527",
+          "6068.59",
+          "",
+          ""
+        ],
+        [
+          "BT-2025-0230357",
+          "ARI-2025-5466375",
+          "3753.27",
+          "",
+          ""
+        ],
+        [
+          "BT-2025-0230357",
+          "ARI-2025-6414189",
+          "1988.13",
+          "",
+          ""
+        ],
+        [
+          "BT-2025-0230357",
+          "ARI-2025-7014186",
+          "5246.81",
+          "",
+          ""
+        ],
+        [
+          "BT-2025-0230357",
+          "ARI-2025-9222631",
+          "1817.35",
+          "",
+          ""
+        ]
+      ],
+      "after": [
+        [
+          "BT-2025-0230357",
+          "ARI-2025-0592121",
+          "6531.43",
+          "",
+          ""
+        ],
+        [
+          "BT-2025-0230357",
+          "ARI-2025-0906314",
+          "6354.93",
+          "",
+          ""
+        ],
+        [
+          "BT-2025-0230357",
+          "ARI-2025-1040810",
+          "4283.79",
+          "",
+          ""
+        ],
+        [
+          "BT-2025-0230357",
+          "ARI-2025-1443610",
+          "4887.59",
+          "",
+          ""
+        ],
+        [
+          "BT-2025-0230357",
+          "ARI-2025-1623995",
+          "4927.07",
+          "",
+          ""
+        ],
+        [
+          "BT-2025-0230357",
+          "ARI-2025-2701758",
+          "5983.68",
+          "",
+          ""
+        ],
+        [
+          "BT-2025-0230357",
+          "ARI-2025-3440110",
+          "5190.33",
+          "",
+          ""
+        ],
+        [
+          "BT-2025-0230357",
+          "ARI-2025-3762709",
+          "3764.12",
+          "",
+          ""
+        ],
+        [
+          "BT-2025-0230357",
+          "ARI-2025-4157103",
+          "5022.54",
+          "",
+          ""
+        ],
+        [
+          "BT-2025-0230357",
+          "ARI-2025-4593527",
+          "6068.59",
+          "",
+          ""
+        ],
+        [
+          "BT-2025-0230357",
+          "ARI-2025-5466375",
+          "3753.27",
+          "",
+          ""
+        ],
+        [
+          "BT-2025-0230357",
+          "ARI-2025-6414189",
+          "1988.13",
+          "",
+          ""
+        ],
+        [
+          "BT-2025-0230357",
+          "ARI-2025-7014186",
+          "5246.81",
+          "",
+          ""
+        ],
+        [
+          "BT-2025-0230357",
+          "ARI-2025-9222631",
+          "1817.35",
+          "",
+          ""
+        ]
+      ]
+    },
+    {
+      "bank_txn_id": "BT-2025-0348772",
+      "packet_sha256": "efa852503791f37a9bee2d2bd601db49a0684126fa1f67f425bdbe4607ebc79c",
+      "action": "KEEP",
+      "reason": "The PDF names the bank payer and explicitly establishes an instalment invoice of 91814.80. Cash 32440.20 is below the invoice and below either scheduled 45907.40 tranche, supporting a nonfinal partial allocation. The zero balance is marked unconfident, so it does not establish duplicate payment, and no final-payment wording supports a blank exception.",
+      "changed": false,
+      "regenerated": false,
+      "before": [
+        [
+          "BT-2025-0348772",
+          "ARI-2025-7594640",
+          "32440.20",
+          "",
+          "PARTIAL"
+        ]
+      ],
+      "after": [
+        [
+          "BT-2025-0348772",
+          "ARI-2025-7594640",
+          "32440.20",
+          "",
+          "PARTIAL"
+        ]
+      ]
+    },
+    {
+      "bank_txn_id": "BT-2025-0388567",
+      "packet_sha256": "d1b40d9ea9c648106d15c83df53ff6f2c569d8d8f8794b9dcc5e3483f5a2181a",
+      "action": "KEEP",
+      "reason": "RESTO TRANSFERENCIA explicitly describes a remainder payment. The incumbent represents that final remainder with a blank exception, consistent with closing-payment semantics even though the reconstructed balance still shows the larger original amount.",
+      "changed": false,
+      "regenerated": false,
+      "before": [
+        [
+          "BT-2025-0388567",
+          "ARI-2025-9822597",
+          "296.15",
+          "",
+          ""
+        ]
+      ],
+      "after": [
+        [
+          "BT-2025-0388567",
+          "ARI-2025-9822597",
+          "296.15",
+          "",
+          ""
+        ]
+      ]
+    },
+    {
+      "bank_txn_id": "BT-2025-0254413",
+      "packet_sha256": "34612dc0cd0e3dc8654dba5d157229ab93a27155c723b49dda6124bdd82ad1c4",
+      "action": "CHOOSE",
+      "reason": "Invoice reference 508729 supports document 1092508729. Cash 77.49 clears only half of the confidently open 154.98; no final-tranche or accepted-adjustment explanation is present, so PARTIAL is required.",
+      "candidate_id": "C1",
+      "changed": true,
+      "regenerated": false,
+      "before": [
+        [
+          "BT-2025-0254413",
+          "ARI-2025-9823575",
+          "77.49",
+          "",
+          ""
+        ]
+      ],
+      "after": [
+        [
+          "BT-2025-0254413",
+          "ARI-2025-9823575",
+          "77.49",
+          "",
+          "PARTIAL"
+        ]
+      ]
+    },
+    {
+      "bank_txn_id": "BT-2025-0301887",
+      "packet_sha256": "e6c54d437d3d43952735a19ba549fb6118566669f343006d0b98b9b39ee9adac",
+      "action": "CHOOSE",
+      "reason": "The incumbent clears only 14913.62 against cash 33937.33, spans two party IDs, and has no invoice references or explanation for the 19023.71 difference. No listed item allocation reconciles this receipt, so choose UNIDENTIFIED.",
+      "candidate_id": "C1",
+      "changed": true,
+      "regenerated": false,
+      "before": [
+        [
+          "BT-2025-0301887",
+          "ARI-2025-0699025",
+          "1954.06",
+          "",
+          ""
+        ],
+        [
+          "BT-2025-0301887",
+          "ARI-2025-2580536",
+          "1631.99",
+          "",
+          ""
+        ],
+        [
+          "BT-2025-0301887",
+          "ARI-2025-6527647",
+          "1166.22",
+          "",
+          ""
+        ],
+        [
+          "BT-2025-0301887",
+          "ARI-2025-6943400",
+          "1115.37",
+          "",
+          ""
+        ],
+        [
+          "BT-2025-0301887",
+          "ARI-2025-7891214",
+          "9045.98",
+          "",
+          ""
+        ]
+      ],
+      "after": [
+        [
+          "BT-2025-0301887",
+          "",
+          "",
+          "UNIDENTIFIED",
+          "UNIDENTIFIED"
+        ]
+      ]
+    },
+    {
+      "bank_txn_id": "BT-2025-0351197",
+      "packet_sha256": "0290e3d5ec1d23e26b1b7efa99906d72fdc8dac1796862684357952ea30459d4",
+      "action": "CHOOSE",
+      "reason": "The incumbent clears 9806.28 against cash 5365.15 without a supported adjustment. C1 assigns the actual cash to the same-party older invoice with open amount 6204.29 and correctly leaves its unpaid remainder open as PARTIAL.",
+      "candidate_id": "C1",
+      "changed": true,
+      "regenerated": false,
+      "before": [
+        [
+          "BT-2025-0351197",
+          "ARI-2025-1389936",
+          "4404.51",
+          "",
+          ""
+        ],
+        [
+          "BT-2025-0351197",
+          "ARI-2025-2408857",
+          "3047.05",
+          "",
+          ""
+        ],
+        [
+          "BT-2025-0351197",
+          "ARI-2025-6696067",
+          "2354.72",
+          "",
+          ""
+        ]
+      ],
+      "after": [
+        [
+          "BT-2025-0351197",
+          "ARI-2025-1080709",
+          "5365.15",
+          "",
+          "PARTIAL"
+        ]
+      ]
+    },
+    {
+      "bank_txn_id": "BT-2025-0280856",
+      "packet_sha256": "9065c0afdf82f5eae4c576b53fb92189dd5b6f332e6cc62802817610d247a31f",
+      "action": "CHOOSE",
+      "reason": "The narrative explicitly says INSTALMENT 3/4, which is a nonfinal instalment. Cash 387.17 is below both invoice total 1548.68 and the recorded prior balance 1161.51; C1 correctly marks PARTIAL.",
+      "candidate_id": "C1",
+      "changed": true,
+      "regenerated": false,
+      "before": [
+        [
+          "BT-2025-0280856",
+          "ARI-2025-8549308",
+          "387.17",
+          "",
+          ""
+        ]
+      ],
+      "after": [
+        [
+          "BT-2025-0280856",
+          "ARI-2025-8549308",
+          "387.17",
+          "",
+          "PARTIAL"
+        ]
+      ]
+    },
+    {
+      "bank_txn_id": "BT-2025-0397855",
+      "packet_sha256": "f1718aa01771d3ec497492f3049b97be6dc991c3a0987cf81f269679fc247912",
+      "action": "CHOOSE",
+      "reason": "C0 clears 13634.90 against cash 10744.77 with no discount or other adjustment evidence. The listed older same-party invoice has balance 10644.68, making C1 a coherent full clearance with 100.09 OVERPAYMENT.",
+      "candidate_id": "C1",
+      "changed": true,
+      "regenerated": false,
+      "before": [
+        [
+          "BT-2025-0397855",
+          "ARI-2025-2328025",
+          "1200.83",
+          "",
+          ""
+        ],
+        [
+          "BT-2025-0397855",
+          "ARI-2025-3209279",
+          "2781.64",
+          "",
+          ""
+        ],
+        [
+          "BT-2025-0397855",
+          "ARI-2025-3922413",
+          "3693.11",
+          "",
+          ""
+        ],
+        [
+          "BT-2025-0397855",
+          "ARI-2025-4266371",
+          "2211.89",
+          "",
+          ""
+        ],
+        [
+          "BT-2025-0397855",
+          "ARI-2025-7332228",
+          "2506.77",
+          "",
+          ""
+        ],
+        [
+          "BT-2025-0397855",
+          "ARI-2025-8578111",
+          "1240.66",
+          "",
+          ""
+        ]
+      ],
+      "after": [
+        [
+          "BT-2025-0397855",
+          "ARI-2025-5055578",
+          "10644.68",
+          "",
+          "OVERPAYMENT"
+        ]
+      ]
+    },
+    {
+      "bank_txn_id": "BT-2025-0260152",
+      "packet_sha256": "25ce35c5fac95ebf28cbaf6de673f983de9ade727dfb7ebd75b1765bde1929c2",
+      "action": "CHOOSE",
+      "reason": "The receipt is 9494.59 against the listed invoice balance 13044.39. The generic PAYMENT/SANDERS narrative gives no final-payment or accepted-adjustment explanation; C1 retains the cash allocation and marks PARTIAL.",
+      "candidate_id": "C1",
+      "changed": true,
+      "regenerated": false,
+      "before": [
+        [
+          "BT-2025-0260152",
+          "ARI-2025-1371474",
+          "9494.59",
+          "",
+          ""
+        ]
+      ],
+      "after": [
+        [
+          "BT-2025-0260152",
+          "ARI-2025-1371474",
+          "9494.59",
+          "",
+          "PARTIAL"
+        ]
+      ]
+    },
+    {
+      "bank_txn_id": "BT-2025-0269866",
+      "packet_sha256": "0241b88dd48defd52ef4f1255f8d811c762907b5d0b8605f7c085a7639150ece",
+      "action": "KEEP",
+      "reason": "C0 matches the 872.48 cash to the open August invoice due August 31, immediately before the September 2 receipt. C1 has confidently zero balance, while C3 is not due until October; the truncated receipt reference does not support switching away from C0.",
+      "changed": false,
+      "regenerated": false,
+      "before": [
+        [
+          "BT-2025-0269866",
+          "ARI-2025-5136881",
+          "872.48",
+          "",
+          ""
+        ]
+      ],
+      "after": [
+        [
+          "BT-2025-0269866",
+          "ARI-2025-5136881",
+          "872.48",
+          "",
+          ""
+        ]
+      ]
+    },
+    {
+      "bank_txn_id": "BT-2025-0331566",
+      "packet_sha256": "02445842a96ac54cdb491d88fedb7f7fe4c70d0637fc841a6e89d38760e5e493",
+      "action": "CHOOSE",
+      "reason": "C0 clears 8177.45 against cash 7896.63 without an explained discount. C1 allocates the received 7896.63 to the same-party open invoice of 8119.96 as PARTIAL; the generic WILSON reference does not establish an overpayment on C3.",
+      "candidate_id": "C1",
+      "changed": true,
+      "regenerated": false,
+      "before": [
+        [
+          "BT-2025-0331566",
+          "ARI-2025-1453863",
+          "1000.73",
+          "",
+          ""
+        ],
+        [
+          "BT-2025-0331566",
+          "ARI-2025-3237042",
+          "1968.70",
+          "",
+          ""
+        ],
+        [
+          "BT-2025-0331566",
+          "ARI-2025-4683981",
+          "2231.69",
+          "",
+          ""
+        ],
+        [
+          "BT-2025-0331566",
+          "ARI-2025-7238448",
+          "1731.89",
+          "",
+          ""
+        ],
+        [
+          "BT-2025-0331566",
+          "ARI-2025-8660169",
+          "1244.44",
+          "",
+          ""
+        ]
+      ],
+      "after": [
+        [
+          "BT-2025-0331566",
+          "ARI-2025-1485423",
+          "7896.63",
+          "",
+          "PARTIAL"
+        ]
+      ]
+    },
+    {
+      "bank_txn_id": "BT-2025-0341898",
+      "packet_sha256": "5714c04411e11d505cd95e05dcfa34da43a69e903b73c39bae85e16c435cf9cd",
+      "action": "CHOOSE",
+      "reason": "The bank explicitly names September 2025. The incumbent November invoice cached PDF explicitly states service for October, showing the service period precedes invoice issue month; infer the October 1 invoice in C3 is the September service invoice rather than C0 or the August invoice in C1.",
+      "candidate_id": "C3",
+      "changed": true,
+      "regenerated": false,
+      "before": [
+        [
+          "BT-2025-0341898",
+          "ARI-2025-1555340",
+          "1373.35",
+          "",
+          ""
+        ]
+      ],
+      "after": [
+        [
+          "BT-2025-0341898",
+          "ARI-2025-7754302",
+          "1373.35",
+          "",
+          ""
+        ]
+      ]
+    },
+    {
+      "bank_txn_id": "BT-2025-0313967",
+      "packet_sha256": "15185d7ed85f5faee4688b3e58a024e0a88e372de68febd88e278fd02e655950",
+      "action": "CHOOSE",
+      "reason": "The narrative explicitly specifies SERVICE JUNE 2025. For these recurring service invoices, the following-month July 1 invoice in C4 is the best listed match; the incumbent October and C1 August invoices are too late. This is a month-based judgment because no cached PDF is supplied.",
+      "candidate_id": "C4",
+      "changed": true,
+      "regenerated": false,
+      "before": [
+        [
+          "BT-2025-0313967",
+          "ARI-2025-9370515",
+          "14337.00",
+          "",
+          ""
+        ]
+      ],
+      "after": [
+        [
+          "BT-2025-0313967",
+          "ARI-2025-5817110",
+          "14337.00",
+          "",
+          ""
+        ]
+      ]
+    },
+    {
+      "bank_txn_id": "BT-2025-0231988",
+      "packet_sha256": "4d60b8198ee6d0ccb4ddc6c2752892a61c580016e4d7e876d38c77f43f54b6c5",
+      "action": "KEEP",
+      "reason": "With no invoice or month reference, the June 2 invoice due July 2 is a reasonable matured open item for the July 28 cash of 722.37. The competing July invoice is not yet due and the 2022 credit note has no narrative support; retain C0.",
+      "changed": false,
+      "regenerated": false,
+      "before": [
+        [
+          "BT-2025-0231988",
+          "ARI-2025-3984286",
+          "722.37",
+          "",
+          ""
+        ]
+      ],
+      "after": [
+        [
+          "BT-2025-0231988",
+          "ARI-2025-3984286",
+          "722.37",
+          "",
+          ""
+        ]
+      ]
+    },
+    {
+      "bank_txn_id": "BT-2025-0304338",
+      "packet_sha256": "22301be604515d3fff9395b9621c6f7fa7559d42f5062ce02569ea66528237d5",
+      "action": "CHOOSE",
+      "reason": "MANT. JUL 25 explicitly names July service. The following-month August 1 invoice in C4 is the best recurring-service match; C0 is September and C1 is June. No cached PDF is available, so this is a bounded month-based judgment.",
+      "candidate_id": "C4",
+      "changed": true,
+      "regenerated": false,
+      "before": [
+        [
+          "BT-2025-0304338",
+          "ARI-2025-7266682",
+          "50098.08",
+          "",
+          ""
+        ]
+      ],
+      "after": [
+        [
+          "BT-2025-0304338",
+          "ARI-2025-9531486",
+          "50098.08",
+          "",
+          ""
+        ]
+      ]
+    },
+    {
+      "bank_txn_id": "BT-2025-0383861",
+      "packet_sha256": "fb61f68b7100f43cf0bcaa0ca1d8763857e36e340dbbd228bb7a0e56ff49fa83",
+      "action": "CHOOSE",
+      "reason": "The four incumbent invoice balances total 13936.53 against cash 16211.02, leaving an unexplained 2274.49. The bank provides no invoice references and no listed candidate explains the remainder or an overpayment, so choose UNIDENTIFIED.",
+      "candidate_id": "C1",
+      "changed": true,
+      "regenerated": false,
+      "before": [
+        [
+          "BT-2025-0383861",
+          "ARI-2025-1637486",
+          "2663.00",
+          "",
+          ""
+        ],
+        [
+          "BT-2025-0383861",
+          "ARI-2025-3923649",
+          "5584.67",
+          "",
+          ""
+        ],
+        [
+          "BT-2025-0383861",
+          "ARI-2025-5014365",
+          "1825.18",
+          "",
+          ""
+        ],
+        [
+          "BT-2025-0383861",
+          "ARI-2025-8995100",
+          "3863.68",
+          "",
+          ""
+        ]
+      ],
+      "after": [
+        [
+          "BT-2025-0383861",
+          "",
+          "",
+          "UNIDENTIFIED",
+          "UNIDENTIFIED"
+        ]
+      ]
+    },
+    {
+      "bank_txn_id": "BT-2025-0322469",
+      "packet_sha256": "4c4a2555c19808eed1639056e97850e1f282dfa8601217f71478381174a679fd",
+      "action": "CHOOSE",
+      "reason": "The incumbent six invoices total 25270.92 against receipt 28179.57, with no explanation for 2908.65. The generic SPA narrative and payment ID identify no listed invoice grouping that reconciles the cash; choose UNIDENTIFIED.",
+      "candidate_id": "C1",
+      "changed": true,
+      "regenerated": false,
+      "before": [
+        [
+          "BT-2025-0322469",
+          "ARI-2025-0675333",
+          "4930.05",
+          "",
+          ""
+        ],
+        [
+          "BT-2025-0322469",
+          "ARI-2025-1589523",
+          "2541.63",
+          "",
+          ""
+        ],
+        [
+          "BT-2025-0322469",
+          "ARI-2025-2223144",
+          "4722.53",
+          "",
+          ""
+        ],
+        [
+          "BT-2025-0322469",
+          "ARI-2025-6560102",
+          "4738.95",
+          "",
+          ""
+        ],
+        [
+          "BT-2025-0322469",
+          "ARI-2025-6794782",
+          "5273.21",
+          "",
+          ""
+        ],
+        [
+          "BT-2025-0322469",
+          "ARI-2025-9018244",
+          "3064.55",
+          "",
+          ""
+        ]
+      ],
+      "after": [
+        [
+          "BT-2025-0322469",
+          "",
+          "",
+          "UNIDENTIFIED",
+          "UNIDENTIFIED"
+        ]
+      ]
+    },
+    {
+      "bank_txn_id": "BT-2025-0393375",
+      "packet_sha256": "e778e50ab237a30a83f2c1c7dc8253ac416d46e51dc7f57ae10b77564861118c",
+      "action": "CHOOSE",
+      "reason": "The full C1 invoice set totals 71945.05 and the credit note is 328.55, giving net cash exactly 71616.50. The truncated multi-invoice narrative includes matching document stems and references. C0 retains only a small subset; C1 correctly lists the credit-note allocation as positive.",
+      "candidate_id": "C1",
+      "changed": true,
+      "regenerated": false,
+      "before": [
+        [
+          "BT-2025-0393375",
+          "ARC-2025-7690256",
+          "328.55",
+          "",
+          ""
+        ],
+        [
+          "BT-2025-0393375",
+          "ARI-2025-2641121",
+          "5935.50",
+          "",
+          ""
+        ],
+        [
+          "BT-2025-0393375",
+          "ARI-2025-3550764",
+          "1256.05",
+          "",
+          ""
+        ],
+        [
+          "BT-2025-0393375",
+          "ARI-2025-9487764",
+          "1051.88",
+          "",
+          ""
+        ]
+      ],
+      "after": [
+        [
+          "BT-2025-0393375",
+          "ARC-2025-7690256",
+          "328.55",
+          "",
+          ""
+        ],
+        [
+          "BT-2025-0393375",
+          "ARI-2025-1000156",
+          "695.34",
+          "",
+          ""
+        ],
+        [
+          "BT-2025-0393375",
+          "ARI-2025-1596025",
+          "3027.88",
+          "",
+          ""
+        ],
+        [
+          "BT-2025-0393375",
+          "ARI-2025-1798038",
+          "657.11",
+          "",
+          ""
+        ],
+        [
+          "BT-2025-0393375",
+          "ARI-2025-1852333",
+          "4663.41",
+          "",
+          ""
+        ],
+        [
+          "BT-2025-0393375",
+          "ARI-2025-2246727",
+          "2438.40",
+          "",
+          ""
+        ],
+        [
+          "BT-2025-0393375",
+          "ARI-2025-2339193",
+          "457.22",
+          "",
+          ""
+        ],
+        [
+          "BT-2025-0393375",
+          "ARI-2025-2367582",
+          "4625.01",
+          "",
+          ""
+        ],
+        [
+          "BT-2025-0393375",
+          "ARI-2025-2641121",
+          "5935.50",
+          "",
+          ""
+        ],
+        [
+          "BT-2025-0393375",
+          "ARI-2025-2897160",
+          "3781.59",
+          "",
+          ""
+        ],
+        [
+          "BT-2025-0393375",
+          "ARI-2025-3492610",
+          "242.70",
+          "",
+          ""
+        ],
+        [
+          "BT-2025-0393375",
+          "ARI-2025-3550764",
+          "1256.05",
+          "",
+          ""
+        ],
+        [
+          "BT-2025-0393375",
+          "ARI-2025-3615948",
+          "5468.06",
+          "",
+          ""
+        ],
+        [
+          "BT-2025-0393375",
+          "ARI-2025-4389988",
+          "1280.47",
+          "",
+          ""
+        ],
+        [
+          "BT-2025-0393375",
+          "ARI-2025-4708728",
+          "3796.56",
+          "",
+          ""
+        ],
+        [
+          "BT-2025-0393375",
+          "ARI-2025-4984750",
+          "3175.35",
+          "",
+          ""
+        ],
+        [
+          "BT-2025-0393375",
+          "ARI-2025-5115387",
+          "5532.37",
+          "",
+          ""
+        ],
+        [
+          "BT-2025-0393375",
+          "ARI-2025-5689897",
+          "2933.33",
+          "",
+          ""
+        ],
+        [
+          "BT-2025-0393375",
+          "ARI-2025-5882128",
+          "2237.88",
+          "",
+          ""
+        ],
+        [
+          "BT-2025-0393375",
+          "ARI-2025-6810647",
+          "5960.54",
+          "",
+          ""
+        ],
+        [
+          "BT-2025-0393375",
+          "ARI-2025-7904534",
+          "945.02",
+          "",
+          ""
+        ],
+        [
+          "BT-2025-0393375",
+          "ARI-2025-8064248",
+          "1945.86",
+          "",
+          ""
+        ],
+        [
+          "BT-2025-0393375",
+          "ARI-2025-9201541",
+          "9837.52",
+          "",
+          ""
+        ],
+        [
+          "BT-2025-0393375",
+          "ARI-2025-9487764",
+          "1051.88",
+          "",
+          ""
+        ]
+      ]
+    },
+    {
+      "bank_txn_id": "BT-2025-0306361",
+      "packet_sha256": "1aae1d2526f2741b72db51687f6545ba959041b0c817e0ae7155e963eb331640",
+      "action": "CHOOSE",
+      "reason": "The narrative explicitly specifies SERVICE APRIL 2025. The May 1 invoice in C1 is the following-month service bill and is open for exactly 2006.21; C0 is an August invoice and the April-issued alternative would ordinarily cover the prior month. This is month-based judgment without cached PDF text.",
+      "candidate_id": "C1",
+      "changed": true,
+      "regenerated": false,
+      "before": [
+        [
+          "BT-2025-0306361",
+          "ARI-2025-4675544",
+          "2006.21",
+          "",
+          ""
+        ]
+      ],
+      "after": [
+        [
+          "BT-2025-0306361",
+          "ARI-2025-8137590",
+          "2006.21",
+          "",
+          ""
+        ]
+      ]
+    },
+    {
+      "bank_txn_id": "BT-2025-0219832",
+      "packet_sha256": "6e8ad233e71a225a4f791fccab8dc21e0d54dd956a59373ea73a62f0424b007e",
+      "action": "KEEP",
+      "reason": "Four narrative invoice fragments match FV25-0404889, FV24-0420991, FV25-0407994 and FV25-0409449 at the same party. C0 retains all four whereas C1 drops two. The extra FV25-0411107 and substantial cash residual remain uncertain, but no listed alternative reconstructs the referenced payment better.",
+      "changed": false,
+      "regenerated": false,
+      "before": [
+        [
+          "BT-2025-0219832",
+          "ARI-2024-7513549",
+          "1606.93",
+          "",
+          ""
+        ],
+        [
+          "BT-2025-0219832",
+          "ARI-2025-4139153",
+          "1078.86",
+          "",
+          ""
+        ],
+        [
+          "BT-2025-0219832",
+          "ARI-2025-5547233",
+          "9258.17",
+          "",
+          ""
+        ],
+        [
+          "BT-2025-0219832",
+          "ARI-2025-5758759",
+          "793.47",
+          "",
+          ""
+        ],
+        [
+          "BT-2025-0219832",
+          "ARI-2025-7548968",
+          "556.22",
+          "",
+          ""
+        ]
+      ],
+      "after": [
+        [
+          "BT-2025-0219832",
+          "ARI-2024-7513549",
+          "1606.93",
+          "",
+          ""
+        ],
+        [
+          "BT-2025-0219832",
+          "ARI-2025-4139153",
+          "1078.86",
+          "",
+          ""
+        ],
+        [
+          "BT-2025-0219832",
+          "ARI-2025-5547233",
+          "9258.17",
+          "",
+          ""
+        ],
+        [
+          "BT-2025-0219832",
+          "ARI-2025-5758759",
+          "793.47",
+          "",
+          ""
+        ],
+        [
+          "BT-2025-0219832",
+          "ARI-2025-7548968",
+          "556.22",
+          "",
+          ""
+        ]
+      ]
+    },
+    {
+      "bank_txn_id": "BT-2025-0265188",
+      "packet_sha256": "9a92929da6c633f333ff9b713981b499628abbf22c8b6e6ac0018e2899035279",
+      "action": "KEEP",
+      "reason": "All five named F25 invoices are represented and the allocations total the PLN 50214.34 debit. F25/04929 receives 2309.79 against an open balance of 3299.71, so PARTIAL is appropriate; F25/04842 fully clears its remaining 12573.27.",
+      "changed": false,
+      "regenerated": false,
+      "before": [
+        [
+          "BT-2025-0265188",
+          "API-2025-0763200",
+          "16066.62",
+          "",
+          ""
+        ],
+        [
+          "BT-2025-0265188",
+          "API-2025-2012942",
+          "12573.27",
+          "",
+          ""
+        ],
+        [
+          "BT-2025-0265188",
+          "API-2025-3074581",
+          "2309.79",
+          "",
+          "PARTIAL"
+        ],
+        [
+          "BT-2025-0265188",
+          "API-2025-3275637",
+          "11246.12",
+          "",
+          ""
+        ],
+        [
+          "BT-2025-0265188",
+          "API-2025-4630798",
+          "8018.54",
+          "",
+          ""
+        ]
+      ],
+      "after": [
+        [
+          "BT-2025-0265188",
+          "API-2025-0763200",
+          "16066.62",
+          "",
+          ""
+        ],
+        [
+          "BT-2025-0265188",
+          "API-2025-2012942",
+          "12573.27",
+          "",
+          ""
+        ],
+        [
+          "BT-2025-0265188",
+          "API-2025-3074581",
+          "2309.79",
+          "",
+          "PARTIAL"
+        ],
+        [
+          "BT-2025-0265188",
+          "API-2025-3275637",
+          "11246.12",
+          "",
+          ""
+        ],
+        [
+          "BT-2025-0265188",
+          "API-2025-4630798",
+          "8018.54",
+          "",
+          ""
+        ]
+      ]
+    },
+    {
+      "bank_txn_id": "BT-2025-0237377",
+      "packet_sha256": "82477fbdc6eb880742f27455b5bc4002a053e87d022bf37f3ba513a2f908b94b",
+      "action": "CHOOSE",
+      "reason": "The bank explicitly names SERVICE MARCH 2025. The April 1 invoice is the strongest listed match for March service billed in the following month, with the same party and exact AUD 3055.40 balance. July and August issue dates fit later service periods. This is a best guess because no cached service-period text is supplied.",
+      "candidate_id": "C1",
+      "changed": true,
+      "regenerated": false,
+      "before": [
+        [
+          "BT-2025-0237377",
+          "ARI-2025-4880692",
+          "3055.40",
+          "",
+          ""
+        ]
+      ],
+      "after": [
+        [
+          "BT-2025-0237377",
+          "ARI-2025-6665666",
+          "3055.40",
+          "",
+          ""
+        ]
+      ]
+    },
+    {
+      "bank_txn_id": "BT-2025-0202369",
+      "packet_sha256": "55683c6a1066584bb1b017a2f2009c329f2cbb355a711ebcb2194762926c645b",
+      "action": "CHOOSE",
+      "reason": "INVOICE 506896 supports document 1092506896. The USD 22229.11 receipt is below its confident USD 23399.06 open balance, and payment occurs well after the April 18 due date with no explained accepted deduction. PARTIAL preserves the unpaid balance rather than treating this cash amount as final clearance.",
+      "candidate_id": "C1",
+      "changed": true,
+      "regenerated": false,
+      "before": [
+        [
+          "BT-2025-0202369",
+          "ARI-2025-4902744",
+          "22229.11",
+          "",
+          ""
+        ]
+      ],
+      "after": [
+        [
+          "BT-2025-0202369",
+          "ARI-2025-4902744",
+          "22229.11",
+          "",
+          "PARTIAL"
+        ]
+      ]
+    },
+    {
+      "bank_txn_id": "BT-2025-0290163",
+      "packet_sha256": "230ba6bf309270bb03a4b677c2d452f72317e866c98a68a3fa917a59b654e791",
+      "action": "KEEP",
+      "reason": "The returned receipt references REM 01250916866, consistent with the September 16 collection and the September invoice due September 16. The July invoice has the same amount but an older collection period. RETURNED is consistent with reversing an already cleared item.",
+      "changed": false,
+      "regenerated": false,
+      "before": [
+        [
+          "BT-2025-0290163",
+          "ARI-2025-6226774",
+          "851.84",
+          "",
+          "RETURNED"
+        ]
+      ],
+      "after": [
+        [
+          "BT-2025-0290163",
+          "ARI-2025-6226774",
+          "851.84",
+          "",
+          "RETURNED"
+        ]
+      ]
+    },
+    {
+      "bank_txn_id": "BT-2025-0268533",
+      "packet_sha256": "ee122a87cb905d9d72e9237a4fda833f80731ec9361b161b0596db191c2d9025",
+      "action": "ABSTAIN",
+      "reason": "The Watson Hydro narrative is a customer payment naming five orders, with no cash-pool wording, so CASH_POOL is poorly supported. However the packet supplies no mapping from those order numbers to the five invoice documents, and C0 totals only EUR 4551.22 against EUR 10148.73 cash. Retain the incumbent because the available evidence cannot resolve the allocation or justify replacing it wholesale.",
+      "changed": false,
+      "regenerated": false,
+      "before": [
+        [
+          "BT-2025-0268533",
+          "ARI-2025-0958390",
+          "586.85",
+          "",
+          ""
+        ],
+        [
+          "BT-2025-0268533",
+          "ARI-2025-1877127",
+          "649.93",
+          "",
+          ""
+        ],
+        [
+          "BT-2025-0268533",
+          "ARI-2025-3320207",
+          "361.80",
+          "",
+          ""
+        ],
+        [
+          "BT-2025-0268533",
+          "ARI-2025-4771693",
+          "2403.01",
+          "",
+          ""
+        ],
+        [
+          "BT-2025-0268533",
+          "ARI-2025-5925110",
+          "549.63",
+          "",
+          ""
+        ]
+      ],
+      "after": [
+        [
+          "BT-2025-0268533",
+          "ARI-2025-0958390",
+          "586.85",
+          "",
+          ""
+        ],
+        [
+          "BT-2025-0268533",
+          "ARI-2025-1877127",
+          "649.93",
+          "",
+          ""
+        ],
+        [
+          "BT-2025-0268533",
+          "ARI-2025-3320207",
+          "361.80",
+          "",
+          ""
+        ],
+        [
+          "BT-2025-0268533",
+          "ARI-2025-4771693",
+          "2403.01",
+          "",
+          ""
+        ],
+        [
+          "BT-2025-0268533",
+          "ARI-2025-5925110",
+          "549.63",
+          "",
+          ""
+        ]
+      ]
+    },
+    {
+      "bank_txn_id": "BT-2025-0331917",
+      "packet_sha256": "4e9966fea3e9a9e945e89865b66d2a69c430d202eab530610fe89642483de20e",
+      "action": "KEEP",
+      "reason": "DEV05251017030 points to an October collection around October 17, matching the October 1 invoice due October 16. The equal-valued August invoice is temporally weaker. RETURNED is appropriate for the zero-balance item being reversed.",
+      "changed": false,
+      "regenerated": false,
+      "before": [
+        [
+          "BT-2025-0331917",
+          "ARI-2025-8571867",
+          "922.02",
+          "",
+          "RETURNED"
+        ]
+      ],
+      "after": [
+        [
+          "BT-2025-0331917",
+          "ARI-2025-8571867",
+          "922.02",
+          "",
+          "RETURNED"
+        ]
+      ]
+    },
+    {
+      "bank_txn_id": "BT-2025-0398885",
+      "packet_sha256": "3c04562a4d6e6b0324ce3880dc12184423bf84f1d9c22f531793376867a6bc5b",
+      "action": "KEEP",
+      "reason": "REM 02251216192 identifies the December 16 collection period, matching the December 1 invoice due December 16. The July invoice only shares the amount and party. Keep the December item with RETURNED to reverse its prior clearance.",
+      "changed": false,
+      "regenerated": false,
+      "before": [
+        [
+          "BT-2025-0398885",
+          "ARI-2025-4646565",
+          "1639.55",
+          "",
+          "RETURNED"
+        ]
+      ],
+      "after": [
+        [
+          "BT-2025-0398885",
+          "ARI-2025-4646565",
+          "1639.55",
+          "",
+          "RETURNED"
+        ]
+      ]
+    },
+    {
+      "bank_txn_id": "BT-2025-0335938",
+      "packet_sha256": "fe9ee35e573202143fcd21533f9452b51baaef33da5928d8115a499632f1d20a",
+      "action": "KEEP",
+      "reason": "RE-NR RE250106422 exactly names the incumbent document, and CHF 1322.11 exactly clears its confident remaining balance. The other same-party invoice has a different reference and would require an unsupported partial allocation.",
+      "changed": false,
+      "regenerated": false,
+      "before": [
+        [
+          "BT-2025-0335938",
+          "ARI-2025-1855737",
+          "1322.11",
+          "",
+          ""
+        ]
+      ],
+      "after": [
+        [
+          "BT-2025-0335938",
+          "ARI-2025-1855737",
+          "1322.11",
+          "",
+          ""
+        ]
+      ]
+    },
+    {
+      "bank_txn_id": "BT-2025-0398316",
+      "packet_sha256": "2f00346fd621edab9794955bfe259ccd9559d7858ba367600ce84010168858f6",
+      "action": "KEEP",
+      "reason": "INV# VTN250116935 exactly matches the supplied invoice document, and CNY 6773.77 equals its open balance. The December 29 payment also follows its December 26 due date.",
+      "changed": false,
+      "regenerated": false,
+      "before": [
+        [
+          "BT-2025-0398316",
+          "ARI-2025-7450626",
+          "6773.77",
+          "",
+          ""
+        ]
+      ],
+      "after": [
+        [
+          "BT-2025-0398316",
+          "ARI-2025-7450626",
+          "6773.77",
+          "",
+          ""
+        ]
+      ]
+    },
+    {
+      "bank_txn_id": "BT-2025-0274535",
+      "packet_sha256": "a5152e4a7cd0fef7c92177932d59b69de950040faa5fbc48e7420651e27c4bca",
+      "action": "KEEP",
+      "reason": "INV INV25-0109890 exactly references the incumbent invoice and PLN 5538.60 fully matches its open balance. The retrieved July invoice has a different number and larger balance, so its partial-payment alternative lacks support.",
+      "changed": false,
+      "regenerated": false,
+      "before": [
+        [
+          "BT-2025-0274535",
+          "ARI-2025-7440792",
+          "5538.60",
+          "",
+          ""
+        ]
+      ],
+      "after": [
+        [
+          "BT-2025-0274535",
+          "ARI-2025-7440792",
+          "5538.60",
+          "",
+          ""
+        ]
+      ]
+    },
+    {
+      "bank_txn_id": "BT-2025-0204628",
+      "packet_sha256": "65c516614963bc0440b7b59b6a628ae1a7abb385bd4a362488be10a430c2c62a",
+      "action": "KEEP",
+      "reason": "Both the RMR invoice segment and remittance identify 1062515172. USD 362.18 is below the confident USD 1448.73 balance, approximately a quarter payment, so PARTIAL is appropriate. The 2022 invoice has no reference support.",
+      "changed": false,
+      "regenerated": false,
+      "before": [
+        [
+          "BT-2025-0204628",
+          "ARI-2025-6372599",
+          "362.18",
+          "",
+          "PARTIAL"
+        ]
+      ],
+      "after": [
+        [
+          "BT-2025-0204628",
+          "ARI-2025-6372599",
+          "362.18",
+          "",
+          "PARTIAL"
+        ]
+      ]
+    },
+    {
+      "bank_txn_id": "BT-2025-0286604",
+      "packet_sha256": "2f9f04c9514fa230c5b3d4994e8f8aecfa4fa77b9b34835725f03c19c9d42d64",
+      "action": "ABSTAIN",
+      "reason": "The payer has three open invoices with the identical AUD 1253.10 amount. The bank provides neither an invoice number nor a service period, so amount and party cannot distinguish July, August and September invoices. Retain the incumbent without asserting a period match.",
+      "changed": false,
+      "regenerated": false,
+      "before": [
+        [
+          "BT-2025-0286604",
+          "ARI-2025-1063142",
+          "1253.10",
+          "",
+          ""
+        ]
+      ],
+      "after": [
+        [
+          "BT-2025-0286604",
+          "ARI-2025-1063142",
+          "1253.10",
+          "",
+          ""
+        ]
+      ]
+    },
+    {
+      "bank_txn_id": "BT-2025-0307233",
+      "packet_sha256": "31c93e834e8a1d5a47cc61c2cfd362652349623ee93092e284346eb14eef2b2e",
+      "action": "KEEP",
+      "reason": "The October 7 returned debit follows the September invoice due October 1, which has already been cleared. The October invoice remains open and is not due until October 31, making it a weaker reversal target. Keep the September item with RETURNED.",
+      "changed": false,
+      "regenerated": false,
+      "before": [
+        [
+          "BT-2025-0307233",
+          "ARI-2025-4473831",
+          "269.00",
+          "",
+          "RETURNED"
+        ]
+      ],
+      "after": [
+        [
+          "BT-2025-0307233",
+          "ARI-2025-4473831",
+          "269.00",
+          "",
+          "RETURNED"
+        ]
+      ]
+    },
+    {
+      "bank_txn_id": "BT-2025-0220923",
+      "packet_sha256": "f5053977825d2e5e5fb47aeeef2ca398dfd758cc73de1fa40dcba4f22798a588",
+      "action": "KEEP",
+      "reason": "The supplies direct debit is consistent with the payable candidate: USD 211.03 exactly equals its confident remaining balance and the July 21 debit closely follows the July 19 due date. No competing item or contradictory reference is supplied.",
+      "changed": false,
+      "regenerated": false,
+      "before": [
+        [
+          "BT-2025-0220923",
+          "API-2025-2465997",
+          "211.03",
+          "",
+          ""
+        ]
+      ],
+      "after": [
+        [
+          "BT-2025-0220923",
+          "API-2025-2465997",
+          "211.03",
+          "",
+          ""
+        ]
+      ]
+    },
+    {
+      "bank_txn_id": "BT-2025-0354994",
+      "packet_sha256": "9b20f1b2d2719552dccb7cb09a511e4dd10fe8e303032676efa0b5eb0263b992",
+      "action": "KEEP",
+      "reason": "The bank invoice fragment INV25-03259 is a prefix of INV25-0325925. AUD 2617.45 exactly clears its open balance and the payment occurs on its November 21 due date, supporting the incumbent item.",
+      "changed": false,
+      "regenerated": false,
+      "before": [
+        [
+          "BT-2025-0354994",
+          "ARI-2025-7278885",
+          "2617.45",
+          "",
+          ""
+        ]
+      ],
+      "after": [
+        [
+          "BT-2025-0354994",
+          "ARI-2025-7278885",
+          "2617.45",
+          "",
+          ""
+        ]
+      ]
+    }
+  ]
+}

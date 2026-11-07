@@ -1,8 +1,10 @@
 # Static bank reconciliation
 
+**V5 LIVE submission ready:** [v5-submission.csv](v5-submission.csv) at repository root. All 203,083 bank lines, 642,703 rows; validated. Reuses the frozen model and caches, with 48 bounded LIVE LLM reviews. [Execution/results](version-5/RESULTS.md). Cached development score **79.29**; LIVE website score pending.
+
 **V4 LIVE submission:** [v4-submission.csv](v4-submission.csv) at the repository root. Identical edition copies are under `submission/` and `submission/v4-strategy/`. All 203,083 LIVE transactions are covered; 642,703 rows, no LLM judgment. User-provided website feedback reports **79.05**, versus v3 **77.46**. See [edition details](version-4/LIVE_EDITION_001.md) and [feedback](submission/v4-strategy/feedback.md).
 
-Current work is the [v5 proposal](version-5/README.md): preserve the fitted model/PDF cache, repair policy/state decisions, expand recall candidates and add bounded LLM review. **Design only; no v5 execution or retraining.**
+The [v5 implementation](version-5/README.md) preserves the fitted model/PDF cache, repairs policy/state decisions, adds targeted recovery and bounded LLM review. No model retraining was performed.
 
 Latest completed training stage: [version-4](version-4/README.md) fits two gradient-boosted decision models on a temporal TRAIN sample. The official score is **79.05**, versus **73.34** for static reconstruction on the same 7,500 held-out cases (**+5.71**). The [TRAIN report](version-4/TRAIN_RESULTS.md) documents the 70,500-case sample, complete invoice context, split, candidate limits and regressions. This edition uses **no LLM judgment**.
 

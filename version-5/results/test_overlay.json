@@ -1,0 +1,17 @@
+{
+  "phase": "test",
+  "bank_lines": 7500,
+  "changes": 59,
+  "methods": {
+    "v4_incumbent": 7441,
+    "recovery:cash_pool_account_code_or_pair": 35,
+    "policy:document_plan_retention_or_advance": 21,
+    "recovery:cached_document_service_period": 2,
+    "policy:documented_final_tranche_or_release": 1
+  },
+  "recovery_queries": 1312,
+  "contract_repairs": 0,
+  "llm_queue": 24,
+  "model_sha256": "a883a203fc5bc694812895a14cbd8b125870f435a67bc5e7627ab42e4526eccb",
+  "training_performed": false
+}

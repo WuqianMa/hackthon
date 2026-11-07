@@ -1,5 +1,7 @@
 # Selected V5 strategy — frozen models with policy repair and targeted LLM revision
 
+Execution update: the user subsequently authorized the actual v5 submission. Edition 001 is generated, with cached development score 79.29 and 48 LIVE LLM reviews. No retraining. See [RESULTS.md](RESULTS.md) for the implemented subset, validation and remaining roadmap. The proposal-stage restrictions and unexecuted plan below are historical, not the current execution status.
+
 ## Decision and scope
 
 Reuse the trained v4 allocation/payment models, existing catalogs, parsed sources and PDF text cache. **No ML/DL retraining, full-TRAIN feature regeneration, bulk PDF extraction, or new submission run is authorized in this design stage.** No v5 score is claimed. LLM judgment is included in the proposed architecture; no provider calls are made now.

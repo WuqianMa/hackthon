@@ -1,0 +1,24 @@
+{
+  "phase": "live",
+  "bank_lines": 203083,
+  "changes": 1904,
+  "methods": {
+    "v4_incumbent": 201179,
+    "recovery:cash_pool_account_code_or_pair": 985,
+    "recovery:cached_document_service_period": 10,
+    "policy:late_discount_stays_open": 73,
+    "policy:source_supported_ap_partial": 572,
+    "policy:duplicate_before_event_balance": 108,
+    "policy:explicit_partial_cash": 1,
+    "recovery:related_credit_exact_net": 3,
+    "policy:document_plan_retention_or_advance": 149,
+    "recovery:linked_original_return": 1,
+    "policy:remaining_balance_fully_paid": 1,
+    "policy:duplicate_before_event_balance,source_supported_ap_partial": 1
+  },
+  "recovery_queries": 6000,
+  "contract_repairs": 0,
+  "llm_queue": 48,
+  "model_sha256": "a883a203fc5bc694812895a14cbd8b125870f435a67bc5e7627ab42e4526eccb",
+  "training_performed": false
+}

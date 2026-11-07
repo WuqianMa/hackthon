@@ -1,0 +1,568 @@
+{
+  "v5": {
+    "ok": true,
+    "errors": [],
+    "score": 79.25,
+    "metrics": {
+      "allocation_f1": 0.861931,
+      "precision": 0.904661,
+      "recall": 0.823055,
+      "txn_accuracy": 0.838533,
+      "exception_macro_f1": 0.549873,
+      "amount_weighted_accuracy": 0.773002,
+      "rows": 25272,
+      "txns_covered": 7500,
+      "txns_total": 7500
+    },
+    "segments": {
+      "ap_confirming": {
+        "n": 26,
+        "accuracy": 0.846154
+      },
+      "ap_credit_note_netted": {
+        "n": 99,
+        "accuracy": 0.959596
+      },
+      "ap_direct_debit": {
+        "n": 191,
+        "accuracy": 0.91623
+      },
+      "ap_duplicate_payment": {
+        "n": 2,
+        "accuracy": 0.0
+      },
+      "ap_duplicate_refund": {
+        "n": 3,
+        "accuracy": 0.333333
+      },
+      "ap_factored": {
+        "n": 53,
+        "accuracy": 0.679245
+      },
+      "ap_fx": {
+        "n": 36,
+        "accuracy": 0.888889
+      },
+      "ap_paid_by_holding": {
+        "n": 150,
+        "accuracy": 0.993333
+      },
+      "ap_partial": {
+        "n": 111,
+        "accuracy": 0.792793
+      },
+      "ap_payment_multi": {
+        "n": 898,
+        "accuracy": 0.971047
+      },
+      "ap_payment_single": {
+        "n": 698,
+        "accuracy": 0.995702
+      },
+      "ap_returned_transfer": {
+        "n": 8,
+        "accuracy": 0.25
+      },
+      "ap_supplier_refund": {
+        "n": 88,
+        "accuracy": 0.954545
+      },
+      "ar_1to1": {
+        "n": 693,
+        "accuracy": 0.988456
+      },
+      "ar_1toN_credit_note": {
+        "n": 119,
+        "accuracy": 0.420168
+      },
+      "ar_1toN_remittance": {
+        "n": 38,
+        "accuracy": 0.842105
+      },
+      "ar_1toN_text": {
+        "n": 214,
+        "accuracy": 0.799065
+      },
+      "ar_advance_deduction": {
+        "n": 8,
+        "accuracy": 0.25
+      },
+      "ar_card_chargeback": {
+        "n": 1,
+        "accuracy": 0.0
+      },
+      "ar_card_settlement": {
+        "n": 47,
+        "accuracy": 1.0
+      },
+      "ar_cheque_deposit": {
+        "n": 86,
+        "accuracy": 1.0
+      },
+      "ar_cheque_returned": {
+        "n": 2,
+        "accuracy": 0.0
+      },
+      "ar_dd_batch": {
+        "n": 57,
+        "accuracy": 0.842105
+      },
+      "ar_dd_represented_transfer": {
+        "n": 34,
+        "accuracy": 0.794118
+      },
+      "ar_dd_returned": {
+        "n": 130,
+        "accuracy": 0.723077
+      },
+      "ar_discount_late": {
+        "n": 34,
+        "accuracy": 0.411765
+      },
+      "ar_dispute_settlement": {
+        "n": 36,
+        "accuracy": 0.944444
+      },
+      "ar_duplicate_payment": {
+        "n": 20,
+        "accuracy": 0.0
+      },
+      "ar_fx": {
+        "n": 26,
+        "accuracy": 0.461538
+      },
+      "ar_instalment": {
+        "n": 147,
+        "accuracy": 0.734694
+      },
+      "ar_n_to_m": {
+        "n": 65,
+        "accuracy": 0.030769
+      },
+      "ar_new_iban": {
+        "n": 10,
+        "accuracy": 0.8
+      },
+      "ar_overpayment": {
+        "n": 20,
+        "accuracy": 0.65
+      },
+      "ar_partial": {
+        "n": 139,
+        "accuracy": 0.640288
+      },
+      "ar_ref_noise": {
+        "n": 1609,
+        "accuracy": 0.801119
+      },
+      "ar_replaced_invoice": {
+        "n": 12,
+        "accuracy": 0.166667
+      },
+      "ar_retention": {
+        "n": 35,
+        "accuracy": 0.628571
+      },
+      "ar_retention_release": {
+        "n": 28,
+        "accuracy": 0.714286
+      },
+      "ar_same_amount_fifo": {
+        "n": 236,
+        "accuracy": 0.45339
+      },
+      "ar_same_amount_month": {
+        "n": 185,
+        "accuracy": 0.405405
+      },
+      "ar_short_bank_charges": {
+        "n": 5,
+        "accuracy": 0.0
+      },
+      "ar_short_discount": {
+        "n": 219,
+        "accuracy": 0.90411
+      },
+      "ar_short_dispute": {
+        "n": 39,
+        "accuracy": 0.717949
+      },
+      "ar_short_withholding": {
+        "n": 56,
+        "accuracy": 0.696429
+      },
+      "ar_third_party_agency": {
+        "n": 13,
+        "accuracy": 0.615385
+      },
+      "ar_third_party_confirming": {
+        "n": 33,
+        "accuracy": 0.848485
+      },
+      "ar_third_party_parent": {
+        "n": 6,
+        "accuracy": 0.833333
+      },
+      "customer_advance": {
+        "n": 8,
+        "accuracy": 1.0
+      },
+      "customer_refund": {
+        "n": 12,
+        "accuracy": 0.75
+      },
+      "nonitem_bank_fees": {
+        "n": 266,
+        "accuracy": 0.992481
+      },
+      "nonitem_bank_fees_intl": {
+        "n": 124,
+        "accuracy": 1.0
+      },
+      "nonitem_bank_reversal": {
+        "n": 11,
+        "accuracy": 0.636364
+      },
+      "nonitem_card_expenses": {
+        "n": 3,
+        "accuracy": 1.0
+      },
+      "nonitem_cash_pool": {
+        "n": 60,
+        "accuracy": 0.866667
+      },
+      "nonitem_fx_deal": {
+        "n": 6,
+        "accuracy": 1.0
+      },
+      "nonitem_intercompany": {
+        "n": 18,
+        "accuracy": 1.0
+      },
+      "nonitem_interest_expense": {
+        "n": 1,
+        "accuracy": 1.0
+      },
+      "nonitem_interest_income": {
+        "n": 1,
+        "accuracy": 1.0
+      },
+      "nonitem_internal_transfer": {
+        "n": 11,
+        "accuracy": 1.0
+      },
+      "nonitem_leasing": {
+        "n": 13,
+        "accuracy": 1.0
+      },
+      "nonitem_loan_repayment": {
+        "n": 5,
+        "accuracy": 0.6
+      },
+      "nonitem_payroll": {
+        "n": 19,
+        "accuracy": 0.368421
+      },
+      "nonitem_social_security": {
+        "n": 6,
+        "accuracy": 0.833333
+      },
+      "nonitem_tax_payment": {
+        "n": 3,
+        "accuracy": 1.0
+      },
+      "unidentified": {
+        "n": 127,
+        "accuracy": 0.976378
+      },
+      "unidentified_lookalike": {
+        "n": 41,
+        "accuracy": 0.878049
+      }
+    }
+  },
+  "v4": {
+    "ok": true,
+    "errors": [],
+    "score": 79.05,
+    "metrics": {
+      "allocation_f1": 0.861852,
+      "precision": 0.904578,
+      "recall": 0.822979,
+      "txn_accuracy": 0.833067,
+      "exception_macro_f1": 0.548159,
+      "amount_weighted_accuracy": 0.772393,
+      "rows": 25272,
+      "txns_covered": 7500,
+      "txns_total": 7500
+    },
+    "segments": {
+      "ap_confirming": {
+        "n": 26,
+        "accuracy": 0.846154
+      },
+      "ap_credit_note_netted": {
+        "n": 99,
+        "accuracy": 0.959596
+      },
+      "ap_direct_debit": {
+        "n": 191,
+        "accuracy": 0.91623
+      },
+      "ap_duplicate_payment": {
+        "n": 2,
+        "accuracy": 0.0
+      },
+      "ap_duplicate_refund": {
+        "n": 3,
+        "accuracy": 0.333333
+      },
+      "ap_factored": {
+        "n": 53,
+        "accuracy": 0.679245
+      },
+      "ap_fx": {
+        "n": 36,
+        "accuracy": 0.888889
+      },
+      "ap_paid_by_holding": {
+        "n": 150,
+        "accuracy": 0.993333
+      },
+      "ap_partial": {
+        "n": 111,
+        "accuracy": 0.792793
+      },
+      "ap_payment_multi": {
+        "n": 898,
+        "accuracy": 0.971047
+      },
+      "ap_payment_single": {
+        "n": 698,
+        "accuracy": 0.995702
+      },
+      "ap_returned_transfer": {
+        "n": 8,
+        "accuracy": 0.25
+      },
+      "ap_supplier_refund": {
+        "n": 88,
+        "accuracy": 0.954545
+      },
+      "ar_1to1": {
+        "n": 693,
+        "accuracy": 0.988456
+      },
+      "ar_1toN_credit_note": {
+        "n": 119,
+        "accuracy": 0.420168
+      },
+      "ar_1toN_remittance": {
+        "n": 38,
+        "accuracy": 0.842105
+      },
+      "ar_1toN_text": {
+        "n": 214,
+        "accuracy": 0.799065
+      },
+      "ar_advance_deduction": {
+        "n": 8,
+        "accuracy": 0.125
+      },
+      "ar_card_chargeback": {
+        "n": 1,
+        "accuracy": 0.0
+      },
+      "ar_card_settlement": {
+        "n": 47,
+        "accuracy": 1.0
+      },
+      "ar_cheque_deposit": {
+        "n": 86,
+        "accuracy": 1.0
+      },
+      "ar_cheque_returned": {
+        "n": 2,
+        "accuracy": 0.0
+      },
+      "ar_dd_batch": {
+        "n": 57,
+        "accuracy": 0.842105
+      },
+      "ar_dd_represented_transfer": {
+        "n": 34,
+        "accuracy": 0.794118
+      },
+      "ar_dd_returned": {
+        "n": 130,
+        "accuracy": 0.723077
+      },
+      "ar_discount_late": {
+        "n": 34,
+        "accuracy": 0.411765
+      },
+      "ar_dispute_settlement": {
+        "n": 36,
+        "accuracy": 0.944444
+      },
+      "ar_duplicate_payment": {
+        "n": 20,
+        "accuracy": 0.0
+      },
+      "ar_fx": {
+        "n": 26,
+        "accuracy": 0.461538
+      },
+      "ar_instalment": {
+        "n": 147,
+        "accuracy": 0.714286
+      },
+      "ar_n_to_m": {
+        "n": 65,
+        "accuracy": 0.030769
+      },
+      "ar_new_iban": {
+        "n": 10,
+        "accuracy": 0.8
+      },
+      "ar_overpayment": {
+        "n": 20,
+        "accuracy": 0.65
+      },
+      "ar_partial": {
+        "n": 139,
+        "accuracy": 0.640288
+      },
+      "ar_ref_noise": {
+        "n": 1609,
+        "accuracy": 0.801119
+      },
+      "ar_replaced_invoice": {
+        "n": 12,
+        "accuracy": 0.166667
+      },
+      "ar_retention": {
+        "n": 35,
+        "accuracy": 0.6
+      },
+      "ar_retention_release": {
+        "n": 28,
+        "accuracy": 0.75
+      },
+      "ar_same_amount_fifo": {
+        "n": 236,
+        "accuracy": 0.45339
+      },
+      "ar_same_amount_month": {
+        "n": 185,
+        "accuracy": 0.394595
+      },
+      "ar_short_bank_charges": {
+        "n": 5,
+        "accuracy": 0.0
+      },
+      "ar_short_discount": {
+        "n": 219,
+        "accuracy": 0.90411
+      },
+      "ar_short_dispute": {
+        "n": 39,
+        "accuracy": 0.717949
+      },
+      "ar_short_withholding": {
+        "n": 56,
+        "accuracy": 0.696429
+      },
+      "ar_third_party_agency": {
+        "n": 13,
+        "accuracy": 0.615385
+      },
+      "ar_third_party_confirming": {
+        "n": 33,
+        "accuracy": 0.848485
+      },
+      "ar_third_party_parent": {
+        "n": 6,
+        "accuracy": 0.833333
+      },
+      "customer_advance": {
+        "n": 8,
+        "accuracy": 1.0
+      },
+      "customer_refund": {
+        "n": 12,
+        "accuracy": 0.75
+      },
+      "nonitem_bank_fees": {
+        "n": 266,
+        "accuracy": 0.992481
+      },
+      "nonitem_bank_fees_intl": {
+        "n": 124,
+        "accuracy": 1.0
+      },
+      "nonitem_bank_reversal": {
+        "n": 11,
+        "accuracy": 0.636364
+      },
+      "nonitem_card_expenses": {
+        "n": 3,
+        "accuracy": 1.0
+      },
+      "nonitem_cash_pool": {
+        "n": 60,
+        "accuracy": 0.283333
+      },
+      "nonitem_fx_deal": {
+        "n": 6,
+        "accuracy": 1.0
+      },
+      "nonitem_intercompany": {
+        "n": 18,
+        "accuracy": 1.0
+      },
+      "nonitem_interest_expense": {
+        "n": 1,
+        "accuracy": 1.0
+      },
+      "nonitem_interest_income": {
+        "n": 1,
+        "accuracy": 1.0
+      },
+      "nonitem_internal_transfer": {
+        "n": 11,
+        "accuracy": 1.0
+      },
+      "nonitem_leasing": {
+        "n": 13,
+        "accuracy": 1.0
+      },
+      "nonitem_loan_repayment": {
+        "n": 5,
+        "accuracy": 0.6
+      },
+      "nonitem_payroll": {
+        "n": 19,
+        "accuracy": 0.368421
+      },
+      "nonitem_social_security": {
+        "n": 6,
+        "accuracy": 0.833333
+      },
+      "nonitem_tax_payment": {
+        "n": 3,
+        "accuracy": 1.0
+      },
+      "unidentified": {
+        "n": 127,
+        "accuracy": 0.976378
+      },
+      "unidentified_lookalike": {
+        "n": 41,
+        "accuracy": 0.878049
+      }
+    }
+  },
+  "scope": "Existing inspected 7,500-case cached temporal development fixture; no retraining",
+  "delta": 0.2
+}

@@ -1,0 +1,9 @@
+{
+  "runtime": "Codex collaboration LLM reviewers",
+  "development_cases": 24,
+  "live_cases": 48,
+  "review_batches": 5,
+  "external_provider_api_calls": 0,
+  "cost": null,
+  "notes": "Actual LLM judgments from isolated reviewer agents, cached for deterministic replay. No standalone provider API client or model training was used. Case packets excluded golden/segment/difficulty labels."
+}
