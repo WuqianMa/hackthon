@@ -1,0 +1,31 @@
+{
+  "fold": 4,
+  "alpha": 0.5,
+  "static_bonus": 0,
+  "calibration_score": 78.66,
+  "held_out_score": 78.53,
+  "baseline_score": 76.22,
+  "transactions": 1699,
+  "metrics": {
+    "allocation_f1": 0.855989,
+    "precision": 0.942737,
+    "recall": 0.78386,
+    "txn_accuracy": 0.859918,
+    "exception_macro_f1": 0.496599,
+    "amount_weighted_accuracy": 0.612686,
+    "rows": 6428,
+    "txns_covered": 1699,
+    "txns_total": 1699
+  },
+  "method_counts": {
+    "static": 1590,
+    "probset": 92,
+    "top": 7,
+    "static_blank": 8,
+    "unidentified": 1,
+    "source": 1
+  },
+  "pair_average_precision": 0.9888433480797495,
+  "pair_roc_auc": 0.9929051190902309,
+  "complete_hypothesis_coverage": 0.8769864626250736
+}

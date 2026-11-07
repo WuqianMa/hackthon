@@ -12,7 +12,7 @@ Features are numeric evidence and fixed categorical indicators: amount residuals
 
 ## Starter-only split
 
-Build connected transaction episodes from repeated true item keys and structured payment-container references. Use these groups only to partition data, not as features. Five group-disjoint folds rotate through test (one fold), calibration (one), hypothesis fitting (one), and allocation fitting (two). Hypothesis fitting therefore receives allocation probabilities from a model that did not fit those transactions. Calibration selects an operating point using the official composite; test labels never select it. Every transaction has exactly one held-out prediction in the pooled score.
+Build connected transaction episodes from repeated true item keys. Use these groups only to partition data, not as features. All allocation rows of a bank transaction remain together. Five group-disjoint folds rotate through test (one fold), calibration (one), hypothesis fitting (one), and allocation fitting (two). Hypothesis fitting therefore receives allocation probabilities from a model that did not fit those transactions. Calibration selects an operating point using the official composite; test labels never select it. Every transaction has exactly one held-out prediction in the pooled score. This initial split does not additionally hold out whole customers or every source-file container; those are separate future stress tests.
 
 The starter and its static heuristics were already inspected. This is a grouped development experiment, not a claim of unseen-period generalization. If there are too few independent episodes or poor rare-class support, report that limitation rather than call an in-sample score a test score.
 

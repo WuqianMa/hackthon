@@ -2,6 +2,8 @@
 
 Saved from the preceding dialogue on 7 November 2026. Status: **deferred proposal, not implemented or run**. The statement about not running experiments below describes that original proposal response, not the subsequently authorized version-3 LIVE execution.
 
+Subsequent update: the user authorized the starter ML implementation and selected the three-tier strategy. See STRATEGY.md and RESULTS.md for the current decision and measured 80.95 result. The dialogue below is retained unchanged as historical planning context.
+
 ---
 
 I propose **v4: static payment reconstruction with two learned decision models**. The models choose between plausible explanations; the static system continues to calculate amounts, apply policies and export the CSV.

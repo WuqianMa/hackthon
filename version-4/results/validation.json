@@ -1,0 +1,476 @@
+{
+  "ok": true,
+  "errors": [],
+  "warnings": [
+    {
+      "row": 1758,
+      "message": "return predates observable clearing history; balance capped at total"
+    },
+    {
+      "row": 1785,
+      "message": "return predates observable clearing history; balance capped at total"
+    },
+    {
+      "row": 1786,
+      "message": "return predates observable clearing history; balance capped at total"
+    },
+    {
+      "row": 3926,
+      "message": "return predates observable clearing history; balance capped at total"
+    },
+    {
+      "row": 4382,
+      "message": "return predates observable clearing history; balance capped at total"
+    },
+    {
+      "row": 5343,
+      "message": "return predates observable clearing history; balance capped at total"
+    },
+    {
+      "row": 5360,
+      "message": "return predates observable clearing history; balance capped at total"
+    },
+    {
+      "row": 7485,
+      "message": "return predates observable clearing history; balance capped at total"
+    },
+    {
+      "row": 7508,
+      "message": "return predates observable clearing history; balance capped at total"
+    },
+    {
+      "row": 9197,
+      "message": "return predates observable clearing history; balance capped at total"
+    },
+    {
+      "row": 9277,
+      "message": "return predates observable clearing history; balance capped at total"
+    },
+    {
+      "row": 9669,
+      "message": "return predates observable clearing history; balance capped at total"
+    },
+    {
+      "row": 9947,
+      "message": "return predates observable clearing history; balance capped at total"
+    },
+    {
+      "row": 9986,
+      "message": "return predates observable clearing history; balance capped at total"
+    },
+    {
+      "row": 15435,
+      "message": "return predates observable clearing history; balance capped at total"
+    },
+    {
+      "row": 23881,
+      "message": "return predates observable clearing history; balance capped at total"
+    },
+    {
+      "row": 755,
+      "message": "aggregate allocation exceeds remaining balance"
+    },
+    {
+      "row": 933,
+      "message": "aggregate allocation exceeds remaining balance"
+    },
+    {
+      "row": 934,
+      "message": "aggregate allocation exceeds remaining balance"
+    },
+    {
+      "row": 937,
+      "message": "aggregate allocation exceeds remaining balance"
+    },
+    {
+      "row": 1659,
+      "message": "aggregate allocation exceeds remaining balance"
+    },
+    {
+      "row": 2097,
+      "message": "aggregate allocation exceeds remaining balance"
+    },
+    {
+      "row": 2161,
+      "message": "aggregate allocation exceeds remaining balance"
+    },
+    {
+      "row": 2248,
+      "message": "aggregate allocation exceeds remaining balance"
+    },
+    {
+      "row": 2344,
+      "message": "aggregate allocation exceeds remaining balance"
+    },
+    {
+      "row": 2345,
+      "message": "aggregate allocation exceeds remaining balance"
+    },
+    {
+      "row": 2346,
+      "message": "aggregate allocation exceeds remaining balance"
+    },
+    {
+      "row": 2481,
+      "message": "aggregate allocation exceeds remaining balance"
+    },
+    {
+      "row": 2964,
+      "message": "aggregate allocation exceeds remaining balance"
+    },
+    {
+      "row": 4008,
+      "message": "aggregate allocation exceeds remaining balance"
+    },
+    {
+      "row": 4150,
+      "message": "aggregate allocation exceeds remaining balance"
+    },
+    {
+      "row": 4293,
+      "message": "aggregate allocation exceeds remaining balance"
+    },
+    {
+      "row": 4435,
+      "message": "aggregate allocation exceeds remaining balance"
+    },
+    {
+      "row": 5206,
+      "message": "aggregate allocation exceeds remaining balance"
+    },
+    {
+      "row": 5207,
+      "message": "aggregate allocation exceeds remaining balance"
+    },
+    {
+      "row": 6616,
+      "message": "aggregate allocation exceeds remaining balance"
+    },
+    {
+      "row": 6649,
+      "message": "aggregate allocation exceeds remaining balance"
+    },
+    {
+      "row": 7111,
+      "message": "aggregate allocation exceeds remaining balance"
+    },
+    {
+      "row": 7132,
+      "message": "aggregate allocation exceeds remaining balance"
+    },
+    {
+      "row": 7186,
+      "message": "aggregate allocation exceeds remaining balance"
+    },
+    {
+      "row": 7190,
+      "message": "aggregate allocation exceeds remaining balance"
+    },
+    {
+      "row": 7191,
+      "message": "aggregate allocation exceeds remaining balance"
+    },
+    {
+      "row": 7195,
+      "message": "aggregate allocation exceeds remaining balance"
+    },
+    {
+      "row": 7199,
+      "message": "aggregate allocation exceeds remaining balance"
+    },
+    {
+      "row": 7226,
+      "message": "aggregate allocation exceeds remaining balance"
+    },
+    {
+      "row": 7227,
+      "message": "aggregate allocation exceeds remaining balance"
+    },
+    {
+      "row": 7242,
+      "message": "aggregate allocation exceeds remaining balance"
+    },
+    {
+      "row": 7243,
+      "message": "aggregate allocation exceeds remaining balance"
+    },
+    {
+      "row": 7320,
+      "message": "aggregate allocation exceeds remaining balance"
+    },
+    {
+      "row": 7321,
+      "message": "aggregate allocation exceeds remaining balance"
+    },
+    {
+      "row": 7322,
+      "message": "aggregate allocation exceeds remaining balance"
+    },
+    {
+      "row": 7324,
+      "message": "aggregate allocation exceeds remaining balance"
+    },
+    {
+      "row": 7396,
+      "message": "aggregate allocation exceeds remaining balance"
+    },
+    {
+      "row": 7421,
+      "message": "aggregate allocation exceeds remaining balance"
+    },
+    {
+      "row": 7426,
+      "message": "aggregate allocation exceeds remaining balance"
+    },
+    {
+      "row": 7528,
+      "message": "aggregate allocation exceeds remaining balance"
+    },
+    {
+      "row": 7529,
+      "message": "aggregate allocation exceeds remaining balance"
+    },
+    {
+      "row": 7530,
+      "message": "aggregate allocation exceeds remaining balance"
+    },
+    {
+      "row": 7616,
+      "message": "aggregate allocation exceeds remaining balance"
+    },
+    {
+      "row": 8172,
+      "message": "aggregate allocation exceeds remaining balance"
+    },
+    {
+      "row": 8511,
+      "message": "aggregate allocation exceeds remaining balance"
+    },
+    {
+      "row": 8568,
+      "message": "aggregate allocation exceeds remaining balance"
+    },
+    {
+      "row": 8590,
+      "message": "aggregate allocation exceeds remaining balance"
+    },
+    {
+      "row": 8761,
+      "message": "aggregate allocation exceeds remaining balance"
+    },
+    {
+      "row": 8762,
+      "message": "aggregate allocation exceeds remaining balance"
+    },
+    {
+      "row": 8763,
+      "message": "aggregate allocation exceeds remaining balance"
+    },
+    {
+      "row": 8764,
+      "message": "aggregate allocation exceeds remaining balance"
+    },
+    {
+      "row": 8765,
+      "message": "aggregate allocation exceeds remaining balance"
+    },
+    {
+      "row": 8766,
+      "message": "aggregate allocation exceeds remaining balance"
+    },
+    {
+      "row": 8767,
+      "message": "aggregate allocation exceeds remaining balance"
+    },
+    {
+      "row": 8769,
+      "message": "aggregate allocation exceeds remaining balance"
+    },
+    {
+      "row": 8770,
+      "message": "aggregate allocation exceeds remaining balance"
+    },
+    {
+      "row": 8772,
+      "message": "aggregate allocation exceeds remaining balance"
+    },
+    {
+      "row": 8773,
+      "message": "aggregate allocation exceeds remaining balance"
+    },
+    {
+      "row": 8774,
+      "message": "aggregate allocation exceeds remaining balance"
+    },
+    {
+      "row": 8775,
+      "message": "aggregate allocation exceeds remaining balance"
+    },
+    {
+      "row": 8776,
+      "message": "aggregate allocation exceeds remaining balance"
+    },
+    {
+      "row": 8777,
+      "message": "aggregate allocation exceeds remaining balance"
+    },
+    {
+      "row": 8778,
+      "message": "aggregate allocation exceeds remaining balance"
+    },
+    {
+      "row": 8779,
+      "message": "aggregate allocation exceeds remaining balance"
+    },
+    {
+      "row": 8780,
+      "message": "aggregate allocation exceeds remaining balance"
+    },
+    {
+      "row": 8782,
+      "message": "aggregate allocation exceeds remaining balance"
+    },
+    {
+      "row": 8783,
+      "message": "aggregate allocation exceeds remaining balance"
+    },
+    {
+      "row": 8784,
+      "message": "aggregate allocation exceeds remaining balance"
+    },
+    {
+      "row": 8787,
+      "message": "aggregate allocation exceeds remaining balance"
+    },
+    {
+      "row": 9317,
+      "message": "aggregate allocation exceeds remaining balance"
+    },
+    {
+      "row": 9371,
+      "message": "aggregate allocation exceeds remaining balance"
+    },
+    {
+      "row": 9587,
+      "message": "aggregate allocation exceeds remaining balance"
+    },
+    {
+      "row": 9591,
+      "message": "aggregate allocation exceeds remaining balance"
+    },
+    {
+      "row": 9672,
+      "message": "aggregate allocation exceeds remaining balance"
+    },
+    {
+      "row": 9713,
+      "message": "aggregate allocation exceeds remaining balance"
+    },
+    {
+      "row": 10177,
+      "message": "aggregate allocation exceeds remaining balance"
+    },
+    {
+      "row": 10179,
+      "message": "aggregate allocation exceeds remaining balance"
+    },
+    {
+      "row": 10180,
+      "message": "aggregate allocation exceeds remaining balance"
+    },
+    {
+      "row": 10182,
+      "message": "aggregate allocation exceeds remaining balance"
+    },
+    {
+      "row": 10187,
+      "message": "aggregate allocation exceeds remaining balance"
+    },
+    {
+      "row": 10189,
+      "message": "aggregate allocation exceeds remaining balance"
+    },
+    {
+      "row": 10275,
+      "message": "aggregate allocation exceeds remaining balance"
+    },
+    {
+      "row": 10276,
+      "message": "aggregate allocation exceeds remaining balance"
+    },
+    {
+      "row": 11375,
+      "message": "aggregate allocation exceeds remaining balance"
+    },
+    {
+      "row": 11376,
+      "message": "aggregate allocation exceeds remaining balance"
+    },
+    {
+      "row": 11377,
+      "message": "aggregate allocation exceeds remaining balance"
+    },
+    {
+      "row": 11378,
+      "message": "aggregate allocation exceeds remaining balance"
+    },
+    {
+      "row": 11379,
+      "message": "aggregate allocation exceeds remaining balance"
+    },
+    {
+      "row": 11380,
+      "message": "aggregate allocation exceeds remaining balance"
+    },
+    {
+      "row": 11381,
+      "message": "aggregate allocation exceeds remaining balance"
+    },
+    {
+      "row": 11382,
+      "message": "aggregate allocation exceeds remaining balance"
+    },
+    {
+      "row": 11383,
+      "message": "aggregate allocation exceeds remaining balance"
+    },
+    {
+      "row": 11384,
+      "message": "aggregate allocation exceeds remaining balance"
+    },
+    {
+      "row": 11385,
+      "message": "aggregate allocation exceeds remaining balance"
+    },
+    {
+      "row": 11386,
+      "message": "aggregate allocation exceeds remaining balance"
+    },
+    {
+      "row": 11387,
+      "message": "aggregate allocation exceeds remaining balance"
+    },
+    {
+      "row": 11388,
+      "message": "aggregate allocation exceeds remaining balance"
+    },
+    {
+      "row": 11389,
+      "message": "aggregate allocation exceeds remaining balance"
+    },
+    {
+      "row": 11390,
+      "message": "aggregate allocation exceeds remaining balance"
+    },
+    {
+      "row": 11449,
+      "message": "aggregate allocation exceeds remaining balance"
+    }
+  ],
+  "rows": 32174,
+  "bank_lines": 8499,
+  "covered": 8499,
+  "uncompressed_bytes": 1379612,
+  "max_bytes": 62914560,
+  "scope": "Sample model experiment, not a LIVE upload; cross-bank balance checks are diagnostic."
+}

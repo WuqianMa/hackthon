@@ -1,5 +1,7 @@
 ## Current working direction — user update, 2026-11-07
 
+Latest decision: v4 is a three-tier hybrid (static reconstruction, learned allocation/payment decisions, permitted LLM revision actor). Starter ML result is 80.95 vs static 78.65; user-provided v3 LIVE feedback is 77.46. TRAIN is the selected next learning source under version-4/STRATEGY.md; no TRAIN fit or LLM call is included in the starter result. Feedback files are v3_feedback.md and feedback-evaluation/v3-model_evaluation_feedback.md. Commit/push completed stages to q.
+
 Latest stage: implement and evaluate ML-assisted `version-4/` on the 10 MB starter, then report the measured score before deciding the strategy. This supersedes the earlier deferred-v4 restriction for the starter experiment only. TRAIN/LIVE are not authorized for this stage. Compare held-out/grouped predictions with static v3 on the same cases; do not report training fit as test performance. Commit and push completed stages to q.
 
 Latest direction: the user explicitly authorized running frozen version 3 on LIVE for a website submission. Canonical edition implementation is `version-3/`; upload CSV editions go directly in `submission/`. The user will upload and provide feedback. Save the v4 dialogue plan in `version-4/` without training or implementing it. This supersedes the starter-only restriction below for this LIVE v3 task. Commit/push each completed stage to `q`; do not modify remote `main`.
