@@ -41,3 +41,15 @@ The selected rules improve mechanisms instead of lowering a global confidence th
 ## Validation and release
 
 12 v6 mechanism tests and 33 existing v5 tests pass. LIVE coverage, official schema validation, file hashes and aggregate-ledger diagnostics are recorded separately on release. The frozen model and all prior edition CSVs are preserved. Website feedback belongs in `submission/v6-strategy/feedback.md`.
+
+## LIVE edition 001
+
+The root upload file is **`v6-submission.csv`**, with identical copies under `submission/` and `submission/v6-strategy/`. Coverage is **203,083 / 203,083** bank lines, **643,231 rows**, **27,800,155 bytes**, no hard validation errors. The bundled official parser accepts the schema. SHA-256: `1cd50662ec853537e33e40c1ac2c5a640953f87784ffa92d0aa7c91b78a8e9f6`.
+
+The LIVE overlay took 83 seconds on the existing local caches. It changes **2,674 bank-line decisions** vs v5: 1,752 service-month decisions; 231 credit-net decisions; 187 referenced partial/remaining-balance groups; 107 supplier-transfer returns; 49 cheque returns; 19 card chargebacks; 88 replacements; 77 advance deductions; 127 fee recoveries/policy repairs; 36 supplier duplicate refunds; and one withholding repair. These are method counts, not confirmed LIVE corrections. The exact routing totals are in `results/live_overlay.json`.
+
+The final date-effective replacement check leaves both development score and LIVE CSV unchanged; the repeated LIVE runs produce identical bytes. Existing weights, v3/v4/v5 submissions and cached LLM decisions remain unchanged. No new LLM judgment or model fitting was performed.
+
+Full prediction-ledger diagnostics count **16,758 aggregate over-clearing rows**, versus **16,991 for v5** (233 fewer). These remain a modeling limitation. FORMAT's upload contract does not reject aggregate ledger conflicts; the same competition diagnostic profile was used in prior versions. Hard item amounts, IDs, dates, five-column schema, category/exception membership, coverage, duplicates and file limits remain blocking checks.
+
+**LIVE website score is pending.** The local 81.41 is not a prediction or claim of the website result. Keep the edition unchanged and place the website feedback in its strategy folder.

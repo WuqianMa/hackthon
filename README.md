@@ -1,5 +1,7 @@
 # Static bank reconciliation
 
+**V6 LIVE submission:** [v6-submission.csv](v6-submission.csv) at repository root, with identical tracked copies under `submission/`. All **203,083** LIVE bank lines, **643,231** rows, **27,800,155 bytes**; hard schema/membership/coverage checks and the official parser pass. [Strategy](version-6/STRATEGY.md) and [results](version-6/RESULTS.md). V6 recovers synthetic source/template mechanisms while preserving the frozen model and caches. Cached development **81.41 vs v5 79.29**; **LIVE website score pending**. Add feedback [here](submission/v6-strategy/feedback.md).
+
 **V5 LIVE submission:** [v5-submission.csv](v5-submission.csv) at repository root. All 203,083 bank lines, 642,703 rows; validated. Reuses the frozen model and caches, with 48 bounded LIVE LLM reviews. [Execution/results](version-5/RESULTS.md). Cached development score **79.29**; user-reported **LIVE website score 79.34**. See the [below-50% analysis and no-retraining plan](version-5/WEBSITE_REVIEW.md).
 
 **V4 LIVE submission:** [v4-submission.csv](v4-submission.csv) at the repository root. Identical edition copies are under `submission/` and `submission/v4-strategy/`. All 203,083 LIVE transactions are covered; 642,703 rows, no LLM judgment. User-provided website feedback reports **79.05**, versus v3 **77.46**. See [edition details](version-4/LIVE_EDITION_001.md) and [feedback](submission/v4-strategy/feedback.md).
@@ -20,7 +22,7 @@ See [the detailed proposal](reports/static_system_proposal.md), [verified run re
 
 Earlier stage: **strategy comparison**. The [Codex proposal](docs/strategy.md) and [baseline self-review](self_review/2026-11-07_baseline_review.md) document the reasoning before the user authorized v3 implementation. The later v4 TRAIN fitting and LIVE application follow the user's explicit execution request.
 
-The initial implementation is preserved at Git tag `v0.1.0-baseline` (commit `17ce829`). [Human comments](human_comments/README.md), [Codex reviews](self_review/README.md), and [independent strategy proposals](strategy_proposals/README.md) have separate locations. V4 is the selected current execution; the Claude and Gemini proposals remain available for future comparisons.
+The initial implementation is preserved at Git tag `v0.1.0-baseline` (commit `17ce829`). [Human comments](human_comments/README.md), [Codex reviews](self_review/README.md), and [independent strategy proposals](strategy_proposals/README.md) have separate locations. V6 is the current cached release; the Claude and Gemini proposals remain available for future comparisons.
 
 Python 3.9+; tested with Python 3.9.6. Install the pinned PDF reader in an isolated environment:
 

@@ -1,0 +1,25 @@
+{
+  "edition": "001",
+  "phase": "LIVE",
+  "sha256": "1cd50662ec853537e33e40c1ac2c5a640953f87784ffa92d0aa7c91b78a8e9f6",
+  "bytes": 27800155,
+  "rows": 643231,
+  "bank_lines": 203083,
+  "model_sha256": "a883a203fc5bc694812895a14cbd8b125870f435a67bc5e7627ab42e4526eccb",
+  "input_v5_sha256": "2e1e6354334d919d3ffffed42244d4ff3045fded370e2d28572075e7c37bda0b",
+  "training_performed": false,
+  "new_llm_calls": 0,
+  "files": [
+    "v6-submission.csv",
+    "submission/submission_v6_live_001.csv",
+    "submission/v6-strategy/submission_v6_live_001.csv"
+  ],
+  "website_score": null,
+  "source_sha256": {
+    "test_mechanisms.py": "44a3eef13b9b4261baa8c7dfb0bb951db7de50fa36b76e425e1e07ad01e8cd6b",
+    "evaluate_changes.py": "b373b1a42199abe53f7273438025f63afa5ae877776080a101b3f1b5387c6fcf",
+    "run.py": "1a1efc980858c6d84cde592a63a718dc0eaabef60edc8e389a016237f2230a76",
+    "inspect_cases.py": "374801e0de0218463cfccf6aeefdd87e3240eaee4bb1bcdaa24661e1bf77edde",
+    "mechanisms.py": "9d86173fcca99fd7a0f26fda6e3529f1dd363ad54f9ca48da761c427aad60db3"
+  }
+}

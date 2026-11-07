@@ -1,0 +1,22 @@
+{
+  "copies_match": {
+    "v6-submission.csv": true,
+    "submission/submission_v6_live_001.csv": true,
+    "submission/v6-strategy/submission_v6_live_001.csv": true
+  },
+  "source_hashes_match": true,
+  "previous_editions_unchanged": {
+    "v4-submission.csv": "f3f9262153d47c927a96da78d2df9821cdb73738db698fbfb6acc5c7a37113f1",
+    "v5-submission.csv": "2e1e6354334d919d3ffffed42244d4ff3045fded370e2d28572075e7c37bda0b",
+    "submission/static-strategy/submission_v3_live_001.csv": "3927ffc1f7f81c234844fbaeb68b97d2f53c4fc85d8bc8c33cc7253a261d8d05"
+  },
+  "model_unchanged": true,
+  "live_date_guard_rerun_identical": true,
+  "tests": {
+    "v6": 12,
+    "v5": 33,
+    "total": 45
+  },
+  "remote_main_unchanged": "953163cbf28722c9dd46eeeae04bab05fa4463dc",
+  "website_score": null
+}
