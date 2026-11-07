@@ -1,5 +1,7 @@
 # V5 edition 001 — execution and submission
 
+Website update, 7 November 2026: the user's [pasted website result](../feedback-evaluation/v5_website_feedback_2026-11-07.md) reports **LIVE 79.34**, versus v4 LIVE 79.05. The separate cached development result remains 79.29. [WEBSITE_REVIEW.md](WEBSITE_REVIEW.md) analyzes the families below 50%; no new pipeline was run for that review.
+
 Actual upload file: **repository-root `v5-submission.csv`**. Identical copies are `submission/submission_v5_live_001.csv` and `submission/v5-strategy/submission_v5_live_001.csv`.
 
 | Check | Result |
@@ -13,7 +15,7 @@ Actual upload file: **repository-root `v5-submission.csv`**. Identical copies ar
 | Model retraining | None |
 | Bulk PDF extraction | None |
 
-CSV SHA-256: `2e1e6354334d919d3ffffed42244d4ff3045fded370e2d28572075e7c37bda0b`. The v4 model remains `a883a203fc5bc694812895a14cbd8b125870f435a67bc5e7627ab42e4526eccb`; v3/v4 submissions are preserved. Website score is **unknown until upload**.
+CSV SHA-256: `2e1e6354334d919d3ffffed42244d4ff3045fded370e2d28572075e7c37bda0b`. The v4 model remains `a883a203fc5bc694812895a14cbd8b125870f435a67bc5e7627ab42e4526eccb`; v3/v4 submissions are preserved. The edition JSON preserves the original release snapshot; the later website score is tracked separately above and in the submission feedback file.
 
 ## Measured development effect
 

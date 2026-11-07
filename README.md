@@ -1,6 +1,6 @@
 # Static bank reconciliation
 
-**V5 LIVE submission ready:** [v5-submission.csv](v5-submission.csv) at repository root. All 203,083 bank lines, 642,703 rows; validated. Reuses the frozen model and caches, with 48 bounded LIVE LLM reviews. [Execution/results](version-5/RESULTS.md). Cached development score **79.29**; LIVE website score pending.
+**V5 LIVE submission:** [v5-submission.csv](v5-submission.csv) at repository root. All 203,083 bank lines, 642,703 rows; validated. Reuses the frozen model and caches, with 48 bounded LIVE LLM reviews. [Execution/results](version-5/RESULTS.md). Cached development score **79.29**; user-reported **LIVE website score 79.34**. See the [below-50% analysis and no-retraining plan](version-5/WEBSITE_REVIEW.md).
 
 **V4 LIVE submission:** [v4-submission.csv](v4-submission.csv) at the repository root. Identical edition copies are under `submission/` and `submission/v4-strategy/`. All 203,083 LIVE transactions are covered; 642,703 rows, no LLM judgment. User-provided website feedback reports **79.05**, versus v3 **77.46**. See [edition details](version-4/LIVE_EDITION_001.md) and [feedback](submission/v4-strategy/feedback.md).
 

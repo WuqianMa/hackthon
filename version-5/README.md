@@ -1,6 +1,6 @@
 # V5 proposal — reuse the model, recover candidates, review ambiguous cases
 
-**LIVE edition 001 is complete, 7 November 2026.** Upload repository-root [`v5-submission.csv`](../v5-submission.csv). Copies and feedback are under `submission/v5-strategy/`. All 203,083 LIVE bank lines are covered; 642,703 rows. Website score is pending.
+**LIVE edition 001 is complete, 7 November 2026.** Repository-root [`v5-submission.csv`](../v5-submission.csv), with copies and feedback under `submission/v5-strategy/`, covers all 203,083 LIVE bank lines in 642,703 rows. User-provided website feedback now reports **79.34**, versus v4 LIVE 79.05. See the [below-50% review](WEBSITE_REVIEW.md) and [full website report](../feedback-evaluation/v5_website_feedback_2026-11-07.md).
 
 The cached 7,500-case development score is **79.29**, versus v4 **79.05**. Policy/recovery alone scored 79.25; the 24-case LLM pilot improved it to 79.29. LIVE used 48 separate LLM reviews, changing 23 decisions. No learned weights were retrained and no bulk PDF extraction was performed. See [RESULTS.md](RESULTS.md).
 
