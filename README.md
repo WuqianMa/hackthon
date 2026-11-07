@@ -5,6 +5,8 @@
 **Best reported LIVE score:** **81.39 / 100 (V6)**  
 **Scope:** **203,083 LIVE bank transactions**, all covered in the validated V6 submission
 
+**FINAL execution:** the self-contained [final-system/](final-system/README.md) folder contains the frozen model, source code, base masters and runner. When the unseen archive arrives, run `python3 final-system/run_final.py --archive /path/to/bankrec-final.tar.gz`. It produces root `final-submission.csv`, with resumable phase-only processing and no new training or scoring experiment. VV1's database migration has been stopped.
+
 > **Project in one sentence:** We reconcile bank transactions with invoices and other accounting records by combining structured payment evidence, multilingual document extraction, accounting rules, a learned candidate ranker, and a state-aware ledger—rather than simply matching similar names and amounts.
 
 ## 1. The challenge

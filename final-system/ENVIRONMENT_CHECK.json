@@ -1,0 +1,12 @@
+{
+  "ok": true,
+  "python": "3.9.6 (default, Jan  9 2026, 11:03:41) \n[Clang 17.0.0 (clang-1700.6.4.2)]",
+  "sklearn": "1.6.1",
+  "numpy": "2.0.2",
+  "pypdf": "6.11.0",
+  "model_sha256": "a883a203fc5bc694812895a14cbd8b125870f435a67bc5e7627ab42e4526eccb",
+  "models": [
+    "pair",
+    "hypothesis"
+  ]
+}
