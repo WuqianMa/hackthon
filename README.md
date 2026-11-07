@@ -7,6 +7,8 @@
 
 **FINAL execution:** the self-contained [final-system/](final-system/README.md) folder contains the frozen model, source code, base masters and runner. When the unseen archive arrives, run `python3 final-system/run_final.py --archive /path/to/bankrec-final.tar.gz`. It produces root `final-submission.csv`, with resumable phase-only processing and no new training or scoring experiment. VV1's database migration has been stopped.
 
+**FINAL submission generated:** [final-submission.csv](final-submission.csv) covers **all 220,256 FINAL bank transactions** in **678,040 rows**, with zero missing. Runtime was about 20 minutes; all bank lines received frozen-model inference. See [execution details](final-system/FINAL_EDITION_001.md) and [edition metadata/feedback](submission/final-strategy/README.md). FINAL score is not available locally.
+
 > **Project in one sentence:** We reconcile bank transactions with invoices and other accounting records by combining structured payment evidence, multilingual document extraction, accounting rules, a learned candidate ranker, and a state-aware ledger—rather than simply matching similar names and amounts.
 
 ## 1. The challenge

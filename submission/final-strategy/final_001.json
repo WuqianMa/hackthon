@@ -1,0 +1,105 @@
+{
+  "phase": "final",
+  "archive_sha256": "04083d6a0b7aa38629a6275399c25b6e3d9444fcd384fdcff25051e09dfac534",
+  "input_hashes": {
+    "bank_transactions": "6c7d27ad0b23045c667f61f7e398cc52f0ef2d9b3983f509adcff055ccb23ac2",
+    "ar_invoices": "6223b0ef8e606beb9f6c3d490531b22c6b83161c3ff6631f2b35ec98efe53c9f",
+    "ap_invoices": "d7497efee0538ef3b1cfe405382bb51228bdf319ef41df12ae8c15402571c266",
+    "credit_notes": "5459f7f2783811f8cc5e638648eb11d88be5168020bf0ca7767020d56c51f840",
+    "open_items_at_start": "49f9edef5fb80caef47809e73a38d1a0deec6bf930b3a209f6ff206d019dfc19",
+    "masters_final": {
+      "bank_accounts.csv": "9026db7f21ebe40137915b4de4dfb795801e8bf7b2553926e191fff5ed51e832",
+      "categories.csv": "11d8a5fe5abd1c29c9becdff0cacbd0e4749388b8f47f9a0fa16e638e935e2c6",
+      "customers.csv": "5e069d84b504e44b737d7c202c7d79543997657c1ed43538b297110b3784e4b0",
+      "entities.csv": "8060378842ecbb95e6f93631f11fa62634d6af5e74755f2901de932cbd0f59b4",
+      "fx_rates.csv": "f5da33fa99730a4b2be9416d7bfd55aef1f4b052d83771a4a1bf918f3ef5c304",
+      "payment_terms.csv": "2a06486d081d2ca9e14ccf86af844d8a14a2d1eddb8401ed5814e18059644463",
+      "suppliers.csv": "898a87f5348cd6e0d14d1866db379badfda55bf835fcbcb7d74d23e54c6c9f06"
+    }
+  },
+  "model_sha256": "a883a203fc5bc694812895a14cbd8b125870f435a67bc5e7627ab42e4526eccb",
+  "vendored_sha256": "b481244feb65faa7d2f0eaa886f7eca77b0972c80144486005996def734b3e85",
+  "bank_lines": 220256,
+  "rows": 678040,
+  "bytes": 29273654,
+  "missing_bank_lines": 0,
+  "sha256": "88bff25e848c75cf96ddd711ff7401f470c71d86fd54ea908884d7b5c5cdd4d0",
+  "checks": "Single-pass schema, IDs, dates, amounts, duplicates, coverage and limits; no labeled scoring",
+  "output": "/Users/q/Desktop/hackthon/final-system/output/final-submission.csv",
+  "root_copy": "/Users/q/Desktop/hackthon/final-submission.csv",
+  "seconds": 1200.96,
+  "ml": {
+    "modeled_bank_lines": 220256,
+    "methods": {
+      "static": 210605,
+      "unidentified": 543,
+      "top": 2456,
+      "probset": 6000,
+      "source": 277,
+      "static_blank": 375
+    },
+    "failed_batches": [],
+    "amount_fallbacks": 20,
+    "seconds": 465.44
+  },
+  "recovery": {
+    "v5_methods": {
+      "v4_incumbent": 217726,
+      "recovery:cash_pool_account_code_or_pair": 1552,
+      "policy:late_discount_stays_open": 70,
+      "policy:source_supported_ap_partial": 557,
+      "policy:duplicate_before_event_balance": 104,
+      "policy:document_plan_retention_or_advance": 225,
+      "recovery:cached_document_service_period": 14,
+      "recovery:linked_original_return": 2,
+      "policy:explicit_partial_cash": 1,
+      "recovery:related_credit_exact_net": 2,
+      "policy:remaining_balance_fully_paid": 2,
+      "policy:documented_final_tranche_or_release": 1
+    },
+    "v6_changes": {
+      "v6:service_month_following_invoice": 1462,
+      "v6:referenced_signed_credit_net": 45,
+      "v6:retrieved_crossborder_fee_invoice": 84,
+      "v6:related_credit_cash_identity": 243,
+      "v6:referenced_newest_partial_group": 135,
+      "v6:crossborder_fee_tolerance": 62,
+      "v6:source_return_cheque": 47,
+      "v6:source_return_ap": 117,
+      "v6:duplicate_supplier_refund": 42,
+      "v6:referenced_group_remaining_balance": 58,
+      "v6:english_or_spanish_replacement": 123,
+      "v6:retrieved_document_advance_net": 97,
+      "v6:source_return_card": 31,
+      "v6:documented_advance_net": 1,
+      "v6:fixed_rate_withholding": 1
+    },
+    "pdf_facts": {
+      "service_clause": 503,
+      "retention": 1133,
+      "replaces": 2018,
+      "advance": 398,
+      "advance_net": 398,
+      "cached_invoice_facts": 4044
+    },
+    "return_sources": {
+      "ap_transfers": 135,
+      "cheque_numbers": 76,
+      "card_orders": 133
+    },
+    "final_amount_fallbacks": 0,
+    "llm_calls": 0
+  },
+  "runner_sha256": "200c4eb6c546d57be94328044119b80a69a5f2b73d3145973e854a3bc20fb1b9",
+  "new_training": false,
+  "labeled_evaluation": false,
+  "website_score": null,
+  "edition": "001",
+  "files": [
+    "final-submission.csv",
+    "submission/submission_final_001.csv",
+    "submission/final-strategy/submission_final_001.csv"
+  ],
+  "source_system_commit": "c487a2a41e53a7a471b6affa9f0fd55bd1382582",
+  "website_status": "Not uploaded by the agent; user upload pending"
+}

@@ -2,6 +2,8 @@
 
 Self-contained execution folder for the unseen FINAL phase. Includes the frozen trained model, its pinned dependencies, the base masters, official policy/format documents, and the V3–V6 source needed by the runner. It does not depend on a `q` checkout or a TRAIN archive.
 
+**FINAL edition 001 is complete:** [root upload CSV](../final-submission.csv), 220,256 bank lines, 678,040 rows, zero missing. Full frozen-model inference completed with no failed batches. [Execution report](FINAL_EDITION_001.md), [release metadata](../submission/final-strategy/final_001.json). No FINAL website score is known.
+
 VV1's historical database migration was stopped at the user's request. This release uses the existing competition strategy: **V3 static matching → frozen V4 model → V5 policy recovery → V6 source/document mechanisms**. V6's historical LIVE website score is **81.39**; no FINAL score is known. No training, labeled evaluation, database migration or LLM judgment runs here.
 
 ## Run when the FINAL file arrives
