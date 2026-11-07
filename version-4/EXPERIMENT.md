@@ -2,6 +2,8 @@
 
 Authorized 7 November 2026. Implement and measure v4 using only the 10 MB starter/docs/master bundle. TRAIN/LIVE are not run. The v3 website-feedback Markdown has not appeared in the local folders or remote q at experiment start; do not substitute starter scores for website feedback. Incorporate the file if/when available.
 
+Update: Git untracked-file inspection located `v3_feedback.md` and `feedback-evaluation/v3-model_evaluation_feedback.md`. They report v3 LIVE score **77.46**, allocation F1 83.3%, transaction accuracy 86.8%, exception macro-F1 48.9%. Static retrieval is valuable; exceptions and incomplete groups remain priorities. This feedback informs the experiment but provides no per-transaction LIVE labels and is not a training input. The earlier `submission_v4.csv` in its history is not this ML implementation.
+
 ## Models and target
 
 Two scikit-learn HistGradientBoostingClassifier models: allocation correctness (item + amount within official tolerance), and complete payment-hypothesis correctness (all rows/amounts/exceptions/category). Static v3 supplies an unchanged candidate/baseline; additional party-scoped amount/reference proposals expand retrieval. Candidate generation never reads golden. Labels are attached in the evaluation/training program after candidates are frozen.

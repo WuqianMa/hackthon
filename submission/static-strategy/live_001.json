@@ -9,6 +9,18 @@
   "rows": 646942,
   "bytes": 28008037,
   "validation_passed": true,
-  "website_score": null,
-  "feedback_status": "awaiting user website feedback"
+  "website_score": 77.46,
+  "feedback_status": "user-provided website feedback received",
+  "website_metrics": {
+    "allocation_f1": 0.833,
+    "precision": 0.924,
+    "recall": 0.758,
+    "txn_accuracy": 0.868,
+    "exception_macro_f1": 0.489,
+    "amount_weighted_accuracy": 0.785
+  },
+  "feedback_sources": {
+    "v3_feedback.md": "eeaa91b1773bbdecf3234eb32cfcd64b0b2d792c4f00f23e8a6722e39308b422",
+    "feedback-evaluation/v3-model_evaluation_feedback.md": "eeaa91b1773bbdecf3234eb32cfcd64b0b2d792c4f00f23e8a6722e39308b422"
+  }
 }
