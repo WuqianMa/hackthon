@@ -1,5 +1,7 @@
 ## Current working direction — user update, 2026-11-07
 
+Latest direction: the user explicitly authorized running frozen version 3 on LIVE for a website submission. Canonical edition implementation is `version-3/`; upload CSV editions go directly in `submission/`. The user will upload and provide feedback. Save the v4 dialogue plan in `version-4/` without training or implementing it. This supersedes the starter-only restriction below for this LIVE v3 task. Commit/push each completed stage to `q`; do not modify remote `main`.
+
 Latest authorized stage: the user requested implementation and execution of `v3/` on the starter sample, with aggressive competition matching, meaningful commits, and a push to remote `q` after each completed stage. This supersedes the proposal-only restriction below for that scope. The measured selected v3 score is 78.65; continue starter development toward 90+ before expanding to TRAIN/LIVE. See `v3/README.md`, `v3/POLICY.md`, `v3/TASKS.md`, `v3/RESULTS.md` and `human_comments/2026-11-07_v3_execution.md`. Do not push remote `main`.
 
 The user is comparing system strategies before selecting the next implementation. Read `human_comments/2026-11-07_workflow.md`, `docs/strategy.md`, and `self_review/2026-11-07_baseline_review.md` first. This update takes precedence over the older recommended execution sequence below.

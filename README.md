@@ -1,5 +1,7 @@
 # Static bank reconciliation
 
+Latest requested edition: [version-3](version-3/README.md) runs the frozen aggressive strategy on LIVE and publishes direct upload CSV editions in `submission/`. Use `python3 version-3/run.py --phase live --edition 001`. The user handles website upload and supplies feedback. The hybrid [version-4 proposal](version-4/PROPOSAL.md) is saved for later and has not been implemented or trained.
+
 Current executable experiment: [strategy v3](v3/README.md), including [competition policy](v3/POLICY.md), [task chain](v3/TASKS.md) and [measured results](v3/RESULTS.md). `python3 -m v3 --speculative` scores **78.65** on the starter, versus **71.32** for the preserved baseline. All 8,499 starter transactions are covered; 710 remain unresolved. This is an improvement, with lower pair precision, and the 90+ target remains unmet. No new TRAIN/LIVE run was made. Completed stages are pushed to remote `q`.
 
 An offline, deterministic Python program turns verified challenge archives into `final_submission/<phase>/submission.csv`. It uses CSVs, structured payment evidence, native PDF text and a chronological open-item ledger. No model, agent, service credential or network access is used during reconciliation.
