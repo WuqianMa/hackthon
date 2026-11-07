@@ -4,6 +4,10 @@ An offline, deterministic Python program turns verified challenge archives into 
 
 See [the detailed proposal](reports/static_system_proposal.md), [verified run results](reports/run_results.md), and [the rule register](docs/rules_register.md). The organizer's documents inside the docs archive remain authoritative.
 
+Current stage: **strategy comparison, before further solver changes**. The active [Codex strategy](docs/strategy.md) and [baseline self-review](self_review/2026-11-07_baseline_review.md) supersede the earlier report's next-step recommendations. Use the smallest starter/sample dataset when a design experiment is requested. Full TRAIN is primarily reserved for a justified model-training step. Existing LIVE results are historical measurements; they do not require repeating the full run now.
+
+The initial implementation is preserved at Git tag `v0.1.0-baseline` (commit `17ce829`). [Human comments](human_comments/README.md), [Codex reviews](self_review/README.md), and [independent strategy proposals](strategy_proposals/README.md) have separate locations. The final strategy decision remains open for the user's comparison with Claude and Gemini.
+
 Python 3.9+; tested with Python 3.9.6. Install the pinned PDF reader in an isolated environment:
 
 ```sh
@@ -11,7 +15,7 @@ python3 -m venv .venv
 .venv/bin/python -m pip install -r requirements.txt
 ```
 
-Run these commands from the repository root:
+Commands below are a runbook for a requested experiment or later production run. They are not the current task queue. Run from the repository root:
 
 ```sh
 # Small labeled smoke/evaluation run; evaluates with the official scorer automatically.
@@ -23,7 +27,8 @@ Run these commands from the repository root:
 # When the FINAL archive and its published checksum arrive:
 .venv/bin/python -m bankrec --phase final --phase-archive /path/to/bankrec-final.tar.gz --expected-phase-sha256 PUBLISHED_SHA256
 
-# Optional full TRAIN evaluation. This has not been benchmarked yet.
+# Deferred whole-TRAIN command; use only for a specifically chosen training/evaluation task.
+# This is not the default architecture-feedback loop and has not been benchmarked.
 .venv/bin/python -m bankrec --phase train --phase-archive bankrec-train.tar.gz --evaluate
 
 .venv/bin/python -m unittest discover -s tests -v

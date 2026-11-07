@@ -1,3 +1,15 @@
+## Current working direction — user update, 2026-11-07
+
+The user is comparing system strategies before selecting the next implementation. Read `human_comments/2026-11-07_workflow.md`, `docs/strategy.md`, and `self_review/2026-11-07_baseline_review.md` first. This update takes precedence over the older recommended execution sequence below.
+
+- Keep `v0.1.0-baseline` as the initial implementation reference. The existing sample and LIVE measurements are historical evidence, not a request to rerun them.
+- During this comparison stage, review code, feedback and saved results; write proposals and reviews. Do not launch whole-pipeline, LIVE, FINAL, or full-TRAIN runs as a default next step, or change the solver before the strategy decision.
+- When an experiment is requested, use the smallest starter/sample dataset for fast design feedback. Identify sample-dependent heuristics and avoid claiming that a repeatedly inspected sample proves generalization.
+- Full TRAIN is primarily for a justified model-training step. State the model's task and evaluation split before using it; a whole-corpus run is not required to discuss or compare architecture.
+- Keep human comments in `human_comments/`, Codex's code/design reviews in `self_review/`, and separately authored proposals in `strategy_proposals/`. The user will obtain Claude and Gemini proposals; do not fabricate their positions.
+
+---
+
 From GPT5.6 on description of dataset without exploring data
 # Bank Reconciliation Challenge — Agent Collaboration Guide
 

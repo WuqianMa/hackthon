@@ -1,5 +1,7 @@
 # Static bank-reconciliation system and future agent proposal
 
+Historical baseline proposal. Following the user's 7 November workflow feedback, the active recommendation is `docs/strategy.md`, with a code/design review in `self_review/2026-11-07_baseline_review.md`. No further whole-pipeline run or solver change is implied by this report. Compare independent proposals before choosing the next strategy. The results below remain the original measured baseline.
+
 Prepared 7 November 2026. This report is based on the actual verified docs/master archive and its small labeled dataset, followed by an operational run against the available LIVE archive. It replaces assumptions in the earlier description-only analysis with observed schemas, official policies and measured sample results.
 
 ## 1. Recommendation and delivered scope
