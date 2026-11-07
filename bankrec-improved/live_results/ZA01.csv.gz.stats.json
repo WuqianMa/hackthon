@@ -7,8 +7,8 @@
   },
   "warnings": [],
   "prediction_seconds": 0.0,
-  "max_rss_native": 141361152,
-  "total_seconds": 0.38,
+  "max_rss_native": 141459456,
+  "total_seconds": 0.35,
   "label_access_guard": true,
   "group": "ZA01",
   "phase": "live"

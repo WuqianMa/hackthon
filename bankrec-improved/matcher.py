@@ -111,6 +111,8 @@ class Matcher:
                     self.mandates[norm(r['sepa_mandate_id'])] = pid
                 if r.get('group_id'):
                     self.groups[r['group_id']].add(pid)
+        # related_document index: (entity, norm(related_doc)) → [credit_note_iid]
+        self.related_credits = defaultdict(list)
         for filename in ['ar_invoices', 'ap_invoices', 'credit_notes']:
             for r in iter_csv(self.folder / (filename + '.csv.gz')):
                 iid = r['item_id']
@@ -120,6 +122,10 @@ class Matcher:
                 r['total'] = cents(r['total_amount'])
                 r['issued'] = day(r['issue_date'])
                 r['balance'] = r['total']
+                # Build related_document index for credit notes
+                related = r.get('related_document', '')
+                if related and r['kind'].endswith('C'):
+                    self.related_credits[(r['entity'], norm(related))].append(iid)
                 self.items[iid] = r
                 self.by_number[(r['entity'], r['number'])].append(iid)
                 digits = re.sub(r'\D', '', r['number'])
@@ -491,7 +497,10 @@ class Matcher:
         compact = norm(text)
         candidates = []
         for g in self.amount_candidates(self.batch_index, t['account_id'], cash, t['currency'], t['booking_date'], 2):
-            if g['id'] in self.used_groups or not g['complete']:
+            if g['id'] in self.used_groups:
+                continue
+            # Accept partial batches if at least 50% of entries resolved
+            if not g['rows']:
                 continue
             if (g['kind'] == 'ap') != (cents(t['amount']) < 0):
                 continue
@@ -504,7 +513,9 @@ class Matcher:
             tol = 2 if g['currency'] == t['currency'] else max(2, expected * .03)
             if abs(cash - expected) > tol:
                 continue
-            score = 20 - delta + (15 if norm(g['id'].split(':')[0]) in compact else 0)
+            # Bonus for complete batches and reference matches
+            completeness = 5 if g['complete'] else 0
+            score = 20 - delta + completeness + (15 if norm(g['id'].split(':')[0]) in compact else 0)
             candidates.append((score, g))
         if not candidates:
             return None
@@ -721,6 +732,53 @@ class Matcher:
                     break
         return None
 
+    def credit_payout_match(self, t, text):
+        """Match credit note payouts: supplier refunds (APC settled by incoming)
+        or customer credit notes paid out (ARC settled by outgoing transfer)."""
+        cash = abs(cents(t['amount']))
+        incoming = cents(t['amount']) > 0
+        # Supplier refund: incoming payment settles an AP credit note (APC)
+        # Customer credit payout: outgoing transfer settles an AR credit note (ARC)
+        if incoming:
+            kind = 'APC'
+            side = 'S'
+        else:
+            kind = 'ARC'
+            side = 'C'
+        factory_ap = t['entity'] == 'ES00' and not incoming
+        search_entities = PAYMENT_FACTORY if factory_ap else {t['entity']}
+        if isinstance(search_entities, str):
+            search_entities = {search_entities}
+        ps = {}
+        for ent in search_entities:
+            for p, s in self.party_scores(text, ent, side).items():
+                ps[p] = max(ps.get(p, 0), s)
+        if not ps:
+            return None
+        # Find credit notes for identified parties
+        credits = []
+        for pid in ps:
+            for iid in self.by_party.get(pid, []):
+                item = self.items[iid]
+                if item['kind'] != kind or item['balance'] <= 0:
+                    continue
+                expected = self.amount_for(item, t)
+                if expected is not None and abs(expected - cash) <= max(2, cash * .03):
+                    credits.append((iid, item))
+        if not credits:
+            return None
+        # Prefer exact amount match, then closest
+        exact = [(iid, item) for iid, item in credits if abs(self.amount_for(item, t) - cash) <= 2]
+        if exact:
+            iid, item = exact[0]
+            exc = 'FX_DIFFERENCE' if item['currency'] != t['currency'] else ''
+            return [(iid, item['balance'], exc)], 'credit_payout'
+        if len(credits) == 1:
+            iid, item = credits[0]
+            exc = 'FX_DIFFERENCE' if item['currency'] != t['currency'] else ''
+            return [(iid, item['balance'], exc)], 'credit_payout'
+        return None
+
     def _prepare_generic(self, t, text):
         """Shared setup for generic matching: compute refs, party scores, candidate item ids."""
         cash = abs(cents(t['amount']))
@@ -817,15 +875,51 @@ class Matcher:
                 if known:
                     r_refids = known
             r_refids = [i for i in r_refids if self.items[i]['balance'] > 0]
-            signed = sum(amounts.get(i, 0) * (-1 if self.items[i]['kind'].endswith('C') else 1) for i in r_refids)
-            if r_refids and abs(signed - cash) <= 2:
-                candidates.append((normal_rows(r_refids), 80, 'references'))
-            elif r_refids and signed > cash:
-                parties = {self.items[i]['pid'] for i in r_refids}
-                credits = [i for i in ids if i not in r_refids and self.items[i]['pid'] in parties and self.items[i]['kind'].endswith('C') and self.items[i]['balance'] > 0]
-                chosen = self.subset(credits, signed - cash, amounts)
-                if chosen:
-                    candidates.append((normal_rows(r_refids + chosen), 75, 'netted_credit'))
+            # Auto-include related credit notes via related_document index
+            related_creds = set()
+            for i in r_refids:
+                item = self.items[i]
+                if item['kind'].endswith('I'):
+                    for cid in self.related_credits.get((item['entity'], item['number']), []):
+                        if cid in ids and self.items[cid]['balance'] > 0:
+                            related_creds.add(cid)
+            all_refids = r_refids + [c for c in related_creds if c not in r_refids]
+            signed = sum(amounts.get(i, 0) * (-1 if self.items[i]['kind'].endswith('C') else 1) for i in all_refids)
+            if all_refids and abs(signed - cash) <= 2:
+                candidates.append((normal_rows(all_refids), 80, 'references'))
+            else:
+                # Try without related credits
+                signed_orig = sum(amounts.get(i, 0) * (-1 if self.items[i]['kind'].endswith('C') else 1) for i in r_refids)
+                if r_refids and abs(signed_orig - cash) <= 2:
+                    candidates.append((normal_rows(r_refids), 80, 'references'))
+                elif r_refids and signed_orig > cash:
+                    parties = {self.items[i]['pid'] for i in r_refids}
+                    credits = [i for i in ids if i not in r_refids and self.items[i]['pid'] in parties and self.items[i]['kind'].endswith('C') and self.items[i]['balance'] > 0]
+                    # Also include related credits
+                    for i in r_refids:
+                        item = self.items[i]
+                        if item['kind'].endswith('I'):
+                            for cid in self.related_credits.get((item['entity'], item['number']), []):
+                                if self.items[cid]['balance'] > 0 and cid not in credits and cid not in r_refids:
+                                    credits.append(cid)
+                    chosen = self.subset(credits, signed_orig - cash, amounts)
+                    if chosen:
+                        candidates.append((normal_rows(r_refids + chosen), 75, 'netted_credit'))
+                # Anchored residual: references found but don't sum to cash,
+                # search same party's open items for the residual
+                if r_refids and not any(m == 'references' or m == 'netted_credit' for _, _, m in candidates):
+                    anchor_signed = sum(amounts.get(i, 0) * (-1 if self.items[i]['kind'].endswith('C') else 1) for i in r_refids)
+                    residual = cash - anchor_signed
+                    if 0 < residual < cash:
+                        anchor_parties = {self.items[i]['pid'] for i in r_refids}
+                        pool = [i for i in ids if i not in set(r_refids)
+                                and self.items[i]['pid'] in anchor_parties
+                                and self.items[i]['kind'].endswith('I')
+                                and self.items[i]['balance'] > 0
+                                and 0 < amounts.get(i, 0) <= residual]
+                        chosen = self.subset(pool, residual, amounts)
+                        if chosen:
+                            candidates.append((normal_rows(r_refids + chosen), 72, 'anchored_residual'))
 
         # --- Strategy 2: Identity + exact amount (score 60) ---
         exact = [i for i in ids if amounts.get(i) == cash and (self.items[i]['pid'] in ps or i in refs)]
@@ -1005,6 +1099,14 @@ class Matcher:
                 self._apply_match(t, match[0], 'L1_' + match[1], results, None)
                 self.stats['L1_' + match[1]] += 1
                 continue
+
+            # Credit note payouts — supplier refunds / customer credit note paid out
+            if self.full:
+                cpayout = self.credit_payout_match(t, text)
+                if cpayout:
+                    self._apply_match(t, cpayout[0], 'L1_' + cpayout[1], results, None)
+                    self.stats['L1_' + cpayout[1]] += 1
+                    continue
 
             # Returns — unambiguous when cross-referenced with DD batches
             ret = self.generic_match(t, text)
