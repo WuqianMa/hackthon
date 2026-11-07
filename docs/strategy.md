@@ -2,6 +2,8 @@
 
 Status: proposed, awaiting the user's strategy decision and comparison with Claude/Gemini. Date: 7 November 2026. Baseline: Git tag `v0.1.0-baseline`, commit `17ce829`. This document supersedes the earlier report's development sequence; it does not authorize a solver change or a pipeline run.
 
+Latest starter-only diagnosis: `../self_review/2026-11-07_why_71_and_path_to_90.md`. It traces the 71.32 score to concrete grouping, relationship, parser and document-event failures. The development target is now **90+ on the starter before selecting a residual TRAIN/model task**. That target is not yet an achieved result. The diagnostic reads frozen sample output and selected starter sources; no solver or large-phase run was performed.
+
 ## Objective and immediate scope
 
 The eventual product remains a deterministic compressed-input-to-submission system, expandable for agents. The immediate objective is to choose the design through fast feedback on the smallest starter/sample dataset. The current code is a reproducible initial version, not the selected final architecture.
@@ -68,10 +70,10 @@ The saved sample has high pair precision but lower recall and exception macro-F1
 
 | Order | Proposed edition | Smallest useful evidence | Overfitting control |
 |---|---|---|---|
-| 1 | Trace and distinguish incomplete groups from proven single-invoice overpayments. | Saved false-overpayment cases, complete-group controls and a focused sample experiment. | General completeness/evidence condition; no tuned excess-percentage accounting rule. |
-| 2 | Separate proposal generation from immediate ledger mutation and expose conflicts. | A compact sequence with competing weak/strong evidence, return and later re-presentation. | Define evidence tiers and causal event behavior before scoring. |
-| 3 | Track unknown opening metadata/history explicitly and use service-month facts before FIFO. | Small related fixtures for final instalment, discount terms and service month. | Unknown remains unknown; avoid inferring missing history from golden labels at runtime. |
-| 4 | Reassess the residual task and decide whether a model/agent is warranted. | Measured candidate/evidence error taxonomy after the earlier editions. | Define the task and TRAIN split before training or choosing a model. |
+| 1 | Correct available structured evidence: email deduction fields, parent-payer scoping and confirming subdivisions. | The concrete starter counterexamples in the latest diagnosis, valid controls and advice-total reconciliation. | Source/schema rules and recorded relationships; no customer-specific answer tables. |
+| 2 | Preserve related credits and recover complete payment groups before inferring overpayment; separate proposals from ledger mutation. | The 12,097 absent required keys and 228 false-overpayment cases with multi-item goldens, evaluated through a focused sample experiment. | General completeness/evidence conditions, explicit conflicts; no tuned excess-percentage accounting rule. |
+| 3 | Interpret PDF/bank event facts and track unknown history, including final instalments, retention/advance and service month. | Small related fixtures with actual starter clauses and boundary cases. | Use present evidence; unknown remains unknown; no golden-derived runtime history. |
+| 4 | Reassess the residual task once the starter score is high enough; target 90+ during development. | Measured candidate/evidence error taxonomy and official sample components. | Define the residual model task and TRAIN split before training; inspected sample performance is not unseen performance. |
 
 The user may select a different order or architecture after considering the independent proposals. The next action is comparison and a decision, not executing this table automatically.
 
