@@ -51,8 +51,22 @@ def prepare(work):
     c=cm.Catalog(db,phase,masters,ROOT/'work/cache/pdf_text',True)
     sources=sm.Sources(phase,ROOT/'work/cache/pdf_text')
     engine=em.Engine(c,sources)
+    result=generate(c,sources,banks,static,phase,docs)
+    c.db.close()
+    write_json(work/'candidate_manifest.json',dict(input_archive_sha256=HASHES['docs'],baseline_sha256=digest(baseline),
+        bank_lines=len(banks),pairs=len(result['pair_rows']),features=result['feature_names'],labels_read=False,
+        candidate_code_sha256=digest(Path(__file__))))
+    return result
+
+
+def generate(c,sources,banks,static,phase,docs):
+    """Reusable bounded-batch generator; takes no labels and performs no model/provider calls."""
+    import numpy as np
+    _,_,em=load_strategy()
+    engine=em.Engine(c,sources)
     pair_rows=[];pair_x=[];per_tx={};baseline_pairs={};base_hyps={};item_parties={}
     for index,(tid,t) in enumerate(banks.items(),1):
+        if hasattr(c,'as_of'):c.as_of=t['booking_date']
         tx=text_of(t);nt=norm(tx);tt=plain(tx);ts=tokens(tx);cash=abs(cents(t['amount']))
         side='AR' if cents(t['amount'])>0 else 'AP'
         if is_return(t):side='AP' if side=='AR' else 'AR'
@@ -142,11 +156,7 @@ def prepare(work):
             if ids:
                 base_hyps[tid].append({'kind':'source','pair_ids':ids,'rows':[pair_rows[j] for j in ids]})
         if index%1000==0:print(f'Candidates {index:,}/{len(banks):,}; pairs {len(pair_rows):,}',flush=True)
-    c.db.close()
     feature_names=FEATURES+['exception_'+e for e in EXCEPTIONS]
-    write_json(work/'candidate_manifest.json',dict(input_archive_sha256=HASHES['docs'],baseline_sha256=digest(baseline),
-        bank_lines=len(banks),pairs=len(pair_rows),features=feature_names,labels_read=False,
-        candidate_code_sha256=digest(Path(__file__))))
     return dict(banks=banks,static=dict(static),pair_rows=pair_rows,X=np.asarray(pair_x,dtype=np.float32),
                 per_tx=per_tx,base_hyps=base_hyps,phase=phase,docs=docs,feature_names=feature_names,
                 item_parties=item_parties)
