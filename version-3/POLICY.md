@@ -12,6 +12,7 @@ The organizer's docs in the verified archive remain the accounting authority. Co
 | Parent payment | Distinguish payer from debtor; expand stored parent/group relationships. |
 | Grouping | Preserve whole run, transfer/beneficiary and maturity hypotheses. Maturity uses the latest unambiguous invoice due date within a transfer; this is an empirical interpretation of available fields, checked by source sums and sample results. |
 | Returns | Prefer original receipt evidence; add mandate-to-party lookup and exact document amount hypotheses. |
+| Production return bound (3.0.1) | Reopened amount cannot exceed the document total; excess paid cash is not itself an additional reopened item balance. |
 | Partial container | Emit resolved item rows even if another entry is unresolved. This can earn pair credit while failing complete-transaction accuracy. |
 | Unknown/ambiguous case | Use ranked party-scoped hypotheses, then partial reference sets. Unknown payer controls stay in the evaluated population; no golden-based choice of which transactions to guess. |
 

@@ -37,6 +37,10 @@ class StrategyTests(unittest.TestCase):
     def test_final_instalment(self):
         self.assertEqual(self.engine().policy(item(),30000,bank(text='RATE 3/3')), (30000,''))
 
+    def test_return_reopens_item_not_excess_cash(self):
+        self.assertEqual(self.engine().policy(item(total=90000),95000,bank(),force_return=True),(90000,'RETURNED'))
+        self.assertEqual(self.engine().policy(item(total=90000),30000,bank(),force_return=True),(30000,'RETURNED'))
+
     def test_nonfinal_instalment(self):
         self.assertEqual(self.engine().policy(item(),30000,bank(text='RATE 1/3')), (30000,'PARTIAL'))
 

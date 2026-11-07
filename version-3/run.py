@@ -84,8 +84,15 @@ def main():
     shutil.copyfile(out/'submission.csv',temporary)
     os.replace(temporary,target)
     assert digest(target)==manifest['submission_sha256']
+    strategy_dir=submission_dir/'static-strategy'
+    strategy_dir.mkdir(exist_ok=True)
+    tracked=strategy_dir/target.name
+    if tracked.exists() and digest(tracked)!=manifest['submission_sha256']:
+        raise ValueError(f'Strategy edition already exists with different content: {tracked}')
+    shutil.copyfile(target,tracked)
     record = dict(manifest)
     record.update(edition=edition, submission_file=str(target.relative_to(ROOT)),
+                  strategy_submission_file=str(tracked.relative_to(ROOT)),
                   validation=json.loads((out/'validation.json').read_text()),
                   website_upload_status='not uploaded; user will upload and provide feedback')
     write_json(FOLDER/f'editions/{phase}_{edition}.json',record)

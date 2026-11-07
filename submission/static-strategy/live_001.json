@@ -1,0 +1,14 @@
+{
+  "edition": "001",
+  "phase": "LIVE",
+  "strategy": "version-3",
+  "version": "3.0.1",
+  "file": "submission_v3_live_001.csv",
+  "sha256": "3927ffc1f7f81c234844fbaeb68b97d2f53c4fc85d8bc8c33cc7253a261d8d05",
+  "bank_lines": 203083,
+  "rows": 646942,
+  "bytes": 28008037,
+  "validation_passed": true,
+  "website_score": null,
+  "feedback_status": "awaiting user website feedback"
+}

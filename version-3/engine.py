@@ -43,6 +43,9 @@ class Engine(BaseEngine):
         return result
 
     def policy(self, item, paid, t, reason='', force_return=False):
+        if force_return:
+            # Cash can include an earlier excess; reopening is bounded by the document.
+            return min(paid,item['total']), 'RETURNED'
         result = super().policy(item, paid, t, reason, force_return)
         if force_return or item['iid'].startswith(('ARC','APC')):
             return result
