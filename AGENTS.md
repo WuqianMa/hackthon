@@ -1,5 +1,7 @@
 ## Current working direction — user update, 2026-11-07
 
+Latest stage: implement and evaluate ML-assisted `version-4/` on the 10 MB starter, then report the measured score before deciding the strategy. This supersedes the earlier deferred-v4 restriction for the starter experiment only. TRAIN/LIVE are not authorized for this stage. Compare held-out/grouped predictions with static v3 on the same cases; do not report training fit as test performance. Commit and push completed stages to q.
+
 Latest direction: the user explicitly authorized running frozen version 3 on LIVE for a website submission. Canonical edition implementation is `version-3/`; upload CSV editions go directly in `submission/`. The user will upload and provide feedback. Save the v4 dialogue plan in `version-4/` without training or implementing it. This supersedes the starter-only restriction below for this LIVE v3 task. Commit/push each completed stage to `q`; do not modify remote `main`.
 
 Latest layout refinement: track the static strategy's CSV copies, edition metadata and feedback under `submission/static-strategy/`. LIVE edition 001 is generated and validated; website feedback is pending. An identical root-level CSV preserves the earlier direct-upload layout. Do not infer a LIVE score from the 78.65 starter result.
