@@ -1,4 +1,5 @@
 """Package the completed TRAIN run and its official scores for review."""
+import argparse
 import hashlib
 import json
 import platform
@@ -8,6 +9,9 @@ from pathlib import Path
 
 
 def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--no-package', action='store_true', help='Write reports without a ZIP archive')
+    args = parser.parse_args()
     here = Path(__file__).resolve().parent
     results = here / 'train_results'
     score = json.loads((results / 'full_train_score.json').read_text())
@@ -68,9 +72,13 @@ def main():
               '```bash', 'python3 -u bankrec-improved/train_runner.py --workers 2',
               'python3 -u bankrec-improved/evaluate_train.py bankrec-improved/train_results/train_predictions.csv.gz --by-group',
               '```', '',
-              '代码、逐组运行统计、完整预测及官方评分 JSON 均附于交付包。原始 TRAIN 与 masters 数据不重复打包。']
+              ('代码、逐组运行统计及官方评分 JSON 随报告保存在仓库。完整预测保存在本地 train_results/train_predictions.csv.gz，未纳入 Git。原始 TRAIN 与 masters 数据也不纳入 Git。'
+               if args.no_package else '代码、逐组运行统计、完整预测及官方评分 JSON 均附于交付包。原始 TRAIN 与 masters 数据不重复打包。')]
     report = here / 'TRAIN_REPORT.md'
     report.write_text('\n'.join(lines) + '\n')
+    if args.no_package:
+        print(json.dumps({'report': str(report), 'score': score['score'], 'metrics': score['metrics']}, indent=2))
+        return
     package = Path('/tmp/bankrec_train_evaluation.zip')
     with zipfile.ZipFile(package, 'w', compression=zipfile.ZIP_DEFLATED, compresslevel=6) as z:
         files = list(here.glob('*.py')) + list(here.glob('*.md')) + [here / 'requirements.txt']

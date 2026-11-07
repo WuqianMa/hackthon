@@ -16,6 +16,7 @@ __pycache__/
 # Reproducible intermediate data and large predictions.
 /bankrec-improved/train_work/
 /bankrec-improved/train_results/*.csv.gz
+/bankrec-improved/train_results/*.csv
 /bankrec-improved/train_results/*.partial
 /bankrec-improved/train_results/*.log
 /bankrec-improved/sample_*.csv.gz

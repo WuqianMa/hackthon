@@ -37,8 +37,9 @@ python3 -u bankrec-improved/evaluate_train.py \
   --train ../train --docs ../bankrec-docs-and-masters --by-group
 ```
 
-The sample experiment scored **81.28/100**. Full TRAIN results will be recorded
-after its ongoing run completes. No LIVE submission has been made.
+The sample experiment scored **81.28/100**. Full TRAIN scored **72.48/100**
+across **1,489,931 transactions**. See [the full TRAIN report](bankrec-improved/TRAIN_REPORT.md).
+These are offline evaluation results; no LIVE submission has been made.
 
 Raw datasets, temporary partitions and large prediction files are excluded
 from Git. Small evaluation JSON files and reports can be committed.

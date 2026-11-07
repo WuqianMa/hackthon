@@ -1,0 +1,10 @@
+{
+  "filename": "train_submission.csv",
+  "phase": "TRAIN",
+  "rows": 3900195,
+  "transactions": 1489931,
+  "sha256": "aff0d96b4c9a801bdafdb5668115110e4a3917a11ee04fb5447c3548de164cff",
+  "bytes": 169237971,
+  "identical_to_scored_gzip_contents": true,
+  "score": 72.48
+}
