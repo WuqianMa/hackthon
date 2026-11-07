@@ -142,6 +142,11 @@ class Matcher:
                 for field in list(r):
                     if field not in {'kind','pid','number','total','issued','balance','entity','currency','issue_date','payment_terms'}:
                         del r[field]
+        # Amount index: (entity, amount_cents) → [item_ids]
+        self.by_entity_amount = defaultdict(list)
+        for iid, item in self.items.items():
+            if item['kind'].endswith('I'):
+                self.by_entity_amount[(item['entity'], item['total'])].append(iid)
         for r in read_csv(self.folder / 'open_items_at_start.csv.gz'):
             if r['item_id'] in self.items:
                 self.items[r['item_id']]['balance'] = cents(r['open_amount'])
@@ -644,6 +649,14 @@ class Matcher:
     def category(self, t, text):
         if t['bank_txn_id'] in self.reversal_ids:
             return 'BANK_REVERSAL'
+        # ISO 20022 / bank_code structural signals (100% reliable)
+        code = (t.get('bank_code', ''), t.get('bank_subcode', ''))
+        if code in (('NCHG', ''), ('ACMT/MCOP/CHRG', ''), ('17', '310'), ('17', '701')):
+            return 'BANK_FEES'
+        if code == ('CAMT/ACCB/ZABA', ''):
+            return 'CASH_POOL'
+        if code == ('99', '622') or code == ('99', '867'):
+            return 'CASH_POOL'
         w = words(text)
         patterns = [
             ('BANK_REVERSAL', r'ANULACION OPERACION INDEBIDA|BANK ERROR|ERRONEOUS|REVERSAL OF ERROR'),
@@ -961,6 +974,14 @@ class Matcher:
             if item['currency'] != t['currency'] and abs(expected - cash) <= expected * .03 and (i in refs or ps.get(item['pid'], 0) >= 8):
                 candidates.append(([(i, bal, 'FX_DIFFERENCE')], 50, 'fx'))
                 break
+            # Use orig_amount/orig_currency for high-confidence FX matching
+            orig_amt = t.get('orig_amount', '')
+            orig_cur = t.get('orig_currency', '')
+            if orig_amt and orig_cur and orig_cur != t['currency'] and item['currency'] == orig_cur:
+                orig_cents = abs(cents(orig_amt))
+                if abs(orig_cents - bal) <= max(2, bal * .005) and (i in refs or ps.get(item['pid'], 0) >= 5):
+                    candidates.append(([(i, bal, 'FX_DIFFERENCE')], 65, 'fx_orig'))
+                    break
             nonsepa = country in {'US', 'CA', 'MX', 'BR', 'MA', 'CN', 'AU', 'ZA'}
             if (re.search(r'CHGS|SHA|BEN|BANK CHARGES', wt) or nonsepa) and item['currency'] == t['currency'] and 0 < expected - cash <= min(6000, expected * .02):
                 candidates.append(([(i, bal, 'SHORT_BANK_CHARGES')], 50, 'charges'))
@@ -1040,6 +1061,24 @@ class Matcher:
         closed = [i for i in ids if self.items[i]['balance'] == 0 and abs(self.items[i]['total'] - cash) <= 2]
         if closed and (closed[0] in refs or ps.get(self.items[closed[0]]['pid'], 0) >= 8):
             candidates.append(([(closed[0], cash, 'DUPLICATE_PAYMENT')], 25, 'duplicate'))
+
+        # --- Strategy 7: Amount-unique fallback (score 20) ---
+        # When no party identified but only ONE open item in the entity has
+        # this exact amount. Conservative constraints to avoid overfitting:
+        # - same currency, exact amount
+        # - amount has cents (not round hundreds/thousands — avoids fees/subscriptions)
+        # - item issued before booking date, balance > 0
+        # - no candidates found from stronger strategies
+        if not candidates and not ps and not returned:
+            if cash > 1000 and cash % 100 != 0:
+                matches = [i for i in self.by_entity_amount.get((t['entity'], cash), [])
+                           if self.items[i]['kind'] in kinds
+                           and self.items[i]['balance'] > 0
+                           and self.items[i]['currency'] == t['currency']
+                           and self.items[i]['issued'] <= day(t['booking_date'])]
+                if len(matches) == 1:
+                    i = matches[0]
+                    candidates.append(([(i, self.items[i]['balance'], '')], 20, 'amount_unique'))
 
         return candidates
 
