@@ -1,6 +1,6 @@
 # FINAL edition 001 — completed
 
-The FINAL archive supplied by the user was processed on 7 November 2026 using the packaged frozen strategy. The upload file is **[final-submission.csv](../final-submission.csv)** at the repository root. Identical copies are tracked under `submission/` and `submission/final-strategy/`.
+The FINAL archive supplied by the user was processed on 7 November 2026 using the packaged frozen strategy. The upload file is **[final-real-submission.csv](../final-real-submission.csv)** at the repository root. Identical copies are tracked under `submission/` and `submission/final-strategy/`.
 
 | Result | Value |
 |---|---:|
