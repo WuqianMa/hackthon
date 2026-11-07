@@ -21,3 +21,11 @@ __pycache__/
 /bankrec-improved/train_results/*.log
 /bankrec-improved/sample_*.csv.gz
 /bankrec-improved/*_trace.jsonl
+
+# LIVE work and large predictions.
+/bankrec-improved/live_work/
+/bankrec-improved/live_results/*.csv.gz
+/bankrec-improved/live_results/*.csv
+/bankrec-improved/live_results/*.partial
+/bankrec-improved/live_results/*.log
+/live_submission/

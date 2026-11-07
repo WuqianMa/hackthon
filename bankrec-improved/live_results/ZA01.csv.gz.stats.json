@@ -1,0 +1,15 @@
+{
+  "rows": 2,
+  "transactions": 2,
+  "methods": {
+    "L1_category_CUSTOMER_ADVANCE": 2,
+    "category_CUSTOMER_ADVANCE": 0
+  },
+  "warnings": [],
+  "prediction_seconds": 0.0,
+  "max_rss_native": 141361152,
+  "total_seconds": 0.38,
+  "label_access_guard": true,
+  "group": "ZA01",
+  "phase": "live"
+}

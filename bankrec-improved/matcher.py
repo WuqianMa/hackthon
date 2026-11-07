@@ -67,6 +67,8 @@ def parsed_money(s):
 
 STOP = set('SL SLU SA SAS SARL EURL GMBH CO KG AG EK LTD INC LLC BV SRL S L A U DE DEL LA EL Y ET AND THE GROUP PLUS'.split())
 
+PAYMENT_FACTORY = {'ES00', 'ES01', 'ES02', 'PT01'}
+
 
 class Matcher:
     def __init__(self, root, phase='sample', mode='full', cache=None):
@@ -188,6 +190,10 @@ class Matcher:
         self.advice_by_entity = defaultdict(list)
         self.used_advice = set()
         self.used_groups = set()
+        self.confirming_runs = defaultdict(lambda: defaultdict(list))  # [account][run_id] -> [{e2e, amount, allocs}]
+        self.used_confirming = set()
+        # DD return cross-reference: (entity, mandate_norm, amount_cents) → [(collection_date, iid)]
+        self.dd_collections = defaultdict(list)
         self.history = defaultdict(list)
         self.stats = Counter()
         self.warnings = []
@@ -345,12 +351,37 @@ class Matcher:
             ('payment_runs', 'end_to_end_id', 'debtor_account_id', 'execution_date', 'ap'),
         ]:
             groups = defaultdict(list)
+            confirming_entries = defaultdict(list)  # (account, run_id) -> [rows]
             for path in sorted((self.folder / folder).glob('*.csv')):
                 for r in read_csv(path):
+                    if kind == 'ap' and r.get('run_type') == 'confirming':
+                        confirming_entries[(r[account], r['run_id'])].append(r)
+                        continue
                     groupkey = r[key]
                     if kind == 'ap' and r['run_type'] != 'transfers':
                         groupkey = r['run_id'] + ':' + r[dt]
                     groups[(r[account], groupkey)].append(r)
+            # Process confirming runs: store per-e2e entries for subset matching
+            for (acc, run_id), rs in confirming_entries.items():
+                entity = self.account_entities[acc]
+                search_entities = PAYMENT_FACTORY if entity == 'ES00' else {entity}
+                for r in rs:
+                    scores = {}
+                    for fe in search_entities:
+                        for p, s in self.party_scores(r['beneficiary'] + ' ' + r['beneficiary_iban'], fe, 'S').items():
+                            scores[p] = max(scores.get(p, 0), s)
+                    pid = max(scores, key=scores.get) if scores else None
+                    amount = abs(cents(r['document_amount']))
+                    doc_kinds = {'APC'} if cents(r['document_amount']) < 0 else {'API'}
+                    iid = None
+                    for fe in search_entities:
+                        iid = self.resolve(r['document_number'], fe, doc_kinds, pid, amount)
+                        if iid:
+                            break
+                    allocs = [(iid, amount)] if iid else []
+                    self.confirming_runs[acc][run_id].append(dict(
+                        e2e=r['end_to_end_id'], transfer_amount=cents(r['transfer_amount']),
+                        currency=r['currency'], date=r[dt], allocations=allocs))
             for (acc, gid), rs in groups.items():
                 entity = self.account_entities[acc]
                 allocations = []
@@ -359,6 +390,10 @@ class Matcher:
                         pid = self.mandates.get(norm(r['mandate_id']))
                         iid = self.resolve(r['remittance_info'], entity, {'ARI'}, pid, cents(r['amount']))
                         amount = cents(r['amount'])
+                        # Build DD collection index for return cross-reference
+                        if iid and r.get('mandate_id'):
+                            self.dd_collections[(entity, norm(r['mandate_id']), amount)].append(
+                                (r['collection_date'], iid))
                     elif kind == 'card':
                         ids = self.by_po.get((entity, norm(r['order_number'])), [])
                         iid = ids[0] if len(ids) == 1 else self.resolve(r['order_number'], entity, {'ARI'})
@@ -367,11 +402,20 @@ class Matcher:
                         iid = self.resolve(r['stub_reference'], entity, {'ARI'}, amount=cents(r['amount']))
                         amount = cents(r['amount'])
                     else:
-                        scores = self.party_scores(r['beneficiary'] + ' ' + r['beneficiary_iban'], entity, 'S')
+                        # Payment factory: only ES00 pays invoices for ES01/ES02/PT01
+                        search_entities = PAYMENT_FACTORY if entity == 'ES00' else {entity}
+                        scores = {}
+                        for fe in search_entities:
+                            for p, s in self.party_scores(r['beneficiary'] + ' ' + r['beneficiary_iban'], fe, 'S').items():
+                                scores[p] = max(scores.get(p, 0), s)
                         pid = max(scores, key=scores.get) if scores else None
                         amount = abs(cents(r['document_amount']))
                         kinds = {'APC'} if cents(r['document_amount']) < 0 else {'API'}
-                        iid = self.resolve(r['document_number'], entity, kinds, pid, amount)
+                        iid = None
+                        for fe in search_entities:
+                            iid = self.resolve(r['document_number'], fe, kinds, pid, amount)
+                            if iid:
+                                break
                     if iid:
                         allocations.append((iid, amount))
                 if kind == 'dd':
@@ -512,6 +556,80 @@ class Matcher:
         rows = [(i, amt, ('FX_DIFFERENCE' if self.items[i]['currency'] != t['currency'] and self.items[i]['kind'] == 'ARI' and not e else e)) for i, amt, e in a['rows']]
         return rows, 'advice'
 
+    def confirming_match(self, t, text):
+        """Match confirming payment debits to subsets of a confirming run."""
+        if cents(t['amount']) >= 0:
+            return None
+        wt = words(text)
+        m = re.search(r'REMESA\s+(\S+)', wt)
+        if not m:
+            return None
+        run_ref = norm(m[1])
+        cash = abs(cents(t['amount']))
+        # Find confirming runs on this account matching the ref
+        runs = self.confirming_runs.get(t['account_id'], {})
+        matched_run_id = None
+        for rid, entries in runs.items():
+            if norm(rid) == run_ref or run_ref in norm(rid) or norm(rid) in run_ref:
+                matched_run_id = rid
+                break
+        if not matched_run_id:
+            return None
+        entries = runs[matched_run_id]
+        # Filter out already-used entries
+        available = [e for e in entries if e['e2e'] not in self.used_confirming]
+        if not available:
+            return None
+        # Parse N PROVEEDORES if present
+        nm = re.search(r'(\d+)\s+PROVEEDOR', wt)
+        expected_n = int(nm[1]) if nm else None
+        # Try to find subset of entries that sums to cash
+        amounts = [e['transfer_amount'] for e in available]
+        # For small N, try exact combinations
+        max_n = expected_n or min(len(available), 8)
+        best = None
+        for n in (range(expected_n, expected_n + 1) if expected_n else range(1, max_n + 1)):
+            if n > len(available):
+                break
+            if n <= 4 or (n <= 8 and len(available) <= 20):
+                for combo in itertools.combinations(range(len(available)), n):
+                    total = sum(amounts[i] for i in combo)
+                    if abs(total - cash) <= 2:
+                        best = combo
+                        break
+            if best:
+                break
+        if not best:
+            # Fallback: try all entries if small enough
+            if len(available) <= 20 and not expected_n:
+                states = {0: ()}
+                for idx, amt in enumerate(amounts):
+                    for total, prefix in list(states.items()):
+                        val = total + amt
+                        if abs(val - cash) <= 2:
+                            best = prefix + (idx,)
+                            break
+                        if val < cash + 2 and val not in states:
+                            states[val] = prefix + (idx,)
+                    if best:
+                        break
+        if not best:
+            return None
+        # Collect allocations from matched entries
+        rows = []
+        for idx in best:
+            e = available[idx]
+            self.used_confirming.add(e['e2e'])
+            for iid, amt in e['allocations']:
+                item = self.items[iid]
+                exc = ''
+                if item['currency'] != t['currency'] and item['kind'].endswith('I'):
+                    exc = 'FX_DIFFERENCE'
+                rows.append((iid, amt, exc))
+        if not rows:
+            return None
+        return rows, 'confirming'
+
     def category(self, t, text):
         if t['bank_txn_id'] in self.reversal_ids:
             return 'BANK_REVERSAL'
@@ -519,10 +637,11 @@ class Matcher:
         patterns = [
             ('BANK_REVERSAL', r'ANULACION OPERACION INDEBIDA|BANK ERROR|ERRONEOUS|REVERSAL OF ERROR'),
             ('BANK_FEES', r'COMISION|COMISS|FRAIS|GEBUHR|BANK FEES|TRANSFER FEE|MAINTENANCE FEE|\bCOM (?:TRANSF|REMESA|DEVOL)|LIQUIDACION CTA|SERV EM TRANSF|GASTOS (?:TRANSF|CORRESPONSAL|TRANSFERENCIA)'),
-            ('CASH_POOL', r'CASH POOL|SWEEP|ZBA|BARRIDO|NIVELACION'),
+            ('CASH_POOL', r'CASH POOL|CASH CONCENTRATION|SWEEP|ZBA|BARRIDO|NIVELACION|TRASPASO ENTRE CUENTAS|TRASPASO PROPIO'),
             ('CUSTOMER_ADVANCE', r'PROFORMA'),
             ('CUSTOMER_REFUND', r'REFUND DUPLICATE|DEVOLUCION COBRO DUPLICADO'),
             ('SUPPLIER_REFUND', r'REEMBOLSO'),
+            ('INSURANCE', r'INSURANCE PREMIUM|PRIMA SEGURO|SEGUROS MULTIRRIESGO'),
             ('CARD_EXPENSES', r'ADEUDO MENSUAL DE TARJETA|CORPORATE CARD|CARTE ENTREPRISE'),
             ('LEASING', r'LEASING|ARRENDAMIENTO|RENTING'),
             ('LOAN_REPAYMENT', r'AMORTIZACION|LOAN REPAYMENT|CUOTA PRESTAMO'),
@@ -540,6 +659,9 @@ class Matcher:
         for cat, pat in patterns:
             if re.search(pat, w):
                 return cat
+        # LIQUIDACION INTERESES: same text for income vs expense, differentiated by amount sign
+        if re.search(r'LIQUIDACION INTERESES', w):
+            return 'INTEREST_INCOME' if cents(t['amount']) > 0 else 'INTEREST_EXPENSE'
         # Own-account identity distinguishes same-entity transfers from group financing.
         acct = norm(t.get('counterparty_account', ''))
         if acct:
@@ -549,22 +671,24 @@ class Matcher:
         return None
 
     def references(self, text, entity, kinds):
+        entities = entity if isinstance(entity, set) else {entity}
         compact = norm(text)
         found = set()
         tokens = re.findall(r'[A-Z0-9][A-Z0-9/.-]*', unicodedata.normalize('NFKD', text.upper()))
         for token in tokens:
             key = norm(token)
-            for iid in self.by_number.get((entity, key), ()):
-                if self.items[iid]['kind'] in kinds:
-                    found.add(self.replacements.get((entity, key), iid))
-            if len(key) >= 5:
-                for iid in self.by_po.get((entity, key), ()):
+            for ent in entities:
+                for iid in self.by_number.get((ent, key), ()):
                     if self.items[iid]['kind'] in kinds:
-                        found.add(iid)
-            if key.isdigit() and len(key) >= 6:
-                for iid in self.by_suffix.get((entity, key[-6:]), ()):
-                    if self.items[iid]['kind'] in kinds:
-                        found.add(iid)
+                        found.add(self.replacements.get((ent, key), iid))
+                if len(key) >= 5:
+                    for iid in self.by_po.get((ent, key), ()):
+                        if self.items[iid]['kind'] in kinds:
+                            found.add(iid)
+                if key.isdigit() and len(key) >= 6:
+                    for iid in self.by_suffix.get((ent, key[-6:]), ()):
+                        if self.items[iid]['kind'] in kinds:
+                            found.add(iid)
         return found
 
     def amount_for(self, item, t):
@@ -597,21 +721,29 @@ class Matcher:
                     break
         return None
 
-    def generic_match(self, t, text):
+    def _prepare_generic(self, t, text):
+        """Shared setup for generic matching: compute refs, party scores, candidate item ids."""
         cash = abs(cents(t['amount']))
         wt = words(text)
-        returned = bool(re.search(r'DEVOLUCION RECIBO|DEVOL RECIBOS|RETURN|RUE?CKLAST|REJET|IMPAYE|CHARGEBACK|DEVOLUCION TRANSFERENCIA', wt))
+        returned = bool(re.search(r'DEVOLUCION RECIBO|DEVOL RECIBOS|RETURN|RUE?CKLAST|REJET|IMPAYE|CHARGEBACK|RETROCESION CONTRACARGO|DEVOLUCION TRANSFERENCIA', wt))
         incoming = cents(t['amount']) > 0
+        factory_ap = t['entity'] == 'ES00' and not incoming and not returned
         if returned:
             kinds = {'API'} if incoming else {'ARI'}
         else:
             kinds = {'ARI', 'ARC', 'APC'} if incoming else {'API', 'APC', 'ARC'}
-        refs = self.references(text, t['entity'], kinds)
-        ps = self.party_scores(text, t['entity'])
+        search_entities = PAYMENT_FACTORY if factory_ap else t['entity']
+        refs = self.references(text, search_entities, kinds)
+        if factory_ap:
+            ps = {}
+            for fe in PAYMENT_FACTORY:
+                for p, s in self.party_scores(text, fe, 'S').items():
+                    ps[p] = max(ps.get(p, 0), s)
+        else:
+            ps = self.party_scores(text, t['entity'])
         if ps:
             best = max(ps.values())
             ps = {p: s for p, s in ps.items() if s >= max(5, best - 8)}
-        # A parent can settle subsidiaries' invoices.
         for pid, score in list(ps.items()):
             for related in self.groups.get(self.parties.get(pid, {}).get('group_id', ''), ()):
                 if related in self.by_party:
@@ -620,55 +752,101 @@ class Matcher:
         for pid in ps:
             ids.update(self.by_party[pid])
         ids = {i for i in ids if self.items[i]['kind'] in kinds and self.items[i]['issued'] <= day(t['booking_date'])}
-        if not ids:
-            return None
         if ps:
             refs = {i for i in refs if self.items[i]['pid'] in ps or self.items[i]['number'] in norm(text)}
-        # Prefer explicit complete references; names can point to a parent or factor.
         refids = sorted(i for i in refs if i in ids)
-        score = lambda i: (ps.get(self.items[i]['pid'], 0) + (12 if i in refs else 0), -self.items[i]['issued'])
-        ids = sorted(ids, key=lambda i: (-score(i)[0], self.items[i]['issued'], i))
+        ids = sorted(ids, key=lambda i: (-(ps.get(self.items[i]['pid'], 0) + (12 if i in refs else 0)), self.items[i]['issued'], i))
+        amounts = {i: self.amount_for(self.items[i], t) for i in ids}
+        amounts = {i: a for i, a in amounts.items() if a is not None}
+        return cash, wt, returned, incoming, factory_ap, kinds, refs, ps, ids, refids, amounts
+
+    def generic_match(self, t, text):
+        """Original single-best generic match (used by Layer 1 for returns)."""
+        prep = self._prepare_generic(t, text)
+        if not prep:
+            return None
+        cash, wt, returned, incoming, factory_ap, kinds, refs, ps, ids, refids, amounts = prep
+        if not ids:
+            return None
+        def normal_rows(chosen):
+            return [(i, self.items[i]['balance'], 'FX_DIFFERENCE' if self.items[i]['currency'] != t['currency'] and self.items[i]['kind'].endswith('I') else '') for i in chosen]
         if returned:
             matches = [i for i in ids if abs(self.items[i]['total'] - cash) <= 2 and self.items[i]['currency'] == t['currency']]
             if matches:
+                if len(matches) > 1:
+                    mandate_pids = {pid for pid, sc in ps.items() if sc >= 22}
+                    if mandate_pids:
+                        for mandate_norm, pid in self.mandates.items():
+                            if pid in mandate_pids:
+                                entries = self.dd_collections.get((t['entity'], mandate_norm, cash), [])
+                                if entries:
+                                    entries_sorted = sorted(entries, key=lambda x: x[0], reverse=True)
+                                    for coll_date, iid in entries_sorted:
+                                        if iid in set(matches) and day(coll_date) <= day(t['booking_date']):
+                                            return [(iid, cash, 'RETURNED')], 'return'
+                                    for coll_date, iid in entries_sorted:
+                                        if iid in set(matches):
+                                            return [(iid, cash, 'RETURNED')], 'return'
                 return [(matches[0], cash, 'RETURNED')], 'return'
-        amounts = {i: self.amount_for(self.items[i], t) for i in ids}
-        amounts = {i: a for i, a in amounts.items() if a is not None}
+            return None
+        return None
+
+    def generate_candidates(self, t, text):
+        """Layer 2: generate all candidate matches with confidence scores.
+
+        Returns list of (rows, score, method) tuples. Each 'rows' is a list of
+        (item_id, amount, exception) triples. Score is a numeric confidence
+        (higher = more confident). Multiple candidates may share items — Layer 3
+        resolves conflicts.
+        """
+        prep = self._prepare_generic(t, text)
+        if not prep:
+            return []
+        cash, wt, returned, incoming, factory_ap, kinds, refs, ps, ids, refids, amounts = prep
+        if not ids or returned:
+            return []
+        candidates = []
         def normal_rows(chosen):
             return [(i, self.items[i]['balance'], 'FX_DIFFERENCE' if self.items[i]['currency'] != t['currency'] and self.items[i]['kind'].endswith('I') else '') for i in chosen]
+
+        # --- Strategy 1: Complete references (score 80) ---
         if refids:
-            # Resolve repeated supplier numbers using identity before summing references.
+            r_refids = list(refids)
             if ps:
-                known = [i for i in refids if self.items[i]['pid'] in ps]
+                known = [i for i in r_refids if self.items[i]['pid'] in ps]
                 if known:
-                    refids = known
-            refids = [i for i in refids if self.items[i]['balance'] > 0]
-            signed = sum(amounts.get(i, 0) * (-1 if self.items[i]['kind'].endswith('C') else 1) for i in refids)
-            if refids and abs(signed - cash) <= 2:
-                return normal_rows(refids), 'references'
-            # Referenced invoices may be paid net of unquoted credit notes.
-            if refids and signed > cash:
-                parties = {self.items[i]['pid'] for i in refids}
-                credits = [i for i in ids if i not in refids and self.items[i]['pid'] in parties and self.items[i]['kind'].endswith('C') and self.items[i]['balance'] > 0]
+                    r_refids = known
+            r_refids = [i for i in r_refids if self.items[i]['balance'] > 0]
+            signed = sum(amounts.get(i, 0) * (-1 if self.items[i]['kind'].endswith('C') else 1) for i in r_refids)
+            if r_refids and abs(signed - cash) <= 2:
+                candidates.append((normal_rows(r_refids), 80, 'references'))
+            elif r_refids and signed > cash:
+                parties = {self.items[i]['pid'] for i in r_refids}
+                credits = [i for i in ids if i not in r_refids and self.items[i]['pid'] in parties and self.items[i]['kind'].endswith('C') and self.items[i]['balance'] > 0]
                 chosen = self.subset(credits, signed - cash, amounts)
                 if chosen:
-                    return normal_rows(refids + chosen), 'netted_credit'
-        # Full amount + identity; FIFO disambiguates repeated maintenance amounts.
+                    candidates.append((normal_rows(r_refids + chosen), 75, 'netted_credit'))
+
+        # --- Strategy 2: Identity + exact amount (score 60) ---
         exact = [i for i in ids if amounts.get(i) == cash and (self.items[i]['pid'] in ps or i in refs)]
         if exact:
-            # Monthly maintenance is billed in the following month.
             months = ['JANUARY|JANVIER|ENERO|JANUAR', 'FEBRUARY|FEVRIER|FEBRERO|FEBRUAR', 'MARCH|MARS|MARZO|MARZ',
                       'APRIL|AVRIL|ABRIL', 'MAY|MAI|MAYO', 'JUNE|JUIN|JUNIO|JUNI', 'JULY|JUILLET|JULIO|JULI',
                       'AUGUST|AOUT|AGOSTO', 'SEPTEMBER|SEPTEMBRE|SEPTIEMBRE', 'OCTOBER|OCTOBRE|OCTUBRE|OKTOBER',
                       'NOVEMBER|NOVEMBRE|NOVIEMBRE', 'DECEMBER|DECEMBRE|DICIEMBRE|DEZEMBER']
+            filtered = list(exact)
             for month, pattern in enumerate(months, 1):
                 if re.search(r'\b(?:' + pattern + r')\b', wt):
                     dated = [i for i in exact if int(self.items[i]['issue_date'][5:7]) == month % 12 + 1]
                     if dated:
-                        exact = dated
+                        filtered = dated
                         break
-            return normal_rows([exact[0]]), 'identity_amount'
-        # Discount and withholding candidates are tested before partial allocation.
+            # Score boost if party identity is strong
+            pid_score = ps.get(self.items[filtered[0]]['pid'], 0)
+            s = 60 + min(pid_score, 10)
+            candidates.append((normal_rows([filtered[0]]), s, 'identity_amount'))
+
+        # --- Strategy 3: Discount / Withholding / FX / Bank charges (score 55) ---
         for i in ids:
             item = self.items[i]
             bal = item['balance']
@@ -679,60 +857,115 @@ class Matcher:
             pct = float(term.get('early_payment_discount_pct') or 0)
             if pct and item['currency'] == t['currency'] and abs(cash - (expected - round(expected * pct / 100))) <= 2:
                 timely = day(t['booking_date']) <= item['issued'] + int(term['discount_days']) + 3
-                return [(i, bal if timely else cash, 'SHORT_DISCOUNT' if timely else 'PARTIAL')], 'discount'
+                candidates.append(([(i, bal if timely else cash, 'SHORT_DISCOUNT' if timely else 'PARTIAL')], 55, 'discount'))
+                break
             country = self.parties.get(item['pid'], {}).get('country')
             if country in {'MX', 'BR', 'MA'} and item['currency'] == t['currency']:
-                if any(abs(cash - round(expected * (1 - pct))) <= 2 for pct in [.0125, .015, .1]):
-                    return [(i, bal, 'SHORT_WITHHOLDING')], 'withholding'
+                if any(abs(cash - round(expected * (1 - p))) <= 2 for p in [.0125, .015, .1]):
+                    candidates.append(([(i, bal, 'SHORT_WITHHOLDING')], 55, 'withholding'))
+                    break
             if item['currency'] != t['currency'] and abs(expected - cash) <= expected * .03 and (i in refs or ps.get(item['pid'], 0) >= 8):
-                return [(i, bal, 'FX_DIFFERENCE')], 'fx'
+                candidates.append(([(i, bal, 'FX_DIFFERENCE')], 50, 'fx'))
+                break
             nonsepa = country in {'US', 'CA', 'MX', 'BR', 'MA', 'CN', 'AU', 'ZA'}
             if (re.search(r'CHGS|SHA|BEN|BANK CHARGES', wt) or nonsepa) and item['currency'] == t['currency'] and 0 < expected - cash <= min(6000, expected * .02):
-                return [(i, bal, 'SHORT_BANK_CHARGES')], 'charges'
+                candidates.append(([(i, bal, 'SHORT_BANK_CHARGES')], 50, 'charges'))
+                break
             pdf = self.meta.get(i, '')
-            # Only use explicit PDF terms to infer an unreferenced instalment/retention.
             retention = re.search(r'(?:Retention|Retenci[oó]n)\s+(\d+)\s*%', pdf, re.I)
             if retention and item['currency'] == t['currency']:
                 retained = round(item['total'] * int(retention[1]) / 100)
                 if abs(cash - retained) <= 2:
-                    return [(i, cash, '')], 'retention_release'
+                    candidates.append(([(i, cash, '')], 52, 'retention_release'))
+                    break
                 if abs(cash - (item['total'] - retained)) <= 2:
-                    return [(i, cash, 'PARTIAL')], 'retention'
+                    candidates.append(([(i, cash, 'PARTIAL')], 52, 'retention'))
+                    break
             plan = re.search(r'(\d+)\s+instalments\s+at\s+([\d/]+)\s+days', pdf, re.I)
             if plan and item['currency'] == t['currency'] and abs(cash - item['total'] / int(plan[1])) <= 5:
                 schedule = [int(x) for x in plan[2].split('/')]
                 age = day(t['booking_date']) - item['issued']
                 pos = min(range(len(schedule)), key=lambda x: abs(age - schedule[x]))
-                return [(i, cash, '' if pos == len(schedule) - 1 else 'PARTIAL')], 'instalment_pdf'
-        # Payments without complete references: search only within identified parties.
+                candidates.append(([(i, cash, '' if pos == len(schedule) - 1 else 'PARTIAL')], 52, 'instalment_pdf'))
+                break
+
+        # --- Strategy 4: Party subset-sum (score 45) ---
         for pid in sorted(ps, key=lambda p: (-ps[p], p)):
             own = [i for i in ids if self.items[i]['pid'] == pid and self.items[i]['kind'].endswith('I') and self.items[i]['balance'] > 0]
             chosen = self.subset(own, cash, amounts)
             if chosen:
-                return normal_rows(chosen), 'party_subset'
+                pid_score = ps.get(pid, 0)
+                candidates.append((normal_rows(chosen), 45 + min(pid_score, 10), 'party_subset'))
+                break
             credits = [i for i in ids if self.items[i]['pid'] == pid and self.items[i]['kind'].endswith('C') and self.items[i]['balance'] > 0]
+            found_net = False
             for credit in credits[:12]:
                 chosen = self.subset(own, cash + amounts.get(credit, 0), amounts)
                 if chosen:
-                    return normal_rows(chosen + [credit]), 'party_net_subset'
-        # A unique reference supports a partial payment or an overpayment.
+                    candidates.append((normal_rows(chosen + [credit]), 42, 'party_net_subset'))
+                    found_net = True
+                    break
+            if found_net:
+                break
+            for c1, c2 in itertools.combinations(credits[:10], 2):
+                target = cash + amounts.get(c1, 0) + amounts.get(c2, 0)
+                chosen = self.subset(own, target, amounts)
+                if chosen:
+                    candidates.append((normal_rows(chosen + [c1, c2]), 40, 'party_net_subset'))
+                    found_net = True
+                    break
+            if found_net:
+                break
+            if len(credits) <= 8:
+                for combo in itertools.combinations(credits, 3):
+                    target = cash + sum(amounts.get(c, 0) for c in combo)
+                    chosen = self.subset(own, target, amounts)
+                    if chosen:
+                        candidates.append((normal_rows(chosen + list(combo)), 38, 'party_net_subset'))
+                        found_net = True
+                        break
+            if found_net:
+                break
+
+        # --- Strategy 5: Referenced partial / overpayment (score 35) ---
         if len(refids) == 1:
             i = refids[0]
             item = self.items[i]
             if item['currency'] == t['currency']:
                 bal = item['balance']
-                if cash < bal:
+                if bal > 0 and cash < bal:
                     exc = '' if re.search(r'SETTLEMENT|RETENTION RELEASE|\bREST\b|RESTO|SOLDE', wt) else 'PARTIAL'
                     instalment = re.search(r'(?:RATE|PLAZO|INSTALMENT|ECHEANCE)\s+(\d+)/(\d+)', text.upper())
                     if instalment and instalment[1] == instalment[2]:
                         exc = ''
-                    return [(i, cash, exc)], 'referenced_partial'
-                if bal > 0 and cash <= bal * 1.1:
-                    return [(i, bal, 'OVERPAYMENT')], 'overpayment'
+                    candidates.append(([(i, cash, exc)], 35, 'referenced_partial'))
+                if bal > 0 and cash <= bal * 1.1 and cash > bal:
+                    candidates.append(([(i, bal, 'OVERPAYMENT')], 35, 'overpayment'))
+
+        # --- Strategy 6: Duplicate payment (score 25) ---
         closed = [i for i in ids if self.items[i]['balance'] == 0 and abs(self.items[i]['total'] - cash) <= 2]
         if closed and (closed[0] in refs or ps.get(self.items[closed[0]]['pid'], 0) >= 8):
-            return [(closed[0], cash, 'DUPLICATE_PAYMENT')], 'duplicate'
-        return None
+            candidates.append(([(closed[0], cash, 'DUPLICATE_PAYMENT')], 25, 'duplicate'))
+
+        return candidates
+
+    def _apply_match(self, t, rows, method, results, audit):
+        """Apply a match result: consume balances, record output rows."""
+        merged = {}
+        for iid, amt, exc in rows:
+            if iid in merged:
+                old = merged[iid]
+                merged[iid] = (old[0] + amt, exc or old[1])
+            else:
+                merged[iid] = (amt, exc)
+        out_rows = []
+        for iid, (amt, exc) in merged.items():
+            out_rows.append((t['bank_txn_id'], iid, money(amt), '', exc))
+            if exc == 'RETURNED':
+                self.items[iid]['balance'] += amt
+            elif exc != 'DUPLICATE_PAYMENT':
+                self.items[iid]['balance'] = max(0, self.items[iid]['balance'] - amt)
+        results[t['bank_txn_id']] = (out_rows, method)
 
     def run(self, out, trace):
         import time
@@ -741,49 +974,115 @@ class Matcher:
         out = Path(out)
         out.parent.mkdir(parents=True, exist_ok=True)
         temp = out.with_name(out.name + '.partial')
-        count = 0
         started = time.monotonic()
+
+        results = {}  # bank_txn_id -> (out_rows, method)
+        texts = {}    # bank_txn_id -> text
+
+        # Precompute texts
+        for t in self.transactions:
+            texts[t['bank_txn_id']] = self.bank_text(t)
+
+        # ============================================================
+        # Layer 1: Strong evidence — batch, advice, confirming, returns
+        # These are high-confidence matches that consume balances immediately.
+        # ============================================================
+        for n, t in enumerate(self.transactions, 1):
+            text = texts[t['bank_txn_id']]
+            match = None
+
+            # Category-first for known non-item patterns (bank reversals, fees, etc.)
+            cat = self.category(t, text)
+            if cat:
+                results[t['bank_txn_id']] = ([(t['bank_txn_id'], '', '', cat, 'UNIDENTIFIED' if cat == 'UNIDENTIFIED' else '')], 'category_' + cat)
+                self.stats['L1_category_' + cat] += 1
+                continue
+
+            # Batch / advice / confirming — high-confidence structured evidence
+            if self.full:
+                match = self.batch_match(t, text) or self.advice_match(t, text) or self.confirming_match(t, text)
+            if match:
+                self._apply_match(t, match[0], 'L1_' + match[1], results, None)
+                self.stats['L1_' + match[1]] += 1
+                continue
+
+            # Returns — unambiguous when cross-referenced with DD batches
+            ret = self.generic_match(t, text)
+            if ret:
+                self._apply_match(t, ret[0], 'L1_' + ret[1], results, None)
+                self.stats['L1_' + ret[1]] += 1
+                continue
+
+            if n % 5000 == 0:
+                elapsed = time.monotonic() - started
+                print(f'L1 PROGRESS {n}/{len(self.transactions)} date={t["booking_date"]} rate={n/max(elapsed,.001):.1f}/s', flush=True)
+
+        layer1_count = len(results)
+        print(f'LAYER 1 DONE: {layer1_count}/{len(self.transactions)} resolved', flush=True)
+
+        # ============================================================
+        # Layer 2+3: Candidate generation and resolution per transaction
+        # Process in TRANSACTION TIME ORDER to preserve FIFO balance
+        # consumption. For each transaction, generate all candidates,
+        # pick the highest-scored one whose items are still available.
+        # ============================================================
+        l23_resolved = 0
+        l23_unidentified = 0
+        unresolved_count = 0
+        for n, t in enumerate(self.transactions, 1):
+            if t['bank_txn_id'] in results:
+                continue
+            unresolved_count += 1
+            text = texts[t['bank_txn_id']]
+            cands = self.generate_candidates(t, text)
+            # Sort candidates by score descending
+            cands.sort(key=lambda c: -c[1])
+            assigned = False
+            for rows, score, method in cands:
+                # Check item availability
+                ok = True
+                for iid, amt, exc in rows:
+                    item = self.items[iid]
+                    if exc in ('DUPLICATE_PAYMENT', 'RETURNED'):
+                        continue
+                    if item['balance'] <= 0:
+                        ok = False
+                        break
+                if not ok:
+                    continue
+                self._apply_match(t, rows, 'L3_' + method, results, None)
+                self.stats['L3_' + method] += 1
+                assigned = True
+                l23_resolved += 1
+                break
+            if not assigned:
+                results[t['bank_txn_id']] = ([(t['bank_txn_id'], '', '', 'UNIDENTIFIED', 'UNIDENTIFIED')], 'L3_unidentified')
+                self.stats['L3_unidentified'] += 1
+                l23_unidentified += 1
+            if n % 5000 == 0:
+                elapsed = time.monotonic() - started
+                print(f'L2+3 PROGRESS {n}/{len(self.transactions)} date={t["booking_date"]} rate={n/max(elapsed,.001):.1f}/s', flush=True)
+
+        print(f'LAYER 2+3 DONE: {l23_resolved} resolved, {l23_unidentified} unidentified (of {unresolved_count} unresolved)', flush=True)
+
+        # ============================================================
+        # Write output
+        # ============================================================
+        count = 0
         with ExitStack() as stack:
             op = gzip.open if out.suffix == '.gz' else open
             f = stack.enter_context(op(temp, 'wt', encoding='utf-8', newline=''))
             w = csv.writer(f, lineterminator='\n')
             w.writerow(['bank_txn_id', 'item_id', 'amount', 'category', 'exception'])
             audit = stack.enter_context(open(trace, 'w')) if trace else None
-            for n, t in enumerate(self.transactions, 1):
-                text = self.bank_text(t)
-                cat = self.category(t, text)
-                match = None
-                if cat is None and self.full:
-                    match = self.batch_match(t, text) or self.advice_match(t, text)
-                if cat is None and match is None:
-                    match = self.generic_match(t, text)
-                if match:
-                    rows, method = match
-                    merged = {}
-                    for iid, amt, exc in rows:
-                        if iid in merged:
-                            old = merged[iid]
-                            merged[iid] = (old[0] + amt, exc or old[1])
-                        else:
-                            merged[iid] = (amt, exc)
-                    for iid, (amt, exc) in merged.items():
-                        w.writerow([t['bank_txn_id'], iid, money(amt), '', exc])
-                        count += 1
-                        if exc == 'RETURNED':
-                            self.items[iid]['balance'] += amt
-                        elif exc != 'DUPLICATE_PAYMENT':
-                            self.items[iid]['balance'] = max(0, self.items[iid]['balance'] - amt)
-                else:
-                    cat = cat or 'UNIDENTIFIED'
-                    method = 'category_' + cat
-                    w.writerow([t['bank_txn_id'], '', '', cat, 'UNIDENTIFIED' if cat == 'UNIDENTIFIED' else ''])
+            for t in self.transactions:
+                out_rows, method = results[t['bank_txn_id']]
+                for row in out_rows:
+                    w.writerow(row)
                     count += 1
-                self.stats[method] += 1
+                self.stats[method] = self.stats.get(method, 0)
                 if audit:
                     audit.write(json.dumps({'bank_txn_id': t['bank_txn_id'], 'method': method}) + '\n')
-                if n % 5000 == 0:
-                    elapsed = time.monotonic() - started
-                    print(f'PROGRESS {n}/{len(self.transactions)} date={t["booking_date"]} rate={n/max(elapsed,.001):.1f}/s', flush=True)
         temp.replace(out)
         summary = {'rows': count, 'transactions': len(self.transactions), 'methods': dict(self.stats),
                    'warnings': self.warnings, 'prediction_seconds': round(time.monotonic()-started, 2),
